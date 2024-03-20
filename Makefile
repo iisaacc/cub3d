@@ -1,13 +1,15 @@
 
 NAME = cub3D
-INCLUDES = libft/include -I/Users/$(USER)/.brew/opt/readline/include
+INCLUDES = includes/MLX42/build/libmlx42.a -Iincludes
 SRCS_DIR = src/
 OBJS_DIR = obj/
 LIBFT = includes/libft
-LIBFLAG = 
+LIBFLAG =
 CC = gcc
+GLFW = -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
 CFLAGS = -g -Wall -Wextra -Werror -I
-MLXFLAGS = -Iinclude -Lincludes/MLX42/build -lmlx42 -ldl -lglfw -pthread -lm
+LINUX_MLXFLAGS = -Lincludes/MLX42/build -lmlx42 -ldl -lglfw -pthread -lm
+MAC_MLXFLAGS = $(GLFW) $(INCLUDES)
 RM = rm -f
 AR = ar rcs
 
@@ -41,7 +43,17 @@ $(NAME):$(OBJSF)	$(OBJS_SRC)
 	@mv libft.a $(NAME)
 	@echo "$(GREEN)Libft compiled!$(NC)"
 	@echo "$(BLUE)Compiling $(NAME)...$(NC)"
-	@$(CC) $(OBJS_SRC) $(LIBFLAG) $(MLXFLAGS) -o $(NAME) $(LIBFT)/libft.a
+	@$(CC) $(OBJS_SRC) $(LIBFLAG) $(MAC_MLXFLAGS) -o $(NAME) $(LIBFT)/libft.a
+	@echo "$(GREEN)Succesful compilation!$(NC)"
+
+linux:$(OBJSF)	$(OBJS_SRC)
+	@echo "$(BLUE)Compiling libft...$(NC)"
+	@make -s -C $(LIBFT)
+	@cp $(LIBFT)/libft.a .
+	@mv libft.a $(NAME)
+	@echo "$(GREEN)Libft compiled!$(NC)"
+	@echo "$(BLUE)Compiling $(NAME)...$(NC)"
+	@$(CC) $(OBJS_SRC) $(LIBFLAG) $(LINUX_MLXFLAGS) -o $(NAME) $(LIBFT)/libft.a
 	@echo "$(GREEN)Succesful compilation!$(NC)"
 
 debug: $(OBJSF) $(OBJS_SRC_DEBUG)
