@@ -5,14 +5,14 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <unistd.h>
-# include "MLX42/include/MLX42/MLX42.h"
+# include "./MLX42/include/MLX42/MLX42.h"
 
 #ifndef BUFFER_SIZE
 # define BUFFER_SIZE 64
 #endif
 
-#define WIDTH 512
-#define HEIGHT 512
+#define WIDTH 1280
+#define HEIGHT 720
 
 //Guarda los datos sobre las texturas
 typedef struct s_tx
