@@ -73,7 +73,6 @@ int	ft_valid_elements(char **split_input)
 
 int	ft_checks(t_cub *cub)
 {
-
 	if (ft_valid_elements(cub->split_input) == 1)
 		return (1);
 	// if (ft_valid_paths(cub->split_input) == 1) //Por hacer

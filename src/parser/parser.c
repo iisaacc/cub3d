@@ -29,13 +29,14 @@ void	ft_print_structure(t_cub *cub)
 	int	i;
 
 	i = 0;
-	printf("NO: %s\n", cub->tx.NO_pth);
-	printf("SO: %s\n", cub->tx.SO_pth);
-	printf("WE: %s\n", cub->tx.WE_pth);
-	printf("EA: %s\n", cub->tx.EA_pth);
-	printf("F: %d, %d, %d\n", cub->tx.F_rgb[0], cub->tx.F_rgb[1], cub->tx.F_rgb[2]);
-	printf("C: %d, %d, %d\n", cub->tx.C_rgb[0], cub->tx.C_rgb[1], cub->tx.C_rgb[2]);
+	printf("NO: %s\n", cub->tx->NO_pth);
+	printf("SO: %s\n", cub->tx->SO_pth);
+	printf("WE: %s\n", cub->tx->WE_pth);
+	printf("EA: %s\n", cub->tx->EA_pth);
+	printf("F: %d, %d, %d\n", cub->tx->F_rgb[0], cub->tx->F_rgb[1], cub->tx->F_rgb[2]);
+	printf("C: %d, %d, %d\n", cub->tx->C_rgb[0], cub->tx->C_rgb[1], cub->tx->C_rgb[2]);
 	printf("Initial point of view: %d\n", cub->initial_pov);
+	printf("Initial position: %d, %d\n", cub->pos[0], cub->pos[1]);
 	printf("Map:\n");
 	while (cub->map[i])
 	{
@@ -58,7 +59,7 @@ int	ft_get_init_pov(t_cub *cub)
 			if (cub->map[y][x] == 'N' || cub->map[y][x] == 'S' ||
 				cub->map[y][x] == 'E' || cub->map[y][x] == 'W')
 			{
-				cub->pos[0] = y;
+				cub->pos[0] = y;//Posición inicial del jugador
 				cub->pos[1] = x;
 				if (cub->map[y][x] == 'N')
 					return (0);
@@ -77,16 +78,9 @@ int	ft_get_init_pov(t_cub *cub)
 }
 void	ft_init_struct(t_cub *cub)
 {
-	cub->tx.NO_pth = NULL;
-	cub->tx.SO_pth = NULL;
-	cub->tx.WE_pth = NULL;
-	cub->tx.EA_pth = NULL;
-	cub->tx.F_rgb[0] = -1;
-	cub->tx.F_rgb[1] = -1;
-	cub->tx.F_rgb[2] = -1;
-	cub->tx.C_rgb[0] = -1;
-	cub->tx.C_rgb[1] = -1;
-	cub->tx.C_rgb[2] = -1;
+	cub->tx = ft_calloc(1, sizeof(t_tx));
+	cub->pos[0] = -1;
+	cub->pos[1] = -1;
 	cub->map = NULL;
 	cub->split_input = NULL;
 }
@@ -99,8 +93,8 @@ int	ft_parser(char	*file, t_cub *cub)
 		return (1);
 	if (ft_checks(cub) == 1)
 		return (1);
-	cub->tx = ft_textures(cub);
 	cub->initial_pov = ft_get_init_pov(cub);
+	ft_textures(cub);
 	ft_print_structure(cub);
 	//ft_conf_elements(split_input);
 	return (0);

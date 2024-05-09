@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:45:00 by isporras          #+#    #+#             */
-/*   Updated: 2024/05/07 13:14:01 by isporras         ###   ########.fr       */
+/*   Updated: 2024/05/09 12:38:58 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	ft_game_loop(t_cub *cub)
 		return(EXIT_FAILURE);
 	}
 	mlx_loop(cub->mlx);
-	//if (ft_load_textures(cub) == 1)
-	//	return (mlx_terminate(cub->mlx), EXIT_FAILURE);
+	 if (ft_load_textures(cub) == -1)
+	 	return (EXIT_FAILURE);
 	mlx_terminate(cub->mlx);
 	return(EXIT_SUCCESS);
 }

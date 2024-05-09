@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 11:43:14 by isporras          #+#    #+#             */
-/*   Updated: 2024/05/07 14:35:46 by isporras         ###   ########.fr       */
+/*   Updated: 2024/05/09 11:00:37 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int	ft_spaces_unclosed(char **split_input)
 		j = 0;
 		while (split_input[i][j])
 		{
-			if ((split_input[i][j] == '0' && split_input[i][j - 1] == ' ')
-				|| (split_input[i][j] == '0' && split_input[i][j + 1] == ' ')
-				|| (split_input[i][j] == '0' && split_input[i - 1][j] == ' ')
-				|| (split_input[i][j] == '0' && split_input[i + 1][j] == ' '))
+			if ((split_input[i][j] == '0' && (split_input[i][j - 1] == ' ' || split_input[i][j - 1] == '\0'))
+				|| (split_input[i][j] == '0' && (split_input[i][j + 1] == ' ' || split_input[i][j + 1] == '\0'))
+				|| (split_input[i][j] == '0' && (split_input[i - 1][j] == ' ' || split_input[i - 1][j] == '\0'))
+				|| (split_input[i][j] == '0' && (split_input[i + 1][j] == ' ' || split_input[i + 1][j] == '\0')))
 				return (1);
 			j++;
 		}

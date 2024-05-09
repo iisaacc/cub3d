@@ -17,18 +17,20 @@
 //Guarda los datos sobre las texturas
 typedef struct s_tx
 {
-	char	*NO_pth;
-	char	*SO_pth;
-	char	*WE_pth;
-	char	*EA_pth;
-	int		F_rgb[3];
-	int		C_rgb[3];
+	char			*NO_pth;
+	char			*SO_pth;
+	char			*WE_pth;
+	char			*EA_pth;
+	mlx_texture_t	*taux;
+	mlx_image_t		*iaux;
+	int				F_rgb[3];
+	int				C_rgb[3];
 }	t_tx;
 
 //Guarda los datos principales del juego
 typedef struct s_cub
 {
-	t_tx			tx;//guarda la estructura de las texturas
+	t_tx			*tx;//guarda la estructura de las texturas
 	char			**map;//guarda el mapa
 	char			**split_input;//guarda el input
 	mlx_t			*mlx;//guarda el puntero de mlx
@@ -47,8 +49,11 @@ int		ft_checks(t_cub *cub);
 int		ft_check_way(char **map);
 void	ft_cut_char(char **str, char c);
 int		ft_map_checks(char **map);
-t_tx	ft_textures(t_cub *cub);
+int		ft_textures(t_cub *cub);
 //--------------------GAME----------------------------
 int		ft_game_loop(t_cub *cub);
+
+//-------------------TEXTURES-------------------------
+int		ft_load_textures(t_cub *cub);
 
 #endif
