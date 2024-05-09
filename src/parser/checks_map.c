@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 11:43:14 by isporras          #+#    #+#             */
-/*   Updated: 2024/03/07 11:43:14 by isporras         ###   ########.fr       */
+/*   Updated: 2024/05/07 14:35:46 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,38 @@ int	ft_strange_chars(char **split_input)
 	return (0);
 }
 
+int	ft_check_double_position(char **map)
+{
+	int	i;
+	int	j;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == 'N' || map[i][j] == 'S'
+				|| map[i][j] == 'W' || map[i][j] == 'E')
+				count++;
+			if (count > 1)
+				return (ft_error_msg("Double position in map", NULL), 1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
 int	ft_map_checks(char **map)
 {
 	if (ft_strange_chars(map) == 1)
 		return (1);
 	if (ft_check_walls(map) == 1)
+		return (1);
+	if (ft_check_double_position(map) == 1)
 		return (1);
 	return (0);
 }

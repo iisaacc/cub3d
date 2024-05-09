@@ -24,26 +24,84 @@ char	**ft_get_map(char **split_input)
 	return (ft_error_msg("No map found", NULL), NULL);
 }
 
-void	ft_print_textures(t_tx tx)
+void	ft_print_structure(t_cub *cub)
 {
-	printf("NO: %s\n", tx.NO_pth);
-	printf("SO: %s\n", tx.SO_pth);
-	printf("WE: %s\n", tx.WE_pth);
-	printf("EA: %s\n", tx.EA_pth);
-	printf("F: %d,%d,%d\n", tx.F_rgb[0], tx.F_rgb[1], tx.F_rgb[2]);
-	printf("C: %d,%d,%d\n", tx.C_rgb[0], tx.C_rgb[1], tx.C_rgb[2]);
+	int	i;
+
+	i = 0;
+	printf("NO: %s\n", cub->tx.NO_pth);
+	printf("SO: %s\n", cub->tx.SO_pth);
+	printf("WE: %s\n", cub->tx.WE_pth);
+	printf("EA: %s\n", cub->tx.EA_pth);
+	printf("F: %d, %d, %d\n", cub->tx.F_rgb[0], cub->tx.F_rgb[1], cub->tx.F_rgb[2]);
+	printf("C: %d, %d, %d\n", cub->tx.C_rgb[0], cub->tx.C_rgb[1], cub->tx.C_rgb[2]);
+	printf("Initial point of view: %d\n", cub->initial_pov);
+	printf("Map:\n");
+	while (cub->map[i])
+	{
+		printf("%s\n", cub->map[i]);
+		i++;
+	}
+}
+
+int	ft_get_init_pov(t_cub *cub)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (cub->map[y])
+	{
+		x = 0;
+		while (cub->map[y][x])
+		{
+			if (cub->map[y][x] == 'N' || cub->map[y][x] == 'S' ||
+				cub->map[y][x] == 'E' || cub->map[y][x] == 'W')
+			{
+				cub->pos[0] = y;
+				cub->pos[1] = x;
+				if (cub->map[y][x] == 'N')
+					return (0);
+				else if (cub->map[y][x] == 'E')
+					return (1);
+				else if (cub->map[y][x] == 'S')
+					return (2);
+				else if (cub->map[y][x] == 'W')
+					return (3);
+			}
+			x++;
+		}
+		y++;
+	}
+	return (ft_error_msg("No initial point of view found", NULL), -1);
+}
+void	ft_init_struct(t_cub *cub)
+{
+	cub->tx.NO_pth = NULL;
+	cub->tx.SO_pth = NULL;
+	cub->tx.WE_pth = NULL;
+	cub->tx.EA_pth = NULL;
+	cub->tx.F_rgb[0] = -1;
+	cub->tx.F_rgb[1] = -1;
+	cub->tx.F_rgb[2] = -1;
+	cub->tx.C_rgb[0] = -1;
+	cub->tx.C_rgb[1] = -1;
+	cub->tx.C_rgb[2] = -1;
+	cub->map = NULL;
+	cub->split_input = NULL;
 }
 
 int	ft_parser(char	*file, t_cub *cub)
 {
-
+	ft_init_struct(cub);
 	cub->split_input = ft_read_and_split(file);
 	if (cub->split_input == NULL)
 		return (1);
 	if (ft_checks(cub) == 1)
 		return (1);
 	cub->tx = ft_textures(cub);
-	ft_print_textures(cub->tx);
+	cub->initial_pov = ft_get_init_pov(cub);
+	ft_print_structure(cub);
 	//ft_conf_elements(split_input);
 	return (0);
 }

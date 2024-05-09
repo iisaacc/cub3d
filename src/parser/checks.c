@@ -83,7 +83,5 @@ int	ft_checks(t_cub *cub)
 	cub->map = ft_get_map(cub->split_input);
 	if (ft_map_checks(cub->map) == 1)
 		return (1);
-	printf("map: \n");
-	ft_print_split(cub->map);
 	return (0);
 }

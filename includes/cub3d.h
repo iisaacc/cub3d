@@ -28,10 +28,12 @@ typedef struct s_tx
 //Guarda los datos principales del juego
 typedef struct s_cub
 {
-	t_tx			tx;
-	char			**map;
-	char			**split_input;
-	mlx_t			*mlx;
+	t_tx			tx;//guarda la estructura de las texturas
+	char			**map;//guarda el mapa
+	char			**split_input;//guarda el input
+	mlx_t			*mlx;//guarda el puntero de mlx
+	int				initial_pov;//guarda el punto de vista inicial [0-N, 1-E, 2-S, 3-W]
+	int				pos[2];//guarda la posicion del jugador [y, x]
 	mlx_image_t*	image;
 }	t_cub;
 
