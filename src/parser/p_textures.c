@@ -48,7 +48,7 @@ void	ft_init_tx_struct(t_cub *cub)
 	cub->tx->C_rgb[2] = -1;
 }
 
-int	ft_textures(t_cub *cub)
+int	ft_parser_textures(t_cub *cub)
 {
 	ft_init_tx_struct(cub);
 	ft_get_textures(cub);

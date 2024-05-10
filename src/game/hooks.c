@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_loop.c                                        :+:      :+:    :+:   */
+/*   key_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/07 13:45:00 by isporras          #+#    #+#             */
-/*   Updated: 2024/05/10 13:00:05 by isporras         ###   ########.fr       */
+/*   Created: 2024/05/10 12:41:20 by isporras          #+#    #+#             */
+/*   Updated: 2024/05/10 12:41:20 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	ft_game_loop(t_cub *cub)
+void	ft_close_window(void *param)
 {
-	if (!(cub->mlx = mlx_init(WIDTH, HEIGHT, "puerta", true)))
-	{
-		ft_putstr_fd((char *)mlx_strerror(mlx_errno), 2);
-		return(EXIT_FAILURE);
-	}
-	if (ft_load_textures(cub) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	ft_hooks(cub);
-	mlx_loop(cub->mlx);
-	return(EXIT_SUCCESS);
+	t_cub	*cub;
+
+	cub = (t_cub *)param;
+	mlx_close_window(cub->mlx);
+	mlx_delete_image(cub->mlx, cub->tx->iaux);
+	mlx_terminate(cub->mlx);
+	exit(EXIT_SUCCESS);
+}
+
+// int	key_hooks()
+// {
+	
+// }
+
+void	ft_hooks(t_cub *cub)
+{
+	mlx_close_hook(cub->mlx, ft_close_window, cub);
 }

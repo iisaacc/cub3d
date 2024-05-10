@@ -24,10 +24,10 @@ typedef struct s_tx
 	char			*SO_pth;
 	char			*WE_pth;
 	char			*EA_pth;
+	int32_t			F_rgb[3];
+	int32_t			C_rgb[3];
 	mlx_texture_t	*taux;
 	mlx_image_t		*iaux;
-	int				F_rgb[3];
-	int				C_rgb[3];
 }	t_tx;
 
 //Guarda los datos principales del juego
@@ -52,11 +52,14 @@ int		ft_checks(t_cub *cub);
 int		ft_check_way(char **map);
 void	ft_cut_char(char **str, char c);
 int		ft_map_checks(char **map);
-int		ft_textures(t_cub *cub);
+int		ft_parser_textures(t_cub *cub);
 //--------------------GAME----------------------------
 int		ft_game_loop(t_cub *cub);
 
 //-------------------TEXTURES-------------------------
 int		ft_load_textures(t_cub *cub);
+
+//---------------------HOOKS-------------------------
+void	ft_hooks(t_cub *cub);
 
 #endif

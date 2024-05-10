@@ -94,7 +94,7 @@ int	ft_parser(char	*file, t_cub *cub)
 	if (ft_checks(cub) == 1)
 		return (1);
 	cub->initial_pov = ft_get_init_pov(cub);
-	ft_textures(cub);
+	ft_parser_textures(cub);
 	ft_print_structure(cub);
 	//ft_conf_elements(split_input);
 	return (0);
