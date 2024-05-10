@@ -1,13 +1,15 @@
 
 NAME = cub3D
-INCLUDES = libft/include -I/Users/$(USER)/.brew/opt/readline/include
+#INCLUDES = libft/include -I/Users/$(USER)/.brew/opt/readline/include #PARA MAC
+INCLUDES = libft/include -I/usr/local/include #PARA UBUNTU
 SRCS_DIR = src/
 OBJS_DIR = obj/
 LIBFT = includes/libft
 LIBFLAG =
 CC = gcc
 CFLAGS = -g -Wall -Wextra -Werror -I
-MLXFLAGS = -Iinclude -Lincludes/MLX42/build -lmlx42 -ldl -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -pthread -lm
+#MLXFLAGS = -Iinclude -Lincludes/MLX42/build -lmlx42 -ldl -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -pthread -lm #PARA MAC
+MLXFLAGS = -Iinclude -Lincludes/MLX42/build -lmlx42 -ldl -lglfw3 -L"/usr/local/lib/" -pthread -lm #PARA UBUNTU
 RM = rm -f
 AR = ar rcs
 
