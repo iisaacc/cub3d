@@ -18,7 +18,9 @@ void	ft_close_window(void *param)
 
 	cub = (t_cub *)param;
 	mlx_close_window(cub->mlx);
-	mlx_delete_image(cub->mlx, cub->tx->iaux);
+	mlx_delete_image(cub->mlx, cub->tx->F_img);
+	mlx_delete_image(cub->mlx, cub->tx->C_img);
+	mlx_delete_image(cub->mlx, cub->tx->P_img);
 	mlx_terminate(cub->mlx);
 	exit(EXIT_SUCCESS);
 }

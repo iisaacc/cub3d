@@ -24,10 +24,12 @@ typedef struct s_tx
 	char			*SO_pth;
 	char			*WE_pth;
 	char			*EA_pth;
-	int32_t			F_rgb[3];
-	int32_t			C_rgb[3];
+	unsigned int	F_rgb[3];
+	unsigned int	C_rgb[3];
 	mlx_texture_t	*taux;
-	mlx_image_t		*iaux;
+	mlx_image_t		*F_img;
+	mlx_image_t		*C_img;
+	mlx_image_t		*P_img;
 }	t_tx;
 
 //Guarda los datos principales del juego

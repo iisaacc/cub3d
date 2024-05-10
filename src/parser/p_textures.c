@@ -1,6 +1,6 @@
 #include "../../includes/cub3d.h"
 
-void	ft_fill_rgb(int *rgb, char *str)
+void	ft_fill_rgb(unsigned int *rgb, char *str)
 {
 	char	**split_num;
 
