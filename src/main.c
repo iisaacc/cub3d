@@ -11,6 +11,7 @@ int	main(int argc, char **argv)
 		if (ft_parser(argv[1], &cub) == 1)
 			return (1);
 		ft_game_loop(&cub);
+		//ft_print_split(cub.split_input);
 	}
 	return (0);
 }

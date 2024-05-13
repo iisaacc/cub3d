@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_hooks.c                                        :+:      :+:    :+:   */
+/*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 12:41:20 by isporras          #+#    #+#             */
-/*   Updated: 2024/05/10 12:41:20 by isporras         ###   ########.fr       */
+/*   Updated: 2024/05/13 15:19:21 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_close_window(void *param)
 	
 // }
 
-void	ft_hooks(t_cub *cub)
+/* void	ft_hooks(t_cub *cub)
 {
 	mlx_close_hook(cub->mlx, ft_close_window, cub);
-}
+} */

@@ -62,6 +62,6 @@ int		ft_game_loop(t_cub *cub);
 int		ft_load_textures(t_cub *cub);
 
 //---------------------HOOKS-------------------------
-void	ft_hooks(t_cub *cub);
+void	ft_hooks(mlx_key_data_t keydata, void *param);
 
 #endif

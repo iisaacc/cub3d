@@ -8,8 +8,8 @@ LIBFT = includes/libft
 LIBFLAG =
 CC = gcc
 CFLAGS = -g -Wall -Wextra -Werror -I
-#MLXFLAGS = -Iinclude -Lincludes/MLX42/build -lmlx42 -ldl -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -pthread -lm #PARA MAC
-MLXFLAGS = -Iinclude -Lincludes/MLX42/build -lmlx42 -ldl -lglfw3 -L"/usr/local/lib/" -pthread -lm #PARA UBUNTU
+MLXFLAGS = -Iinclude -Lincludes/MLX42/build -lmlx42 -ldl -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -pthread -lm #PARA MAC
+#MLXFLAGS = -Iinclude -Lincludes/MLX42/build -lmlx42 -ldl -lglfw3 -L"/usr/local/lib/" -pthread -lm #PARA UBUNTU
 RM = rm -f
 AR = ar rcs
 
