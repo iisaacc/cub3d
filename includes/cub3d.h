@@ -32,6 +32,14 @@ typedef struct s_tx
 	mlx_image_t		*P_img;
 }	t_tx;
 
+typedef struct s_player
+{
+	int				initial_pov;//guarda el punto de vista inicial [0-N, 1-E, 2-S, 3-W]
+	int				p_x;//guarda la posicion del jugador
+	int				p_y;
+	float			p_a;//angulo de vista
+}	t_player;
+
 //Guarda los datos principales del juego
 typedef struct s_cub
 {
@@ -39,9 +47,8 @@ typedef struct s_cub
 	char			**map;//guarda el mapa
 	char			**split_input;//guarda el input
 	mlx_t			*mlx;//guarda el puntero de mlx
-	int				initial_pov;//guarda el punto de vista inicial [0-N, 1-E, 2-S, 3-W]
-	int				pos[2];//guarda la posicion del jugador [y, x]
-	mlx_image_t*	image;
+	mlx_image_t		*image;
+	t_player		*player;//guarda los datos del jugador
 }	t_cub;
 
 //------------------PARSER--------------------------

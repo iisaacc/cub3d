@@ -35,8 +35,8 @@ void	ft_print_structure(t_cub *cub)
 	printf("EA: %s\n", cub->tx->EA_pth);
 	printf("F: %d, %d, %d\n", cub->tx->F_rgb[0], cub->tx->F_rgb[1], cub->tx->F_rgb[2]);
 	printf("C: %d, %d, %d\n", cub->tx->C_rgb[0], cub->tx->C_rgb[1], cub->tx->C_rgb[2]);
-	printf("Initial point of view: %d\n", cub->initial_pov);
-	printf("Initial position: %d, %d\n", cub->pos[0], cub->pos[1]);
+	printf("Initial point of view: %d\n", cub->player->initial_pov);
+	printf("Initial position: %d, %d\n", cub->player->p_x, cub->player->p_y);
 	printf("Map:\n");
 	while (cub->map[i])
 	{
@@ -59,8 +59,8 @@ int	ft_get_init_pov(t_cub *cub)
 			if (cub->map[y][x] == 'N' || cub->map[y][x] == 'S' ||
 				cub->map[y][x] == 'E' || cub->map[y][x] == 'W')
 			{
-				cub->pos[0] = y;//Posición inicial del jugador
-				cub->pos[1] = x;
+				cub->player->p_y = y;//Posición inicial del jugador
+				cub->player->p_x = x;
 				if (cub->map[y][x] == 'N')
 					return (0);
 				else if (cub->map[y][x] == 'E')
@@ -79,10 +79,25 @@ int	ft_get_init_pov(t_cub *cub)
 void	ft_init_struct(t_cub *cub)
 {
 	cub->tx = ft_calloc(1, sizeof(t_tx));
-	cub->pos[0] = -1;
-	cub->pos[1] = -1;
+	cub->player = ft_calloc(1, sizeof(t_player));
+	cub->player->p_x = 0;
+	cub->player->p_y = 0;
+	cub->player->p_a = 0;
+	cub->player->initial_pov = 0;
 	cub->map = NULL;
 	cub->split_input = NULL;
+}
+
+void	ft_set_player_angle(t_cub *cub)
+{
+	if (cub->player->initial_pov == 0)
+		cub->player->p_a = 0;
+	else if (cub->player->initial_pov == 1)
+		cub->player->p_a = PI / 2;
+	else if (cub->player->initial_pov == 2)
+		cub->player->p_a = PI;
+	else if (cub->player->initial_pov == 3)
+		cub->player->p_a = 3 * PI / 2;
 }
 
 int	ft_parser(char	*file, t_cub *cub)
@@ -93,7 +108,10 @@ int	ft_parser(char	*file, t_cub *cub)
 		return (1);
 	if (ft_checks(cub) == 1)
 		return (1);
-	cub->initial_pov = ft_get_init_pov(cub);
+	cub->player->initial_pov = ft_get_init_pov(cub);
+	if (cub->player->initial_pov == -1)
+		return (1);
+	ft_set_player_angle(cub);
 	ft_parser_textures(cub);
 	ft_print_structure(cub);
 	//ft_conf_elements(split_input);

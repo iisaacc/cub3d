@@ -12,27 +12,7 @@
 
 #include "../../includes/cub3d.h"
 
-void	ft_hooks(mlx_key_data_t keydata, void *param)
-{
-	t_cub	*cub; 
-
-	cub = param;
-	cub->map[cub->pos[0]][cub->pos[1]] = '0';//convierte la posicion actual en 0
-	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-		mlx_close_window(cub->mlx);
-	/* if ((keydata.key == MLX_KEY_S || keydata.key == MLX_KEY_DOWN)
-		&& keydata.action == MLX_PRESS)
-		move_down(cub);//por hacer
-	if ((keydata.key == MLX_KEY_W || keydata.key == MLX_KEY_UP)
-		&& keydata.action == MLX_PRESS)
-		move_up(cub);//por hacer
-	if ((keydata.key == MLX_KEY_A || keydata.key == MLX_KEY_LEFT)
-		&& keydata.action == MLX_PRESS)
-		move_left(cub);//por hacer
-	if ((keydata.key == MLX_KEY_D || keydata.key == MLX_KEY_RIGHT)
-		&& keydata.action == MLX_PRESS)
-		move_right(cub);//por hacer */
-}
+//Te he movido los hooks al archivo hooks.c :)
 
 int	ft_game_loop(t_cub *cub)
 {
