@@ -37,6 +37,9 @@ void	ft_print_structure(t_cub *cub)
 	printf("C: %d, %d, %d\n", cub->tx->C_rgb[0], cub->tx->C_rgb[1], cub->tx->C_rgb[2]);
 	printf("Initial point of view: %d\n", cub->player->initial_pov);
 	printf("Initial position: %d, %d\n", cub->player->p_x, cub->player->p_y);
+	printf("Initial angle: %f\n", cub->player->p_a);
+	printf("Initial dx: %f\n", cub->player->p_dx);
+	printf("Initial dy: %f\n", cub->player->p_dy);
 	printf("Map:\n");
 	while (cub->map[i])
 	{
@@ -91,13 +94,16 @@ void	ft_init_struct(t_cub *cub)
 void	ft_set_player_angle(t_cub *cub)
 {
 	if (cub->player->initial_pov == 0)
-		cub->player->p_a = 0;
-	else if (cub->player->initial_pov == 1)
 		cub->player->p_a = PI / 2;
+	else if (cub->player->initial_pov == 1)
+		cub->player->p_a = 0;
 	else if (cub->player->initial_pov == 2)
-		cub->player->p_a = PI;
-	else if (cub->player->initial_pov == 3)
 		cub->player->p_a = 3 * PI / 2;
+	else if (cub->player->initial_pov == 3)
+		cub->player->p_a = PI;
+	cub->player->p_dx = cos(cub->player->p_a) * 5;
+	
+	cub->player->p_dy = sin(cub->player->p_a) * 5;
 }
 
 int	ft_parser(char	*file, t_cub *cub)

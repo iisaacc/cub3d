@@ -37,7 +37,9 @@ typedef struct s_player
 	int				initial_pov;//guarda el punto de vista inicial [0-N, 1-E, 2-S, 3-W]
 	int				p_x;//guarda la posicion del jugador
 	int				p_y;
-	float			p_a;//angulo de vista
+	double			p_a;//angulo de vista
+	double			p_dx;//delta x
+	double			p_dy;//delta y
 }	t_player;
 
 //Guarda los datos principales del juego
