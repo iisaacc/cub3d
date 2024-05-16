@@ -12,9 +12,10 @@
 # define BUFFER_SIZE 64
 #endif
 
-#define WIDTH 1280
-#define HEIGHT 720
-#define PI 3.14159265359
+#define WIDTH		1280
+#define HEIGHT		720
+#define PI			3.14159265359
+#define MOVE_SPEED	5
 
 
 //Guarda los datos sobre las texturas
