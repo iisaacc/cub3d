@@ -1,13 +1,13 @@
 #include "../../includes/cub3d.h"
 
-void	ft_fill_rgb(unsigned int *rgb, char *str)
+void	ft_fill_rgb(uint8_t *rgb, char *str)
 {
 	char	**split_num;
 
 	split_num = ft_split(str, ',');
-	rgb[0] = ft_atoi(split_num[0]);
-	rgb[1] = ft_atoi(split_num[1]);
-	rgb[2] = ft_atoi(split_num[2]);
+	rgb[0] = (uint8_t)ft_atoi(split_num[0]);
+	rgb[1] = (uint8_t)ft_atoi(split_num[1]);
+	rgb[2] = (uint8_t)ft_atoi(split_num[2]);
 	ft_free_2d(split_num);
 }
 

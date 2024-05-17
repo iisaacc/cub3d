@@ -3,8 +3,8 @@ NO ./path_to_the_north_texture
 SO ./path_to_the_south_texture
 WE ./path_to_the_west_texture
 
-F 20,0,0
-C 100,0,255
+C 0,0,255
+F 255,0,0
 
         1111111111111111111111111
         1000000000110000000000001

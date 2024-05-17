@@ -12,10 +12,13 @@
 # define BUFFER_SIZE 64
 #endif
 
-#define WIDTH		1280
-#define HEIGHT		720
-#define PI			3.14159265359
-#define MOVE_SPEED	5
+#define PI				3.141592653589793238462643383
+#define WIDTH			1280
+#define HEIGHT			720
+#define WID				640
+#define FOV				PI / 2
+#define MOVE_SPEED		5
+#define ROTATION_SPEED	0.2
 
 
 //Guarda los datos sobre las texturas
@@ -25,12 +28,14 @@ typedef struct s_tx
 	char			*SO_pth;
 	char			*WE_pth;
 	char			*EA_pth;
-	unsigned int	F_rgb[3];
-	unsigned int	C_rgb[3];
+	uint8_t			F_rgb[3];
+	uint8_t			C_rgb[3];
 	mlx_texture_t	*taux;
 	mlx_image_t		*F_img;
 	mlx_image_t		*C_img;
 	mlx_image_t		*P_img;
+	mlx_image_t		*m_walls;
+	mlx_image_t		*m_empty;
 }	t_tx;
 
 typedef struct s_player
@@ -70,6 +75,11 @@ int		ft_game_loop(t_cub *cub);
 
 //-------------------TEXTURES-------------------------
 int		ft_load_textures(t_cub *cub);
+
+//-------------------MOVEMENTS-----------------------
+void	ft_turn_camera(mlx_key_data_t keydata, t_cub *cub);
+void	ft_move_up_down(mlx_key_data_t keydata, t_cub *cub);
+void	ft_move_left_right(mlx_key_data_t keydata, t_cub *cub);
 
 //---------------------HOOKS-------------------------
 void	ft_hooks(mlx_key_data_t keydata, void *param);
