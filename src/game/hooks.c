@@ -28,6 +28,7 @@ void	ft_hooks(mlx_key_data_t keydata, void *param)
 	if ((keydata.key == MLX_KEY_LEFT || keydata.key == MLX_KEY_RIGHT)
 		&& (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
 		ft_turn_camera(keydata, cub);
+	draw_player_direction(cub);
 	printf("x: %d\n", cub->tx->P_img->instances->x);
 	printf("y: %d\n", cub->tx->P_img->instances->y);
 	printf("p_dx: %f\n", cub->player->p_dx);

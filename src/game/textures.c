@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:08:38 by isporras          #+#    #+#             */
-/*   Updated: 2024/05/17 12:05:40 by isporras         ###   ########.fr       */
+/*   Updated: 2024/05/21 14:50:08 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,53 @@ int	ft_load_floor_sky(t_cub *cub)
 
 int	ft_load_player(t_cub *cub)
 {
-	cub->tx->P_img = mlx_new_image(cub->mlx, 4, 4);
+	cub->tx->P_img = mlx_new_image(cub->mlx, 5, 5);
 	if (!cub->tx->P_img)
 		return (ft_error_msg("Error loading player texture", NULL), -1);
-	ft_memset(cub->tx->P_img->pixels, 255, cub->tx->P_img->width * cub->tx->P_img->height * sizeof(int32_t));
+	ft_set_color(cub->tx->P_img, 255, 0, 0);
 	if (mlx_image_to_window(cub->mlx, cub->tx->P_img, cub->player->p_x, cub->player->p_y) < 0)
 		return (ft_error_msg("Error loading player texture", NULL), -1);
 	return (0);
+}
+void mlx_draw_line(mlx_image_t* image, int x0, int y0, int x1, int y1, int color)
+{
+    int dx = abs(x1 - x0);
+    int sx = x0 < x1 ? 1 : -1;
+    int dy = -abs(y1 - y0);
+    int sy = y0 < y1 ? 1 : -1;
+    int err = dx + dy;
+    int e2;
+
+    while (true)
+    {
+        mlx_put_pixel(image, x0, y0, color);
+        if (x0 == x1 && y0 == y1)
+            break;
+        e2 = 2 * err;
+        if (e2 >= dy)
+        {
+            err += dy;
+            x0 += sx;
+        }
+        if (e2 <= dx)
+        {
+            err += dx;
+            y0 += sy;
+        }
+    }
+}
+
+void draw_player_direction(t_cub *cub)
+{
+	if (cub->arrow)
+		mlx_delete_image(cub->mlx , cub->arrow);
+	cub->arrow =  mlx_new_image(cub->mlx, WIDTH, HEIGHT);
+    int x0 = cub->player->p_x + 2;
+    int y0 = cub->player->p_y + 2;
+    int x1 = x0 + cub->player->p_dx * LINE_LENGTH;
+    int y1 = y0 - cub->player->p_dy * LINE_LENGTH;
+    mlx_draw_line(cub->arrow, x0, y0, x1, y1, 200);
+	mlx_image_to_window(cub->mlx, cub->arrow, 0, 0);
 }
 
 int	ft_load_minimap(t_cub *cub)
@@ -93,14 +133,48 @@ int	ft_load_minimap(t_cub *cub)
 	return (0);
 }
 
+int	ft_load_map(t_cub *cub)
+{
+	int	x;
+	int	y;
+	mlx_image_t *walls;
+	mlx_image_t *empty;
+
+	walls = mlx_new_image(cub->mlx, 64, 64);
+	empty = mlx_new_image(cub->mlx, 64, 64);
+	if (!walls || !empty)
+		return (ft_error_msg("Error loading map textures", NULL), -1);
+	ft_set_color(walls, 50, 50, 50);
+	ft_set_color(empty, 255, 255, 255);
+	y = 0;
+	while (cub->map[y])
+	{
+		x = 0;
+		while (cub->map[y][x])
+		{
+			if (cub->map[y][x] == '1')
+				mlx_image_to_window(cub->mlx, walls, x * 64, y * 64);
+			else if (cub->map[y][x] == '0' || cub->map[y][x] == ' ' || cub->map[y][x] == 'S'
+					|| cub->map[y][x] == 'N' || cub->map[y][x] == 'E' || cub->map[y][x] == 'W')
+				mlx_image_to_window(cub->mlx, empty, x * 64, y * 64);
+			x++;
+		}
+		y++;
+	}
+	return (0);
+}
+
 int	ft_load_textures(t_cub *cub)
 {
 	if (ft_load_floor_sky(cub) == -1)
+		return (EXIT_FAILURE);
+	if (ft_load_map(cub) == -1)
 		return (EXIT_FAILURE);
 	if (ft_load_minimap(cub) == -1)
 		return (EXIT_FAILURE);
 	if (ft_load_player(cub) == -1)
 		return (EXIT_FAILURE);
+	draw_player_direction(cub);
 	ft_putstr_fd("Textures loaded\n", 1);
 	return (EXIT_SUCCESS);
 }

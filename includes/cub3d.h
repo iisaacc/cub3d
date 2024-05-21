@@ -19,6 +19,7 @@
 #define FOV				PI / 2
 #define MOVE_SPEED		5
 #define ROTATION_SPEED	0.2
+#define LINE_LENGTH		5
 
 
 //Guarda los datos sobre las texturas
@@ -55,7 +56,7 @@ typedef struct s_cub
 	char			**map;//guarda el mapa
 	char			**split_input;//guarda el input
 	mlx_t			*mlx;//guarda el puntero de mlx
-	mlx_image_t		*image;
+	mlx_image_t		*arrow;
 	t_player		*player;//guarda los datos del jugador
 }	t_cub;
 
@@ -75,6 +76,7 @@ int		ft_game_loop(t_cub *cub);
 
 //-------------------TEXTURES-------------------------
 int		ft_load_textures(t_cub *cub);
+void	draw_player_direction(t_cub *cub);
 
 //-------------------MOVEMENTS-----------------------
 void	ft_turn_camera(mlx_key_data_t keydata, t_cub *cub);
