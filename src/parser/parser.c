@@ -36,7 +36,7 @@ void	ft_print_structure(t_cub *cub)
 	printf("F: %d, %d, %d\n", cub->tx->F_rgb[0], cub->tx->F_rgb[1], cub->tx->F_rgb[2]);
 	printf("C: %d, %d, %d\n", cub->tx->C_rgb[0], cub->tx->C_rgb[1], cub->tx->C_rgb[2]);
 	printf("Initial point of view: %d\n", cub->player->initial_pov);
-	printf("Initial position: %d, %d\n", cub->player->p_x, cub->player->p_y);
+	printf("Initial position: x: %f, y: %f\n", cub->player->p_x, cub->player->p_y);
 	printf("Initial angle: %f\n", cub->player->p_a);
 	printf("Initial dx: %f\n", cub->player->p_dx);
 	printf("Initial dy: %f\n", cub->player->p_dy);
@@ -90,6 +90,7 @@ void	ft_init_struct(t_cub *cub)
 	cub->map = NULL;
 	cub->split_input = NULL;
 	cub->arrow = NULL;
+	cub->ray = NULL;
 }
 
 void	ft_set_player_angle(t_cub *cub)

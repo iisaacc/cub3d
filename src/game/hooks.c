@@ -29,8 +29,9 @@ void	ft_hooks(mlx_key_data_t keydata, void *param)
 		&& (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
 		ft_turn_camera(keydata, cub);
 	draw_player_direction(cub);
-	printf("x: %d\n", cub->tx->P_img->instances->x);
-	printf("y: %d\n", cub->tx->P_img->instances->y);
+	ft_raycaster_loop(cub);
+	printf("x: %d\n", cub->tx->P_img->instances->x / 32);
+	printf("y: %d\n", cub->tx->P_img->instances->y / 32);
 	printf("p_dx: %f\n", cub->player->p_dx);
 	printf("p_dy: %f\n", cub->player->p_dy);
 	printf("p_a: %f\n", cub->player->p_a);

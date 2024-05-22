@@ -10,6 +10,7 @@ int	main(int argc, char **argv)
 	{
 		if (ft_parser(argv[1], &cub) == 1)
 			return (1);
+		printf("p_a: %f\n", cub.player->p_a);
 		ft_game_loop(&cub);
 		//ft_print_split(cub.split_input);
 	}

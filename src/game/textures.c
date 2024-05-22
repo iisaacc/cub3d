@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:08:38 by isporras          #+#    #+#             */
-/*   Updated: 2024/05/21 14:50:08 by isporras         ###   ########.fr       */
+/*   Updated: 2024/05/22 14:57:07 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	ft_load_player(t_cub *cub)
 		return (ft_error_msg("Error loading player texture", NULL), -1);
 	return (0);
 }
-void mlx_draw_line(mlx_image_t* image, int x0, int y0, int x1, int y1, int color)
+void ft_mlx_draw_line(mlx_image_t* image, int x0, int y0, int x1, int y1, int color)
 {
     int dx = abs(x1 - x0);
     int sx = x0 < x1 ? 1 : -1;
@@ -100,7 +100,7 @@ void draw_player_direction(t_cub *cub)
     int y0 = cub->player->p_y + 2;
     int x1 = x0 + cub->player->p_dx * LINE_LENGTH;
     int y1 = y0 - cub->player->p_dy * LINE_LENGTH;
-    mlx_draw_line(cub->arrow, x0, y0, x1, y1, 200);
+    ft_mlx_draw_line(cub->arrow, x0, y0, x1, y1, 200);
 	mlx_image_to_window(cub->mlx, cub->arrow, 0, 0);
 }
 
@@ -140,8 +140,8 @@ int	ft_load_map(t_cub *cub)
 	mlx_image_t *walls;
 	mlx_image_t *empty;
 
-	walls = mlx_new_image(cub->mlx, 64, 64);
-	empty = mlx_new_image(cub->mlx, 64, 64);
+	walls = mlx_new_image(cub->mlx, MAP_SIZE, MAP_SIZE);
+	empty = mlx_new_image(cub->mlx, MAP_SIZE, MAP_SIZE);
 	if (!walls || !empty)
 		return (ft_error_msg("Error loading map textures", NULL), -1);
 	ft_set_color(walls, 50, 50, 50);
@@ -153,10 +153,10 @@ int	ft_load_map(t_cub *cub)
 		while (cub->map[y][x])
 		{
 			if (cub->map[y][x] == '1')
-				mlx_image_to_window(cub->mlx, walls, x * 64, y * 64);
+				mlx_image_to_window(cub->mlx, walls, x * MAP_SIZE, y * MAP_SIZE);
 			else if (cub->map[y][x] == '0' || cub->map[y][x] == ' ' || cub->map[y][x] == 'S'
 					|| cub->map[y][x] == 'N' || cub->map[y][x] == 'E' || cub->map[y][x] == 'W')
-				mlx_image_to_window(cub->mlx, empty, x * 64, y * 64);
+				mlx_image_to_window(cub->mlx, empty, x * MAP_SIZE, y * MAP_SIZE);
 			x++;
 		}
 		y++;

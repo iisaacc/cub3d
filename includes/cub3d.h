@@ -20,6 +20,7 @@
 #define MOVE_SPEED		5
 #define ROTATION_SPEED	0.2
 #define LINE_LENGTH		5
+#define MAP_SIZE		32
 
 
 //Guarda los datos sobre las texturas
@@ -42,8 +43,8 @@ typedef struct s_tx
 typedef struct s_player
 {
 	int				initial_pov;//guarda el punto de vista inicial [0-N, 1-E, 2-S, 3-W]
-	int				p_x;//guarda la posicion del jugador
-	int				p_y;
+	double			p_x;//guarda la posicion del jugador
+	double			p_y;
 	double			p_a;//angulo de vista
 	double			p_dx;//delta x
 	double			p_dy;//delta y
@@ -57,6 +58,7 @@ typedef struct s_cub
 	char			**split_input;//guarda el input
 	mlx_t			*mlx;//guarda el puntero de mlx
 	mlx_image_t		*arrow;
+	mlx_image_t		*ray;
 	t_player		*player;//guarda los datos del jugador
 }	t_cub;
 
@@ -73,10 +75,13 @@ int		ft_map_checks(char **map);
 int		ft_parser_textures(t_cub *cub);
 //--------------------GAME----------------------------
 int		ft_game_loop(t_cub *cub);
+double	ft_raycaster(t_cub *cub, double angle);
+void	ft_raycaster_loop(t_cub *cub);
 
 //-------------------TEXTURES-------------------------
 int		ft_load_textures(t_cub *cub);
 void	draw_player_direction(t_cub *cub);
+void	ft_mlx_draw_line(mlx_image_t* image, int x0, int y0, int x1, int y1, int color);
 
 //-------------------MOVEMENTS-----------------------
 void	ft_turn_camera(mlx_key_data_t keydata, t_cub *cub);

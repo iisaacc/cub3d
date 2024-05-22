@@ -23,6 +23,7 @@ int	ft_game_loop(t_cub *cub)
 	}
 	if (ft_load_textures(cub) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
+	ft_raycaster_loop(cub);
 	mlx_key_hook(cub->mlx, &ft_hooks, cub);
 	mlx_loop(cub->mlx);
 	mlx_terminate(cub->mlx);
