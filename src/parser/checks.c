@@ -1,25 +1,5 @@
 #include "../../includes/cub3d.h"
 
-// int	ft_valid_paths(char **split_input)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (split_input[i])
-// 	{
-// 		if (ft_strncmp(split_input[i], "NO ", 3) == 0 ||
-// 			ft_strncmp(split_input[i], "SO ", 3) == 0 ||
-// 			ft_strncmp(split_input[i], "WE ", 3) == 0 ||
-// 			ft_strncmp(split_input[i], "EA ", 3) == 0)
-// 		{
-// 			if (read/open) //hacer open o read para ver si la ruta es valida
-// 				return (ft_error_msg("Invalid path: ", split_input[i]), 1);
-// 		}
-// 		i++;
-// 	}
-// 	return (0);
-// }
-
 int	ft_valid_rgb(char **split_input)
 {
 	int	i;
