@@ -175,14 +175,14 @@ double	ft_raycaster(t_cub *cub, double r_a)
 		|| isnan(x_step) || isinf(x_step)
 		|| sqrt(pow((x_crossing_x - cub->player->p_x / MAP_SIZE), 2) + pow((x_crossing_y - cub->player->p_y / MAP_SIZE), 2))
 		> sqrt(pow((y_crossing_x - cub->player->p_x / MAP_SIZE), 2) + pow((y_crossing_y - cub->player->p_y / MAP_SIZE), 2)))
-	{
-		dist = sqrt(pow((y_crossing_x - cub->player->p_x / MAP_SIZE), 2) + pow((y_crossing_y - cub->player->p_y / MAP_SIZE), 2));
-		draw_ray(cub, cub->ray, y_crossing_x, y_crossing_y);
-	}
+		{
+			dist = sqrt(pow((y_crossing_x - cub->player->p_x / MAP_SIZE), 2) + pow((y_crossing_y - cub->player->p_y / MAP_SIZE), 2));
+			draw_ray(cub, cub->ray, y_crossing_x, y_crossing_y);
+		}
 	else
-	{
-		dist = sqrt(pow((x_crossing_x - cub->player->p_x / MAP_SIZE), 2) + pow((x_crossing_y - cub->player->p_y / MAP_SIZE), 2));
-		draw_ray(cub, cub->ray, x_crossing_x, x_crossing_y);
-	}
+		{
+			dist = sqrt(pow((x_crossing_x - cub->player->p_x / MAP_SIZE), 2) + pow((x_crossing_y - cub->player->p_y / MAP_SIZE), 2));
+			draw_ray(cub, cub->ray, x_crossing_x, x_crossing_y);
+		}
 	return (dist);
 }
