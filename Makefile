@@ -7,7 +7,7 @@ OBJS_DIR = obj/
 LIBFT = includes/libft
 LIBFLAG =
 CC = clang
-CFLAGS = -g -Wall -Wextra -Werror -I
+CFLAGS = -g -I
 #MLXFLAGS = -Iinclude -Lincludes/MLX42/build -lmlx42 -ldl -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -pthread -lm #PARA MAC
 #MLXFLAGS = -Iinclude -Lincludes/MLX42/build -lmlx42 -ldl -lglfw3 -L"/usr/local/lib/" -pthread -lm #PARA UBUNTU
 MLXFLAGS = includes/MLX42/libmlx42.a -ldl -DEBUG=1 -Iinclude -lm -lglfw -L"usr/lib/x86_64-linux-gnu/"

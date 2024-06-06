@@ -6,7 +6,7 @@
 /*   By: yfang <yfang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 09:47:18 by isporras          #+#    #+#             */
-/*   Updated: 2024/06/06 14:16:02 by yfang            ###   ########.fr       */
+/*   Updated: 2024/06/06 15:25:36 by yfang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,20 @@ void	ft_raycaster_loop(t_cub *cub)
 		mlx_delete_image(cub->mlx, cub->ray);
 	cub->ray = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
 	ft_raycaster(cub, cub->player->p_a);
-	(void)ray;
-	(void)step;
-	(void)angle;
-	// while (angle <= cub->player->p_a + (fov / 2))
-	// {
-	// 	if (angle < 0)
-	// 		ray = angle + 2 * PI;
-	// 	else if (angle > 2 * PI)
-	// 		ray = angle - 2 * PI;
-	// 	else
-	// 		ray = angle;
-	// 	ft_raycaster(cub, ray);
-	// 	angle += step;
-	// }
+	// (void)ray;
+	// (void)step;
+	// (void)angle;
+	while (angle <= cub->player->p_a + (fov / 2))
+	{
+		if (angle < 0)
+			ray = angle + 2 * PI;
+		else if (angle > 2 * PI)
+			ray = angle - 2 * PI;
+		else
+			ray = angle;
+		ft_raycaster(cub, ray);
+		angle += step;
+	}
 }
 
 void draw_ray(t_cub *cub, mlx_image_t *ray, double x_collision, double y_collision)
