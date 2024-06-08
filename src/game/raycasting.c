@@ -64,9 +64,9 @@ void	ft_raycaster_loop(t_cub *cub)
 	while (angle <= cub->player->p_a + (fov / 2))
 	{
 		if (angle < 0)
-			ray = angle + 2 * PI;
-		else if (angle > 2 * PI)
-			ray = angle - 2 * PI;
+			ray = angle + (2 * PI);
+		else if (angle > (2 * PI))
+			ray = angle - (2 * PI);
 		else
 			ray = angle;
 		ft_raycaster(cub, ray);
@@ -98,6 +98,7 @@ double	ft_raycaster(t_cub *cub, double r_a)
 	double	dist;			//distancia al muro
 	
 	dist = 0;
+	c_a = 0;
 	if (r_a > 0 && r_a <= PI / 2) //PRIMER CUADRANTE
 	{
 		c_a = r_a;
@@ -130,22 +131,34 @@ double	ft_raycaster(t_cub *cub, double r_a)
 	printf("c_a: %f\n", c_a);
 	printf("xd: %f\n", xd);
 	printf("yd: %f\n", yd);
+	//No entiendo a partir de que punto tengo que usar c_a en vez de r_a
 	x_first_step = xd/cos(c_a);
 	x_step = 1 / cos(c_a);
-	printf("x_first_step: %f\n", x_first_step);
-	printf("x_step: %f\n", x_step);
 
 	y_first_step = yd / sin(c_a);
 	y_step = 1 / (sin(c_a));
+
+	// if ((r_a > PI / 2 && r_a <= PI) || (r_a > PI && r_a <=  3 * PI / 2)) //SEGUNDO CUADRANTE O TERCERO
+	// {
+	// 	x_first_step *= -1;
+	// 	x_step *= -1;
+	// }
+	// if ((r_a > 0 && r_a <= PI / 2) || r_a > PI / 2 && r_a <= PI) //PRIMERO O SEGUNDO
+	// {
+	// 	y_first_step *= -1;
+	// 	y_step *= -1;
+	// }
+	printf("x_first_step: %f\n", x_first_step);
+	printf("x_step: %f\n", x_step);
 	printf("y_first_step: %f\n", y_first_step);
 	printf("y_step: %f\n\n", y_step);
 	//Check first x_crossing from player position.
-	x_crossing_x = (cub->player->p_x / MAP_SIZE) + x_first_step * cos(c_a);
-	x_crossing_y = (cub->player->p_y / MAP_SIZE) - x_first_step * sin(c_a);
+	x_crossing_x = (cub->player->p_x / MAP_SIZE) + (x_first_step * cos(c_a));
+	x_crossing_y = (cub->player->p_y / MAP_SIZE) - (x_first_step * sin(c_a));
 	printf("x_crossing_x: %f\n", x_crossing_x);
 	printf("x_crossing_y: %f\n\n", x_crossing_y);
-	y_crossing_x = (cub->player->p_x / MAP_SIZE) + y_first_step * cos(c_a);
-	y_crossing_y = (cub->player->p_y / MAP_SIZE) - y_first_step * sin(c_a);
+	y_crossing_x = (cub->player->p_x / MAP_SIZE) + (y_first_step * cos(c_a));
+	y_crossing_y = (cub->player->p_y / MAP_SIZE) - (y_first_step * sin(c_a));
 	//RESOLVER DUDA DE COMO SE CALCULA Y_CROSSING
 
 	printf("y_crossing_x: %f\n", y_crossing_x);
@@ -156,7 +169,7 @@ double	ft_raycaster(t_cub *cub, double r_a)
 		&& (cub->map[(int)x_crossing_y][(int)x_crossing_x] != '1'))
 	{
 		x_crossing_x += (x_step * cos(c_a));
-	 	x_crossing_y += x_step * sin(c_a);
+	 	x_crossing_y += (x_step * sin(c_a));
 		printf("x_crossing_x: %f\n", x_crossing_x);
 		printf("x_crossing_y: %f\n\n", x_crossing_y);
 	}
@@ -164,8 +177,8 @@ double	ft_raycaster(t_cub *cub, double r_a)
 		&& !isnan(y_step) && !isinf(y_step) && cub->map[(int)y_crossing_y][(int)y_crossing_x]
 		&& (cub->map[(int)y_crossing_y][(int)y_crossing_x] != '1'))
 	{
-		y_crossing_x += y_step * cos(c_a);
-		y_crossing_y += y_step * sin(c_a);
+		y_crossing_x += (y_step * cos(c_a));
+		y_crossing_y += (y_step * sin(c_a));
 		printf("y_crossing_x: %f\n", y_crossing_x);
 		printf("y_crossing_y: %f\n\n\n\n", y_crossing_y);
 	}
