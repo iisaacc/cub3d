@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: yfang <yfang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 09:47:18 by isporras          #+#    #+#             */
-/*   Updated: 2024/06/12 14:09:08 by isporras         ###   ########.fr       */
+/*   Updated: 2024/06/12 16:18:50 by yfang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void draw_ray(t_cub *cub, mlx_image_t *ray, double x_collision, double y_collisi
 	2 - ft_transicion_segun_angulo()
 	1 - (colision x & colision y)ft_ray_formula()
 	2 - ft_seleccionar_mas_corta_y_ojo_de_pez()
+	M_PI
 }
 
 /* double	ft_raycaster(t_cub *cub, double r_a)
