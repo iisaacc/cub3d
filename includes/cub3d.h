@@ -50,15 +50,23 @@ typedef struct s_player
 	double			p_dy;//delta y
 }	t_player;
 
+typedef struct s_ray
+{
+	double			angle;
+	double			x_cross[2];
+	double			y_cross[2];
+	mlx_image_t		*img;
+}t_ray;
+
 //Guarda los datos principales del juego
 typedef struct s_cub
 {
 	t_tx			*tx;//guarda la estructura de las texturas
+	t_ray			*ray;//guarda la info del rayo
 	char			**map;//guarda el mapa
 	char			**split_input;//guarda el input
 	mlx_t			*mlx;//guarda el puntero de mlx
 	mlx_image_t		*arrow;
-	mlx_image_t		*ray;
 	t_player		*player;//guarda los datos del jugador
 }	t_cub;
 
