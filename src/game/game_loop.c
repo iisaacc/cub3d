@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:45:00 by isporras          #+#    #+#             */
-/*   Updated: 2024/05/13 15:31:24 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/06/12 17:01:27 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

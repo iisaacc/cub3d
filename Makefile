@@ -22,7 +22,7 @@ NC = \033[0m
 
 MAIN = main
 
-MAIN_DEBUG = main_debug
+MAIN_DEBUG = main
 
 SRC_FILES = parser/error parser/gnl parser/parser parser/read_split parser/checks parser/dfs parser/checks_map parser/p_textures\
 			game/game_loop game/textures game/hooks game/movements game/new_raycaster game/ray_check
@@ -52,8 +52,11 @@ $(NAME):$(OBJSF)	$(OBJS_SRC)
 debug: $(OBJSF) $(OBJS_SRC_DEBUG)
 	@echo "$(BLUE)Compiling libft...$(NC)"
 	@make -s -C $(LIBFT)
+	@make -s -C $(MLX42)
 	@cp $(LIBFT)/libft.a .
+	@cp $(MLX42)/libmlx42.a .
 	@mv libft.a $(NAME)
+	@mv libmlx42.a $(NAME)
 	@echo "$(GREEN)Libft compiled!$(NC)"
 	@echo "$(BLUE)Compiling $(NAME)...$(NC)"
 	@$(CC) $(OBJS_SRC_DEBUG) $(LIBFLAG) $(MLXFLAGS) -o cub_debug $(LIBFT)/libft.a
