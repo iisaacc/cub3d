@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yfang <yfang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 09:47:18 by isporras          #+#    #+#             */
-/*   Updated: 2024/06/06 15:25:36 by yfang            ###   ########.fr       */
+/*   Updated: 2024/06/12 14:09:08 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,14 @@ void draw_ray(t_cub *cub, mlx_image_t *ray, double x_collision, double y_collisi
 	mlx_image_to_window(cub->mlx, ray, 0, 0);
 }
 
-double	ft_raycaster(t_cub *cub, double r_a)
+{
+	//Solucionar esquinas y salidas del mapa
+	2 - ft_transicion_segun_angulo()
+	1 - (colision x & colision y)ft_ray_formula()
+	2 - ft_seleccionar_mas_corta_y_ojo_de_pez()
+}
+
+/* double	ft_raycaster(t_cub *cub, double r_a)
 {
 	double	c_a;	//angulo del rayo en el cuadrante
 	double	xd;		//cateto horizontal
@@ -199,3 +206,4 @@ double	ft_raycaster(t_cub *cub, double r_a)
 		}
 	return (dist);
 }
+ */
