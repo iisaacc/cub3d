@@ -62,8 +62,8 @@ int	ft_get_init_pov(t_cub *cub)
 			if (cub->map[y][x] == 'N' || cub->map[y][x] == 'S' ||
 				cub->map[y][x] == 'E' || cub->map[y][x] == 'W')
 			{
-				cub->player->p_y = y * 32;//Posición inicial del jugador
-				cub->player->p_x = x * 32;
+				cub->player->p_y = y;//Posición inicial del jugador
+				cub->player->p_x = x;
 				if (cub->map[y][x] == 'N')
 					return (0);
 				else if (cub->map[y][x] == 'E')
@@ -83,6 +83,9 @@ void	ft_init_struct(t_cub *cub)
 {
 	cub->tx = ft_calloc(1, sizeof(t_tx));
 	cub->player = ft_calloc(1, sizeof(t_player));
+	cub->ray = ft_calloc(1, sizeof(t_ray));
+	cub->ray->img = NULL;
+	cub->ray->angle = 0;
 	cub->player->p_x = 0;
 	cub->player->p_y = 0;
 	cub->player->p_a = 0;
@@ -90,7 +93,6 @@ void	ft_init_struct(t_cub *cub)
 	cub->map = NULL;
 	cub->split_input = NULL;
 	cub->arrow = NULL;
-	cub->ray = NULL;
 }
 
 void	ft_set_player_angle(t_cub *cub)

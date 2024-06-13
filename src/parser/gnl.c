@@ -18,6 +18,7 @@ char	*ft_strjoin_gnl(char *s1, char const *s2, size_t len)
 	free(s1);
 	return (join);
 }
+//dgfsffdsfdsd
 
 char	*get_next_line(int fd)
 {

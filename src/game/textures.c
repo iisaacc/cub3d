@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:08:38 by isporras          #+#    #+#             */
-/*   Updated: 2024/05/22 14:57:07 by isporras         ###   ########.fr       */
+/*   Updated: 2024/06/12 17:59:40 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,11 @@ void	ft_set_color(mlx_image_t *img, uint8_t r, uint8_t g, uint8_t b)
 //Hay algo que falla al traducir el rgb a bits (preguntar en 42)
 int	ft_load_floor_sky(t_cub *cub)
 {
-	
-	cub->tx->F_img = mlx_new_image(cub->mlx, WIDTH, 360);
+	cub->tx->F_img = mlx_new_image(cub->mlx, WIDTH, HEIGHT / 2);
 	if (cub->tx->F_img == NULL)
 		return (ft_error_msg("Error loading floor texture", NULL), -1);
 	ft_set_color(cub->tx->F_img, cub->tx->F_rgb[0], cub->tx->F_rgb[1], cub->tx->F_rgb[2]);
-	if (mlx_image_to_window(cub->mlx, cub->tx->F_img, 0, 360) < 0)
+	if (mlx_image_to_window(cub->mlx, cub->tx->F_img, 0, HEIGHT / 2) < 0)
 		return (ft_error_msg("Error loading floor texture", NULL), -1);
 	cub->tx->C_img = mlx_new_image(cub->mlx, WIDTH, HEIGHT / 2);
 	if (cub->tx->C_img == NULL)
@@ -59,7 +58,7 @@ int	ft_load_player(t_cub *cub)
 	if (!cub->tx->P_img)
 		return (ft_error_msg("Error loading player texture", NULL), -1);
 	ft_set_color(cub->tx->P_img, 255, 0, 0);
-	if (mlx_image_to_window(cub->mlx, cub->tx->P_img, cub->player->p_x, cub->player->p_y) < 0)
+	if (mlx_image_to_window(cub->mlx, cub->tx->P_img, cub->player->p_x * 32, cub->player->p_y * 32) < 0)// * 32
 		return (ft_error_msg("Error loading player texture", NULL), -1);
 	return (0);
 }
@@ -96,8 +95,8 @@ void draw_player_direction(t_cub *cub)
 	if (cub->arrow)
 		mlx_delete_image(cub->mlx , cub->arrow);
 	cub->arrow =  mlx_new_image(cub->mlx, WIDTH, HEIGHT);
-    int x0 = cub->player->p_x + 2;
-    int y0 = cub->player->p_y + 2;
+    int x0 = (cub->player->p_x * 32) + 2;
+    int y0 = (cub->player->p_y * 32) + 2;
     int x1 = x0 + cub->player->p_dx * LINE_LENGTH;
     int y1 = y0 - cub->player->p_dy * LINE_LENGTH;
     ft_mlx_draw_line(cub->arrow, x0, y0, x1, y1, 200);

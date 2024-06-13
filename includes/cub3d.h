@@ -13,11 +13,11 @@
 #endif
 
 #define PI				3.141592653589793238462643383
-#define WIDTH			1280
-#define HEIGHT			720
+#define WIDTH			1280 * 2
+#define HEIGHT			720 * 2
 #define WID				640
 #define FOV				PI / 2
-#define MOVE_SPEED		5
+#define MOVE_SPEED		5 / 32
 #define ROTATION_SPEED	0.2
 #define LINE_LENGTH		5
 #define MAP_SIZE		32
@@ -50,15 +50,23 @@ typedef struct s_player
 	double			p_dy;//delta y
 }	t_player;
 
+typedef struct s_ray
+{
+	double			angle;
+	double			x_cross[2];
+	double			y_cross[2];
+	mlx_image_t		*img;
+}t_ray;
+
 //Guarda los datos principales del juego
 typedef struct s_cub
 {
 	t_tx			*tx;//guarda la estructura de las texturas
+	t_ray			*ray;//guarda la info del rayo
 	char			**map;//guarda el mapa
 	char			**split_input;//guarda el input
 	mlx_t			*mlx;//guarda el puntero de mlx
 	mlx_image_t		*arrow;
-	mlx_image_t		*ray;
 	t_player		*player;//guarda los datos del jugador
 }	t_cub;
 
@@ -75,8 +83,10 @@ int		ft_map_checks(char **map);
 int		ft_parser_textures(t_cub *cub);
 //--------------------GAME----------------------------
 int		ft_game_loop(t_cub *cub);
-double	ft_raycaster(t_cub *cub, double angle);
+void	ft_raycaster(t_cub *cub);
 void	ft_raycaster_loop(t_cub *cub);
+int		ft_is_wall(double x, double y, t_cub *cub);
+double	ft_calc_dist(t_cub *cub, double *hit);
 
 //-------------------TEXTURES-------------------------
 int		ft_load_textures(t_cub *cub);
