@@ -92,6 +92,7 @@ double	ft_calc_dist(t_cub *cub, double *hit);
 int		ft_load_textures(t_cub *cub);
 void	draw_player_direction(t_cub *cub);
 void	ft_mlx_draw_line(mlx_image_t* image, int x0, int y0, int x1, int y1, int color);
+int		ft_get_rgba(int r, int g, int b, int a);
 
 //-------------------MOVEMENTS-----------------------
 void	ft_turn_camera(mlx_key_data_t keydata, t_cub *cub);

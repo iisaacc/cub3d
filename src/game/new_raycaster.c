@@ -12,16 +12,11 @@
 
 #include "../../includes/cub3d.h"
 
-int get_rgba(int r, int g, int b, int a)
-{
-    return (r << 24 | g << 16 | b << 8 | a);
-}
-
 void draw_ray(t_cub *cub, mlx_image_t *ray, double x_collision, double y_collision)
 {
 	printf("x_collision: %f\n", x_collision);
 	printf("y_collision: %f\n", y_collision);
-	ft_mlx_draw_line(ray, cub->player->p_x * 32, cub->player->p_y * 32, x_collision * MAP_SIZE, y_collision * MAP_SIZE, get_rgba(255, 0, 0, 255));
+	ft_mlx_draw_line(ray, cub->player->p_x * 32, cub->player->p_y * 32, x_collision * MAP_SIZE, y_collision * MAP_SIZE, ft_get_rgba(255, 0, 0, 255));
 	mlx_image_to_window(cub->mlx, ray, 0, 0);
 }
 
