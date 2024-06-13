@@ -119,7 +119,13 @@ void	ft_raycaster(t_cub *cub)
 	y_dist = ft_calc_dist(cub, y_hit);
 	printf("y_dist: %f\n", y_dist);
 	if (x_dist < y_dist)
+	{
 		draw_ray(cub, cub->ray->img, x_hit[0], x_hit[1]);
+		ft_draw_walls(cub, x_hit[0], x_hit[1], x_dist);
+	}
 	else
+	{
 		draw_ray(cub, cub->ray->img, y_hit[0], y_hit[1]);
+		ft_draw_walls(cub, y_hit[0], y_hit[1], y_dist);
+	}
 }
