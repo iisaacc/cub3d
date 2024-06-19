@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: yfang <yfang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 13:20:08 by isporras          #+#    #+#             */
-/*   Updated: 2024/06/28 13:20:08 by isporras         ###   ########.fr       */
+/*   Updated: 2024/07/01 15:26:28 by yfang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,19 +63,14 @@ int ft_is_wall(double x, double y, t_cub *cub)
 
 /*     if (x < 0)
         next_x = 0;
-    else if (x > ft_calc_last())
-        next_x = ft_calc_last();
-    else */
-		next_x = ft_next(x, cub->player->p_x);
-	if (y < 0)
-		next_y = 0;
-	else
-		next_y = ft_next(y, cub->player->p_y);
-	if (ft_on_limits(cub, next_x, next_y) && cub->map[next_y][next_x] != '0'
-		&& cub->map[next_y][next_x] != 'S' && cub->map[next_y][next_x] != 'N'
-		&& cub->map[next_y][next_x] != 'W' && cub->map[next_y][next_x] != 'E')
-		return (1);
-	if (!ft_on_limits(cub, next_x, next_y))
-		return (1);
-	return (0);
+    else if (x > ft_) */
+    next_x = ft_next(x, cub->player->p_x);
+    next_y = ft_next(y, cub->player->p_y);
+    printf("next_x: %d\n", next_x);
+    printf("next_y: %d\n", next_y);
+    if (!ft_on_limits(cub, next_x, next_y) && cub->map[next_y][next_x] != '0'
+        && cub->map[next_y][next_x] != 'S' && cub->map[next_y][next_x] != 'N'
+        && cub->map[next_y][next_x] != 'W' && cub->map[next_y][next_x] != 'E')
+        return (1);
+    return (0);
 }
