@@ -62,8 +62,8 @@ int	ft_get_init_pov(t_cub *cub)
 			if (cub->map[y][x] == 'N' || cub->map[y][x] == 'S' ||
 				cub->map[y][x] == 'E' || cub->map[y][x] == 'W')
 			{
-				cub->player->p_y = y;//Posición inicial del jugador
-				cub->player->p_x = x;
+				cub->player->p_y = y + 0.5;//Posición inicial del jugador
+				cub->player->p_x = x + 0.5;
 				if (cub->map[y][x] == 'N')
 					return (0);
 				else if (cub->map[y][x] == 'E')
