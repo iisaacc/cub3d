@@ -12,13 +12,13 @@
 
 #include "../../includes/cub3d.h"
 
-void draw_ray(t_cub *cub, mlx_image_t *ray, double x_collision, double y_collision)
+void	draw_ray(t_cub *cub, mlx_image_t *ray, double x_collision, double y_collision)
 {
 	ft_mlx_draw_line(ray, cub->player->p_x * 32, cub->player->p_y * 32, x_collision * MAP_SIZE, y_collision * MAP_SIZE, ft_get_rgba(255, 0, 0, 255));
 	mlx_image_to_window(cub->mlx, ray, 0, 0);
 }
 
-double  ft_normalize(double angle)
+double	ft_normalize(double angle)
 {
 	double	normalize;
 
@@ -38,7 +38,7 @@ void	ft_raycaster_loop(t_cub *cub)
 	double	step;
 	double	horiz;
 
-	fov = PI / 2;//90
+	fov = PI / 2;
 	step = FOV / WIDTH;
 	angle = cub->player->p_a - (fov / 2);
 	if (cub->ray->img)
@@ -52,6 +52,7 @@ void	ft_raycaster_loop(t_cub *cub)
 		ft_raycaster(cub, horiz);
 		angle += step;
 		horiz--;
+
 	}
 }
 
@@ -61,14 +62,14 @@ void	ft_collision_x(t_cub *cub, double *hit_x)
 	hit_x[1] = cub->player->p_y;
 	while (!ft_is_wall(hit_x[0], hit_x[1], cub))
 	{
-		if (cub->ray->angle < PI / 2 || cub->ray->angle > (3 * PI) / 2)
+		if (cub->ray->angle < PI / 2 || cub->ray->angle > (3 * PI) / 2)//Si el jugador mira hacia la derecha comprobamos la parte entera de la casilla + 1 (Para saber cual va a ser su proximo x crossing)
 			hit_x[0] = floor(hit_x[0]) + 1;
 		else
-			hit_x[0] = ceil(hit_x[0]) - 1;
-		hit_x[1] = (cub->player->p_x - hit_x[0]) * tan(cub->ray->angle);
-		hit_x[1] += cub->player->p_y;
+			hit_x[0] = ceil(hit_x[0]) - 1;//Si el jugador mira hacia la derecha comprobamos la siguiente casilla (en caso de que tenga decimales) - 1
+		hit_x[1] = (cub->player->p_x - hit_x[0]) * tan(cub->ray->angle);//Esta fórmula nos permite obtener la y a partir del ángulo del rayo y la coordenada x donde estamos comprobando si colisiona
+		hit_x[1] += cub->player->p_y;//Le sumamos la posición en y del jugador
 		if (hit_x[0] > 1000 || hit_x[1] > 1000)
-			break;
+			break ;
 	}
 	if (hit_x[0] > 1000 || hit_x[1] > 1000)
 	{
@@ -90,42 +91,12 @@ void	ft_collision_y(t_cub *cub, double *hit_y)
 		hit_y[0] = (cub->player->p_y - hit_y[1]) / tan(cub->ray->angle);
 		hit_y[0] += cub->player->p_x;
 		if (hit_y[0] > 1000 || hit_y[1] > 1000)
-			break;
+			break ;
 	}
 	if (hit_y[0] > 1000 || hit_y[1] > 1000)
 	{
 		hit_y[0] = 1000;
 		hit_y[1] = 1000;
-	}
-}
-
-void	ft_draw_walls(t_cub *cub, double horiz, double dist, int i)
-{
-	int	y;
-	int	heigth;
-	int	end;
-
-	heigth = HEIGHT / dist;
-	y = (HEIGHT / 2) - (heigth / 2);
-	end = (HEIGHT / 2) + (heigth / 2);
-	if (end >= HEIGHT)
-		end = HEIGHT - 1;
-	while (y >= 0 && y < HEIGHT && y <= end)
-	{
-		if (i == 0)
-		{
-			if (cub->ray->angle > PI / 2 && cub->ray->angle < (3 * PI) / 2)
-				mlx_put_pixel(cub->ray->img, horiz, y++, ft_get_rgba(100, 255, 100, 255));
-			else
-				mlx_put_pixel(cub->ray->img, horiz, y++, ft_get_rgba(255, 255, 100, 255));
-		}
-		else
-		{
-			if (cub->ray->angle > 0 / 2 && cub->ray->angle < PI)
-				mlx_put_pixel(cub->ray->img, horiz, y++, ft_get_rgba(100, 255, 255, 255));
-			else
-				mlx_put_pixel(cub->ray->img, horiz, y++, ft_get_rgba(255, 100, 100, 255));
-		}
 	}
 }
 
@@ -144,11 +115,16 @@ void	ft_raycaster(t_cub *cub, double horiz)
 	anti_fish_eye = cos(cub->ray->angle - cub->player->p_a);
 	if (x_dist < y_dist)
 	{
+		cub->ray->hit[0] = x_hit[0];
+		cub->ray->hit[1] = x_hit[1];
 		ft_draw_walls(cub, horiz, x_dist * anti_fish_eye, 0);
+		draw_ray(cub, cub->ray->img, x_hit[0], x_hit[1]);
 	}
 	else
 	{
+		cub->ray->hit[0] = y_hit[0];
+		cub->ray->hit[1] = y_hit[1];
 		ft_draw_walls(cub, horiz, y_dist * anti_fish_eye, 1);
+		draw_ray(cub, cub->ray->img, y_hit[0], y_hit[1]);
 	}
-	mlx_image_to_window(cub->mlx, cub->ray->img, 0, 0);
 }

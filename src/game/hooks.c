@@ -19,7 +19,7 @@ void	ft_hooks(mlx_key_data_t keydata, void *param)
 	cub = (t_cub *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		mlx_close_window(cub->mlx);
-	if ((keydata.key == MLX_KEY_W || keydata.key == MLX_KEY_S )
+	if ((keydata.key == MLX_KEY_W || keydata.key == MLX_KEY_S)
 		&& (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
 		ft_move_up_down(keydata, cub);
 	if ((keydata.key == MLX_KEY_A || keydata.key == MLX_KEY_D)
@@ -28,6 +28,7 @@ void	ft_hooks(mlx_key_data_t keydata, void *param)
 	if ((keydata.key == MLX_KEY_LEFT || keydata.key == MLX_KEY_RIGHT)
 		&& (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
 		ft_turn_camera(keydata, cub);
+	printf("player position: %f, %f\n", cub->player->p_x, cub->player->p_y);
 	draw_player_direction(cub);
 	ft_raycaster_loop(cub);
 }
