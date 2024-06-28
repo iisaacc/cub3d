@@ -13,14 +13,14 @@
 #endif
 
 #define PI				3.141592653589793238462643383
-#define WIDTH			1280 * 2
-#define HEIGHT			720 * 2
+#define WIDTH			1280
+#define HEIGHT			720
 #define WID				640
 #define FOV				PI / 2
-#define MOVE_SPEED		5 / 32
-#define ROTATION_SPEED	0.2
+#define MOVE_SPEED		1 / 32
+#define ROTATION_SPEED	0.01
 #define LINE_LENGTH		5
-#define MAP_SIZE		32
+#define MAP_SIZE		12
 
 
 //Guarda los datos sobre las texturas
@@ -83,7 +83,7 @@ int		ft_map_checks(char **map);
 int		ft_parser_textures(t_cub *cub);
 //--------------------GAME----------------------------
 int		ft_game_loop(t_cub *cub);
-void	ft_raycaster(t_cub *cub);
+void	ft_raycaster(t_cub *cub, double horiz);
 void	ft_raycaster_loop(t_cub *cub);
 int		ft_is_wall(double x, double y, t_cub *cub);
 double	ft_calc_dist(t_cub *cub, double *hit);

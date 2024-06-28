@@ -26,11 +26,6 @@ int	ft_on_limits(t_cub *cub, int x, int y)
 double  ft_calc_dist(t_cub *cub, double *hit)
 {
     double  dist;
-    printf("\nDIST\n");
-    printf("p_x: %f\n", cub->player->p_x);
-    printf("p_y: %f\n", cub->player->p_y);
-    printf("hit_x: %f\n", hit[0]);
-    printf("hit_y: %f\n", hit[1]);
     dist = pow(cub->player->p_x - hit[0], 2);
     dist += pow(cub->player->p_y - hit[1], 2);
     return (sqrt(dist));
@@ -54,10 +49,16 @@ int ft_is_wall(double x, double y, t_cub *cub)
     int next_x;
     int next_y;
 
-    next_x = ft_next(x, cub->player->p_x);
+/*     if (x < 0)
+        next_x = 0;
+    else if (x > ft_calc_last())
+        next_x = ft_calc_last();
+    else */
+        next_x = ft_next(x, cub->player->p_x);
+    if (y < 0)
+        next_y = 0;
+    else
     next_y = ft_next(y, cub->player->p_y);
-    printf("next_x: %d\n", next_x);
-    printf("next_y: %d\n", next_y);
     if (ft_on_limits(cub, next_x, next_y) && cub->map[next_y][next_x] != '0'
         && cub->map[next_y][next_x] != 'S' && cub->map[next_y][next_x] != 'N'
         && cub->map[next_y][next_x] != 'W' && cub->map[next_y][next_x] != 'E')

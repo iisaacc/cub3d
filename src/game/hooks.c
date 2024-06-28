@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: yfang <yfang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 12:41:20 by isporras          #+#    #+#             */
-/*   Updated: 2024/05/13 15:19:21 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/06/26 11:30:38 by yfang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,6 @@ void	ft_hooks(mlx_key_data_t keydata, void *param)
 		ft_turn_camera(keydata, cub);
 	draw_player_direction(cub);
 	ft_raycaster_loop(cub);
-	printf("x: %d\n", cub->tx->P_img->instances->x / 32);
-	printf("y: %d\n", cub->tx->P_img->instances->y / 32);
-	printf("p_dx: %f\n", cub->player->p_dx);
-	printf("p_dy: %f\n", cub->player->p_dy);
-	printf("p_a: %f\n", cub->player->p_a);
 }
 
 void	ft_close_window(void *param)

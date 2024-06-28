@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_raycaster.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: yfang <yfang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 14:18:50 by isporras          #+#    #+#             */
-/*   Updated: 2024/06/12 18:07:44 by isporras         ###   ########.fr       */
+/*   Updated: 2024/06/27 16:42:52 by yfang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void draw_ray(t_cub *cub, mlx_image_t *ray, double x_collision, double y_collision)
 {
-	printf("x_collision: %f\n", x_collision);
-	printf("y_collision: %f\n", y_collision);
 	ft_mlx_draw_line(ray, cub->player->p_x * 32, cub->player->p_y * 32, x_collision * MAP_SIZE, y_collision * MAP_SIZE, ft_get_rgba(255, 0, 0, 255));
 	mlx_image_to_window(cub->mlx, ray, 0, 0);
 }
@@ -38,20 +36,22 @@ void	ft_raycaster_loop(t_cub *cub)
 	double	angle;
 	double	fov;
 	double	step;
+	double	horiz;
 
 	fov = PI / 2;//90
-	step = 0.05;
+	step = FOV / WIDTH;
 	angle = cub->player->p_a - (fov / 2);
 	if (cub->ray->img)
 		mlx_delete_image(cub->mlx, cub->ray->img);
 	cub->ray->img = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
 	cub->ray->angle = cub->player->p_a;
-	ft_raycaster(cub);
-	while (angle <= cub->player->p_a + (fov / 2))
+	horiz = WIDTH - 1;
+	while (horiz >= 0)
 	{
 		cub->ray->angle = ft_normalize(angle);
-		ft_raycaster(cub);
+		ft_raycaster(cub, horiz);
 		angle += step;
+		horiz--;
 	}
 }
 
@@ -59,7 +59,6 @@ void	ft_collision_x(t_cub *cub, double *hit_x)
 {
 	hit_x[0] = cub->player->p_x;
 	hit_x[1] = cub->player->p_y;
-	printf("is_wall: %d\n", ft_is_wall(hit_x[0], hit_x[1], cub));
 	while (!ft_is_wall(hit_x[0], hit_x[1], cub))
 	{
 		if (cub->ray->angle < PI / 2 || cub->ray->angle > (3 * PI) / 2)
@@ -100,27 +99,56 @@ void	ft_collision_y(t_cub *cub, double *hit_y)
 	}
 }
 
-void	ft_raycaster(t_cub *cub)
+void	ft_draw_walls(t_cub *cub, double horiz, double dist, int i)
+{
+	int	y;
+	int	heigth;
+	int	end;
+
+	heigth = HEIGHT / dist;
+	y = (HEIGHT / 2) - (heigth / 2);
+	end = (HEIGHT / 2) + (heigth / 2);
+	if (end >= HEIGHT)
+		end = HEIGHT - 1;
+	while (y >= 0 && y < HEIGHT && y <= end)
+	{
+		if (i == 0)
+		{
+			if (cub->ray->angle > PI / 2 && cub->ray->angle < (3 * PI) / 2)
+				mlx_put_pixel(cub->ray->img, horiz, y++, ft_get_rgba(100, 255, 100, 255));
+			else
+				mlx_put_pixel(cub->ray->img, horiz, y++, ft_get_rgba(255, 255, 100, 255));
+		}
+		else
+		{
+			if (cub->ray->angle > 0 / 2 && cub->ray->angle < PI)
+				mlx_put_pixel(cub->ray->img, horiz, y++, ft_get_rgba(100, 255, 255, 255));
+			else
+				mlx_put_pixel(cub->ray->img, horiz, y++, ft_get_rgba(255, 100, 100, 255));
+		}
+	}
+}
+
+void	ft_raycaster(t_cub *cub, double horiz)
 {
 	double	x_hit[2];//coordenadas [x][y]
 	double	y_hit[2];
 	double	x_dist;
 	double	y_dist;
+	double	anti_fish_eye;
 
 	ft_collision_x(cub, x_hit);
 	x_dist = ft_calc_dist(cub, x_hit);
-	printf("x_dist: %f\n", x_dist);
 	ft_collision_y(cub, y_hit);
 	y_dist = ft_calc_dist(cub, y_hit);
-	printf("y_dist: %f\n", y_dist);
+	anti_fish_eye = cos(cub->ray->angle - cub->player->p_a);
 	if (x_dist < y_dist)
 	{
-		draw_ray(cub, cub->ray->img, x_hit[0], x_hit[1]);
-		ft_draw_walls(cub, x_hit[0], x_hit[1], x_dist);
+		ft_draw_walls(cub, horiz, x_dist * anti_fish_eye, 0);
 	}
 	else
 	{
-		draw_ray(cub, cub->ray->img, y_hit[0], y_hit[1]);
-		ft_draw_walls(cub, y_hit[0], y_hit[1], y_dist);
+		ft_draw_walls(cub, horiz, y_dist * anti_fish_eye, 1);
 	}
+	mlx_image_to_window(cub->mlx, cub->ray->img, 0, 0);
 }

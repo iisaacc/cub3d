@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: yfang <yfang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:08:38 by isporras          #+#    #+#             */
-/*   Updated: 2024/06/12 17:59:40 by isporras         ###   ########.fr       */
+/*   Updated: 2024/06/26 12:25:16 by yfang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,11 +169,10 @@ int	ft_load_textures(t_cub *cub)
 		return (EXIT_FAILURE);
 	if (ft_load_map(cub) == -1)
 		return (EXIT_FAILURE);
-	if (ft_load_minimap(cub) == -1)
-		return (EXIT_FAILURE);
+	//if (ft_load_minimap(cub) == -1)
+	//	return (EXIT_FAILURE);
 	if (ft_load_player(cub) == -1)
 		return (EXIT_FAILURE);
 	draw_player_direction(cub);
-	ft_putstr_fd("Textures loaded\n", 1);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: yfang <yfang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 09:47:18 by isporras          #+#    #+#             */
-/*   Updated: 2024/06/12 14:28:40 by isporras         ###   ########.fr       */
+/*   Updated: 2024/06/26 11:31:33 by yfang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,6 @@ void	ft_raycaster_loop(t_cub *cub)
 
 void draw_ray(t_cub *cub, mlx_image_t *ray, double x_collision, double y_collision)
 {
-	printf("x_collision: %f\n", x_collision);
-	printf("y_collision: %f\n", y_collision);
 	ft_mlx_draw_line(ray, cub->player->p_x, cub->player->p_y, x_collision * MAP_SIZE, y_collision * MAP_SIZE, get_rgba(255, 0, 0, 255));
 	mlx_image_to_window(cub->mlx, ray, 0, 0);
 }
