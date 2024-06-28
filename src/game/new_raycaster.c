@@ -6,7 +6,7 @@
 /*   By: yfang <yfang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 14:18:50 by isporras          #+#    #+#             */
-/*   Updated: 2024/06/26 12:32:48 by yfang            ###   ########.fr       */
+/*   Updated: 2024/06/27 16:42:52 by yfang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_raycaster_loop(t_cub *cub)
 		mlx_delete_image(cub->mlx, cub->ray->img);
 	cub->ray->img = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
 	cub->ray->angle = cub->player->p_a;
-	horiz = WIDTH;
+	horiz = WIDTH - 1;
 	while (horiz >= 0)
 	{
 		cub->ray->angle = ft_normalize(angle);
@@ -99,7 +99,7 @@ void	ft_collision_y(t_cub *cub, double *hit_y)
 	}
 }
 
-void	ft_draw_walls(t_cub *cub, double horiz, double dist)
+void	ft_draw_walls(t_cub *cub, double horiz, double dist, int i)
 {
 	int	y;
 	int	heigth;
@@ -108,8 +108,25 @@ void	ft_draw_walls(t_cub *cub, double horiz, double dist)
 	heigth = HEIGHT / dist;
 	y = (HEIGHT / 2) - (heigth / 2);
 	end = (HEIGHT / 2) + (heigth / 2);
-	while (y > 0 && y < HEIGHT && y < end)
-		mlx_put_pixel(cub->ray->img, horiz, y++, ft_get_rgba(255, 255, 0, 255));
+	if (end >= HEIGHT)
+		end = HEIGHT - 1;
+	while (y >= 0 && y < HEIGHT && y <= end)
+	{
+		if (i == 0)
+		{
+			if (cub->ray->angle > PI / 2 && cub->ray->angle < (3 * PI) / 2)
+				mlx_put_pixel(cub->ray->img, horiz, y++, ft_get_rgba(100, 255, 100, 255));
+			else
+				mlx_put_pixel(cub->ray->img, horiz, y++, ft_get_rgba(255, 255, 100, 255));
+		}
+		else
+		{
+			if (cub->ray->angle > 0 / 2 && cub->ray->angle < PI)
+				mlx_put_pixel(cub->ray->img, horiz, y++, ft_get_rgba(100, 255, 255, 255));
+			else
+				mlx_put_pixel(cub->ray->img, horiz, y++, ft_get_rgba(255, 100, 100, 255));
+		}
+	}
 }
 
 void	ft_raycaster(t_cub *cub, double horiz)
@@ -127,11 +144,11 @@ void	ft_raycaster(t_cub *cub, double horiz)
 	anti_fish_eye = cos(cub->ray->angle - cub->player->p_a);
 	if (x_dist < y_dist)
 	{
-		ft_draw_walls(cub, horiz, x_dist * anti_fish_eye);
+		ft_draw_walls(cub, horiz, x_dist * anti_fish_eye, 0);
 	}
 	else
 	{
-		ft_draw_walls(cub, horiz, y_dist * anti_fish_eye);
+		ft_draw_walls(cub, horiz, y_dist * anti_fish_eye, 1);
 	}
 	mlx_image_to_window(cub->mlx, cub->ray->img, 0, 0);
 }

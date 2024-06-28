@@ -1,4 +1,3 @@
-
 NAME = cub3D
 INCLUDES = libft/include -I/usr/local/include #PARA UBUNTU
 SRCS_DIR = src/

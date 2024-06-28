@@ -17,10 +17,10 @@
 #define HEIGHT			720
 #define WID				640
 #define FOV				PI / 2
-#define MOVE_SPEED		5 / 32
-#define ROTATION_SPEED	0.2
+#define MOVE_SPEED		1 / 32
+#define ROTATION_SPEED	0.01
 #define LINE_LENGTH		5
-#define MAP_SIZE		32
+#define MAP_SIZE		12
 
 
 //Guarda los datos sobre las texturas
