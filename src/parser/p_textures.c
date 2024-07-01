@@ -11,6 +11,19 @@ void	ft_fill_rgb(uint8_t *rgb, char *str)
 	ft_free_2d(split_num);
 }
 
+//Elimina los saltos de línea de las rutas de las texturas
+void	ft_remove_endl(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\n')
+			str[i] = '\0';
+		i++;
+	}
+}
 void	ft_get_textures(t_cub *cub)
 {
 	int	i;
@@ -32,6 +45,10 @@ void	ft_get_textures(t_cub *cub)
 			ft_fill_rgb(cub->tx->C_rgb, &cub->split_input[i][2]); 
 		i++;
 	}
+	ft_remove_endl(cub->tx->NO_pth);
+	ft_remove_endl(cub->tx->SO_pth);
+	ft_remove_endl(cub->tx->WE_pth);
+	ft_remove_endl(cub->tx->EA_pth);
 }
 
 void	ft_init_tx_struct(t_cub *cub)
@@ -47,6 +64,7 @@ void	ft_init_tx_struct(t_cub *cub)
 	cub->tx->C_rgb[1] = -1;
 	cub->tx->C_rgb[2] = -1;
 }
+
 
 int	ft_parser_textures(t_cub *cub)
 {

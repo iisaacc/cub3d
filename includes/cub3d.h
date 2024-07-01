@@ -20,24 +20,29 @@
 #define MOVE_SPEED		3 / 32
 #define ROTATION_SPEED	0.05
 #define LINE_LENGTH		5
-#define MAP_SIZE		12
+#define MAP_SIZE		32
+#define SIZE			32
 
 
 //Guarda los datos sobre las texturas
 typedef struct s_tx
 {
-	char			*NO_pth;
+	char			*NO_pth;//Ruta a cada una de las texturas
 	char			*SO_pth;
 	char			*WE_pth;
 	char			*EA_pth;
-	uint8_t			F_rgb[3];
-	uint8_t			C_rgb[3];
+	uint8_t			F_rgb[3];//Códigos rgb del suelo
+	uint8_t			C_rgb[3];//Códigos rgb del cielo
 	mlx_texture_t	*taux;
-	mlx_image_t		*F_img;
-	mlx_image_t		*C_img;
-	mlx_image_t		*P_img;
-	mlx_image_t		*m_walls;
-	mlx_image_t		*m_empty;
+	mlx_image_t		*F_img;//Puntero mlx donde se almacena la imagen del suelo
+	mlx_image_t		*C_img;//Puntero mlx donde se almacena la imagen del cielo
+	mlx_image_t		*P_img;//Puntero mlx donde se almacena la imagen del jugador
+	mlx_image_t		*NO_img;//Puntero mlx donde se almacena la imagen de la textura NO
+	mlx_image_t		*SO_img;//Puntero mlx donde se almacena la imagen de la textura SO
+	mlx_image_t		*WE_img;//Puntero mlx donde se almacena la imagen de la textura WE
+	mlx_image_t		*EA_img;//Puntero mlx donde se almacena la imagen de la textura EA
+	mlx_image_t		*m_walls;//Almacena la imagen con la que se construye la representación de los muros del mapa
+	mlx_image_t		*m_empty;//Almacena la imagen con la que se construye la representación de los espacios vacíos del mapa
 }	t_tx;
 
 typedef struct s_player
@@ -55,6 +60,7 @@ typedef struct s_ray
 	double			angle;
 	double			x_cross[2];
 	double			y_cross[2];
+	double			hit[2];
 	mlx_image_t		*img;
 }t_ray;
 
@@ -93,6 +99,7 @@ int		ft_load_textures(t_cub *cub);
 void	draw_player_direction(t_cub *cub);
 void	ft_mlx_draw_line(mlx_image_t* image, int x0, int y0, int x1, int y1, int color);
 int		ft_get_rgba(int r, int g, int b, int a);
+void	ft_draw_walls(t_cub *cub, double horiz, double dist, int i);
 
 //-------------------MOVEMENTS-----------------------
 void	ft_turn_camera(mlx_key_data_t keydata, t_cub *cub);
