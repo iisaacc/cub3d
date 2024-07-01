@@ -6,9 +6,10 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 14:18:50 by isporras          #+#    #+#             */
-/*   Updated: 2024/07/01 18:42:19 by isporras         ###   ########.fr       */
+/*   Updated: 2024/07/01 18:45:04 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../includes/cub3d.h"
 
@@ -117,6 +118,7 @@ void	ft_raycaster(t_cub *cub, double horiz)
 		cub->ray->hit[1] = x_hit[1];
 		ft_draw_walls(cub, horiz, x_dist * anti_fish_eye, 0);
 		draw_ray(cub, cub->ray->img, x_hit[0], x_hit[1]);
+		//ft_draw_walls(cub, x_hit[0], x_hit[1], x_dist);
 	}
 	else
 	{
@@ -124,5 +126,6 @@ void	ft_raycaster(t_cub *cub, double horiz)
 		cub->ray->hit[1] = y_hit[1];
 		ft_draw_walls(cub, horiz, y_dist * anti_fish_eye, 1);
 		draw_ray(cub, cub->ray->img, y_hit[0], y_hit[1]);
+		//ft_draw_walls(cub, y_hit[0], y_hit[1], y_dist);
 	}
 }
