@@ -84,6 +84,7 @@ void	ft_init_struct(t_cub *cub)
 	cub->tx = ft_calloc(1, sizeof(t_tx));
 	cub->player = ft_calloc(1, sizeof(t_player));
 	cub->ray = ft_calloc(1, sizeof(t_ray));
+	cub->wall = ft_calloc(1, sizeof(t_wall));
 	cub->ray->img = NULL;
 	cub->ray->angle = 0;
 	cub->player->p_x = 0;

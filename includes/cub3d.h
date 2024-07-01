@@ -37,10 +37,10 @@ typedef struct s_tx
 	mlx_image_t		*F_img;//Puntero mlx donde se almacena la imagen del suelo
 	mlx_image_t		*C_img;//Puntero mlx donde se almacena la imagen del cielo
 	mlx_image_t		*P_img;//Puntero mlx donde se almacena la imagen del jugador
-	mlx_image_t		*NO_img;//Puntero mlx donde se almacena la imagen de la textura NO
-	mlx_image_t		*SO_img;//Puntero mlx donde se almacena la imagen de la textura SO
-	mlx_image_t		*WE_img;//Puntero mlx donde se almacena la imagen de la textura WE
-	mlx_image_t		*EA_img;//Puntero mlx donde se almacena la imagen de la textura EA
+	mlx_texture_t	*NO_tx;//Puntero mlx donde se almacena la imagen de la textura NO
+	mlx_texture_t	*SO_tx;//Puntero mlx donde se almacena la imagen de la textura SO
+	mlx_texture_t	*WE_tx;//Puntero mlx donde se almacena la imagen de la textura WE
+	mlx_texture_t	*EA_tx;//Puntero mlx donde se almacena la imagen de la textura EA
 	mlx_image_t		*m_walls;//Almacena la imagen con la que se construye la representación de los muros del mapa
 	mlx_image_t		*m_empty;//Almacena la imagen con la que se construye la representación de los espacios vacíos del mapa
 }	t_tx;
@@ -64,6 +64,12 @@ typedef struct s_ray
 	mlx_image_t		*img;
 }t_ray;
 
+typedef struct s_wall
+{
+	int				heigth;
+	int				y;
+}	t_wall;
+
 //Guarda los datos principales del juego
 typedef struct s_cub
 {
@@ -74,7 +80,9 @@ typedef struct s_cub
 	mlx_t			*mlx;//guarda el puntero de mlx
 	mlx_image_t		*arrow;
 	t_player		*player;//guarda los datos del jugador
+	t_wall			*wall;
 }	t_cub;
+
 
 //------------------PARSER--------------------------
 int		ft_parser(char	*file, t_cub *cub);

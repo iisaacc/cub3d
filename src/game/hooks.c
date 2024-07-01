@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yfang <yfang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 12:41:20 by isporras          #+#    #+#             */
-/*   Updated: 2024/06/26 11:30:38 by yfang            ###   ########.fr       */
+/*   Updated: 2024/07/01 17:44:31 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	ft_hooks(mlx_key_data_t keydata, void *param)
 	if ((keydata.key == MLX_KEY_LEFT || keydata.key == MLX_KEY_RIGHT)
 		&& (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
 		ft_turn_camera(keydata, cub);
-	printf("player position: %f, %f\n", cub->player->p_x, cub->player->p_y);
 	draw_player_direction(cub);
 	ft_raycaster_loop(cub);
 }

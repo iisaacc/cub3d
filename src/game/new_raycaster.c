@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_raycaster.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yfang <yfang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 14:18:50 by isporras          #+#    #+#             */
-/*   Updated: 2024/06/27 16:42:52 by yfang            ###   ########.fr       */
+/*   Updated: 2024/07/01 18:42:19 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,11 @@ double	ft_normalize(double angle)
 void	ft_raycaster_loop(t_cub *cub)
 {
 	double	angle;
-	double	fov;
 	double	step;
-	double	horiz;
+	int		horiz;
 
-	fov = PI / 2;
 	step = FOV / WIDTH;
-	angle = cub->player->p_a - (fov / 2);
+	angle = cub->player->p_a - (FOV / 2);
 	if (cub->ray->img)
 		mlx_delete_image(cub->mlx, cub->ray->img);
 	cub->ray->img = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
@@ -49,10 +47,10 @@ void	ft_raycaster_loop(t_cub *cub)
 	while (horiz >= 0)
 	{
 		cub->ray->angle = ft_normalize(angle);
-		ft_raycaster(cub, horiz);
+		//if (horiz == WIDTH / 2)
+			ft_raycaster(cub, horiz);
 		angle += step;
 		horiz--;
-
 	}
 }
 

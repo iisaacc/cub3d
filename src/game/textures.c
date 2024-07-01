@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yfang <yfang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:08:38 by isporras          #+#    #+#             */
-/*   Updated: 2024/06/26 12:25:16 by yfang            ###   ########.fr       */
+/*   Updated: 2024/07/01 16:09:26 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,25 +135,19 @@ int	ft_load_wall_textures(t_cub *cub)
 	tx = mlx_load_png(cub->tx->NO_pth);
 	if (!tx)
 		return (ft_error_msg("Error loading NO texture", NULL), -1);
-	cub->tx->NO_img = mlx_texture_to_image(cub->mlx, tx);
+	cub->tx->NO_tx = tx;
 	tx = mlx_load_png(cub->tx->SO_pth);
 	if (!tx)
 		return (ft_error_msg("Error loading SO texture", NULL), -1);
-	cub->tx->SO_img = mlx_texture_to_image(cub->mlx, tx);
-	if (!cub->tx->SO_img)
-		return (ft_error_msg("Error loading SO texture", NULL), -1);
+	cub->tx->SO_tx = tx;
 	tx = mlx_load_png(cub->tx->WE_pth);
 	if (!tx)
 		return (ft_error_msg("Error loading WE texture", NULL), -1);
-	cub->tx->WE_img = mlx_texture_to_image(cub->mlx, tx);
-	if (!cub->tx->WE_img)
-		return (ft_error_msg("Error loading WE texture", NULL), -1);
+	cub->tx->WE_tx = tx;
 	tx = mlx_load_png(cub->tx->EA_pth);
 	if (!tx)
 		return (ft_error_msg("Error loading EA texture", NULL), -1);
-	cub->tx->EA_img = mlx_texture_to_image(cub->mlx, tx);
-	if (!cub->tx->EA_img)
-		return (ft_error_msg("Error loading EA texture", NULL), -1);
+	cub->tx->EA_tx = tx;
 	return (0);
 }
 
