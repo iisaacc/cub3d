@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   new_raycaster.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yfang <yfang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 14:18:50 by isporras          #+#    #+#             */
-/*   Updated: 2024/07/01 19:00:10 by yfang            ###   ########.fr       */
+<<<<<<< HEAD
+/*   Updated: 2024/06/28 15:03:31 by yfang            ###   ########.fr       */
+=======
+/*   Updated: 2024/07/01 18:42:19 by isporras         ###   ########.fr       */
+>>>>>>> 3398395 (texturas cargadas)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +100,38 @@ void	ft_collision_y(t_cub *cub, double *hit_y)
 	{
 		hit_y[0] = 1000;
 		hit_y[1] = 1000;
+	}
+}
+
+void	ft_draw_walls(t_cub *cub, double horiz, double dist, int i)
+{
+	int	y;
+	int	heigth;
+	int	end;
+
+	heigth = HEIGHT / dist;
+	if (heigth > HEIGHT)
+		heigth = HEIGHT;
+	y = (HEIGHT / 2) - (heigth / 2);
+	end = (HEIGHT / 2) + (heigth / 2);
+	if (end >= HEIGHT)
+		end = HEIGHT - 1;
+	while (y >= 0 && y < HEIGHT && y <= end)
+	{
+		if (i == 0)
+		{
+			if (cub->ray->angle > PI / 2 && cub->ray->angle < (3 * PI) / 2)
+				mlx_put_pixel(cub->ray->img, horiz, y++, ft_get_rgba(100, 255, 100, 255));
+			else
+				mlx_put_pixel(cub->ray->img, horiz, y++, ft_get_rgba(255, 255, 100, 255));
+		}
+		else
+		{
+			if (cub->ray->angle > 0 / 2 && cub->ray->angle < PI)
+				mlx_put_pixel(cub->ray->img, horiz, y++, ft_get_rgba(100, 255, 255, 255));
+			else
+				mlx_put_pixel(cub->ray->img, horiz, y++, ft_get_rgba(255, 100, 100, 255));
+		}
 	}
 }
 
