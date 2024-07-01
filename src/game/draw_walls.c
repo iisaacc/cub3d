@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_walls.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: yfang <yfang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 11:09:16 by isporras          #+#    #+#             */
-/*   Updated: 2024/07/01 18:42:33 by isporras         ###   ########.fr       */
+/*   Updated: 2024/07/01 19:36:05 by yfang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ unsigned long	ft_get_pixel_color(t_cub *cub, mlx_texture_t *tx, int tx_coord[2])
 		a = tx->pixels[p + 3];
 		return (r << 24 | g << 16 | b << 8 | 0xFF);
 	}
-	return (ft_get_rgba(255, 0, 0, 255));
+	return (0);
 }
 
 unsigned long	ft_get_pixel(t_cub *cub, mlx_texture_t *tx)
