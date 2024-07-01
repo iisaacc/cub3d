@@ -6,7 +6,7 @@
 /*   By: yfang <yfang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 14:18:50 by isporras          #+#    #+#             */
-/*   Updated: 2024/06/27 16:42:52 by yfang            ###   ########.fr       */
+/*   Updated: 2024/06/28 15:03:31 by yfang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ void	ft_draw_walls(t_cub *cub, double horiz, double dist, int i)
 	int	end;
 
 	heigth = HEIGHT / dist;
+	if (heigth > HEIGHT)
+		heigth = HEIGHT;
 	y = (HEIGHT / 2) - (heigth / 2);
 	end = (HEIGHT / 2) + (heigth / 2);
 	if (end >= HEIGHT)
