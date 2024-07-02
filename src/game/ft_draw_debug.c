@@ -33,13 +33,6 @@ void ft_mlx_draw_line(mlx_image_t* image, int x0, int y0, int x1, int y1, int co
 
 void	draw_player_direction(t_cub *cub)
 {
-	if (cub->arrow)
-		mlx_delete_image(cub->mlx , cub->arrow);
-	cub->arrow =  mlx_new_image(cub->mlx, WIDTH, HEIGHT);
-    int x0 = (cub->player->p_x * 32) + 2;
-    int y0 = (cub->player->p_y * 32) + 2;
-    int x1 = x0 + cub->player->p_dx * LINE_LENGTH;
-    int y1 = y0 - cub->player->p_dy * LINE_LENGTH;
-    ft_mlx_draw_line(cub->arrow, x0, y0, x1, y1, 200);
-	mlx_image_to_window(cub->mlx, cub->arrow, 0, 0);
+	cub->tx->P_img->instances->x = cub->player->p_x * 32;
+	cub->tx->P_img->instances->y = cub->player->p_y * 32;
 }

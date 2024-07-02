@@ -20,7 +20,6 @@ unsigned long	ft_get_pixel_color(t_cub *cub, mlx_texture_t *tx, int tx_coord[2])
 	int	a;
 	int	p;
 
-	//printf("tx_coord[0] = %d\n", tx_coord[0]);
 	p = 4 * tx_coord[0] + (4 * tx_coord[1] * tx->width);
 	if (p <= tx->height * tx->width * tx->bytes_per_pixel)
 	{
@@ -39,28 +38,14 @@ unsigned long	ft_get_pixel(t_cub *cub, mlx_texture_t *tx)
 	int tx_coord[2];
 
 	if (floor(cub->ray->hit[0]) == cub->ray->hit[0])
-	{
 		tx_coord[0] = (cub->ray->hit[1] - floor(cub->ray->hit[1])) * tx->width;
-		//printf("cub->ray->hit[0] = %f\n tx_coord[0] = %d\n", cub->ray->hit[1], tx_coord[0]);
-	}
 	else if (floor(cub->ray->hit[1]) == cub->ray->hit[1])
-	{
 		tx_coord[0] = (cub->ray->hit[0] - floor(cub->ray->hit[0])) * tx->width;
-		//printf("cub->ray->hit[1] = %f\n tx_coord[0] = %d\n", cub->ray->hit[1], tx_coord[0]);
-	}
 	else
-	{
-		//printf("else\n");
 		tx_coord[0] = 0;
-	}
-/* 	printf("--------------------\n");
-	printf("cub->wall->height = %d\n", cub->wall->heigth);
-	printf("cu->wall->y = %d\n", cub->wall->y);
-	printf("tx->height = %d\n", tx->height); */
+
 	heigth = (double)cub->wall->heigth / 64;
-/* 	printf("heigth = %f\n", heigth); */
-	tx_coord[1] = cub->wall->y++ / heigth;
-/* 	printf("tx_coord[1] = %d\n", tx_coord[1]); */
+	tx_coord[1] = cub->wall->y / heigth;
 
 	return (ft_get_pixel_color(cub, tx, tx_coord));
 }
@@ -83,8 +68,6 @@ void	ft_select_texture(t_cub *cub, double horiz, int y, int i)
 	}
 }
 
-//pixel = [x= 22,5 y = 20] [x = 0,5 y = 0]   
-
 void	ft_draw_walls(t_cub *cub, double horiz, double dist, int i)
 {
 	int	y;
@@ -92,14 +75,16 @@ void	ft_draw_walls(t_cub *cub, double horiz, double dist, int i)
 	int	end;
 
 	heigth = HEIGHT / dist;
-	if (heigth > HEIGHT)
-		heigth = HEIGHT;
 	cub->wall->heigth = heigth;
-	cub->wall->y = 0;
 	y = (HEIGHT / 2) - (heigth / 2);
 	end = (HEIGHT / 2) + (heigth / 2);
-	if (end >= HEIGHT)
-		end = HEIGHT - 1;
-	while (y >= 0 && y < HEIGHT && y <= end)
-		ft_select_texture(cub, horiz, y++, i);
+	cub->wall->y = 0;
+	while (y <= end)
+	{
+		if (y <= 0 || y >= HEIGHT)
+			y++;
+		else
+			ft_select_texture(cub, horiz, y++, i);
+		cub->wall->y++;
+	}
 }

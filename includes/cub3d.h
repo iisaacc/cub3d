@@ -19,7 +19,7 @@
 #define FOV				PI / 2
 #define MOVE_SPEED		1 / 32
 #define ROTATION_SPEED	0.01
-#define LINE_LENGTH		5
+#define LINE_LENGTH		10
 #define MAP_SIZE		32
 #define SIZE			32
 
@@ -70,17 +70,23 @@ typedef struct s_wall
 	int				y;
 }	t_wall;
 
+typedef struct s_map
+{
+	int			center[2];
+	char		**map;//guarda el mapa
+}	t_map;
+
 //Guarda los datos principales del juego
 typedef struct s_cub
 {
 	t_tx			*tx;//guarda la estructura de las texturas
 	t_ray			*ray;//guarda la info del rayo
-	char			**map;//guarda el mapa
 	char			**split_input;//guarda el input
 	mlx_t			*mlx;//guarda el puntero de mlx
 	mlx_image_t		*arrow;
 	t_player		*player;//guarda los datos del jugador
 	t_wall			*wall;
+	t_map			*map;
 }	t_cub;
 
 

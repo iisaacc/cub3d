@@ -59,8 +59,8 @@ int	ft_checks(t_cub *cub)
 	// 	return (1);
 	if (ft_valid_rgb(cub->split_input) == 1)
 		return (1);
-	cub->map = ft_get_map(cub->split_input);
-	if (ft_map_checks(cub->map) == 1)
+	cub->map->map = ft_get_map(cub->split_input);
+	if (ft_map_checks(cub->map->map) == 1)
 		return (1);
 	return (0);
 }

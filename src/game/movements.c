@@ -39,16 +39,16 @@ void	ft_move_up_down(mlx_key_data_t keydata, t_cub *cub)
 	if (keydata.key == MLX_KEY_W && (keydata.action == MLX_PRESS
 			|| keydata.action == MLX_REPEAT))
 	{
-		cub->tx->P_img->instances->x += cub->player->p_dx;
-		cub->tx->P_img->instances->y -= cub->player->p_dy;
+		if (ft_is_wall(cub->player->p_x + cub->player->p_dx, cub->player->p_y - cub->player->p_dy, cub))
+			return ;
 		cub->player->p_x += cub->player->p_dx;
 		cub->player->p_y -= cub->player->p_dy;
 	}
 	if (keydata.key == MLX_KEY_S && (keydata.action == MLX_PRESS
 			|| keydata.action == MLX_REPEAT))
 	{
-		cub->tx->P_img->instances->x -= cub->player->p_dx;
-		cub->tx->P_img->instances->y += cub->player->p_dy;
+		if (ft_is_wall(cub->player->p_x - cub->player->p_dx, cub->player->p_y + cub->player->p_dy, cub))
+			return ;
 		cub->player->p_x -= cub->player->p_dx;
 		cub->player->p_y += cub->player->p_dy;
 	}
@@ -59,16 +59,16 @@ void	ft_move_left_right(mlx_key_data_t keydata, t_cub *cub)
 	if (keydata.key == MLX_KEY_A && (keydata.action == MLX_PRESS
 			|| keydata.action == MLX_REPEAT))
 	{
-		cub->tx->P_img->instances->x -= cub->player->p_dy;
-		cub->tx->P_img->instances->y -= cub->player->p_dx;
+		if (ft_is_wall(cub->player->p_x - cub->player->p_dy, cub->player->p_y - cub->player->p_dx, cub))
+			return ;
 		cub->player->p_x -= cub->player->p_dy;
 		cub->player->p_y -= cub->player->p_dx;
 	}
 	if (keydata.key == MLX_KEY_D && (keydata.action == MLX_PRESS
 			|| keydata.action == MLX_REPEAT))
 	{
-		cub->tx->P_img->instances->x += cub->player->p_dy;
-		cub->tx->P_img->instances->y += cub->player->p_dx;
+		if (ft_is_wall(cub->player->p_x + cub->player->p_dy, cub->player->p_y + cub->player->p_dx, cub))
+			return ;
 		cub->player->p_x += cub->player->p_dy;
 		cub->player->p_y += cub->player->p_dx;
 	}
