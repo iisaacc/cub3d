@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_raycaster.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: yfang <yfang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 14:18:50 by isporras          #+#    #+#             */
-/*   Updated: 2024/07/01 18:45:04 by isporras         ###   ########.fr       */
+/*   Updated: 2024/07/02 15:56:03 by yfang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,25 @@ double	ft_normalize(double angle)
 void	ft_raycaster_loop(t_cub *cub)
 {
 	double	angle;
-	double	step;
 	int		horiz;
+	double s;
+	double dist;
 
-	step = FOV / WIDTH;
 	angle = cub->player->p_a - (FOV / 2);
 	if (cub->ray->img)
 		mlx_delete_image(cub->mlx, cub->ray->img);
 	cub->ray->img = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
 	cub->ray->angle = cub->player->p_a;
-	horiz = WIDTH - 1;
+	horiz = WIDTH;
+	s = WIDTH / 2;
+	dist = horiz - WIDTH / 2 - 0.5;
+	angle = cub->player->p_a + asin((dist) / (sqrt(dist * dist + s * s)));
 	while (horiz >= 0)
 	{
 		cub->ray->angle = ft_normalize(angle);
-		//if (horiz == WIDTH / 2)
-			ft_raycaster(cub, horiz);
-		angle += step;
+		ft_raycaster(cub, horiz);
+		dist = horiz - WIDTH / 2 - 0.5;
+		angle = cub->player->p_a - asin((dist) / (sqrt(dist * dist + s * s)));
 		horiz--;
 	}
 }

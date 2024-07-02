@@ -6,7 +6,7 @@
 /*   By: yfang <yfang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 11:09:16 by isporras          #+#    #+#             */
-/*   Updated: 2024/07/01 19:36:05 by yfang            ###   ########.fr       */
+/*   Updated: 2024/07/02 15:59:37 by yfang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ unsigned long	ft_get_pixel(t_cub *cub, mlx_texture_t *tx)
 	printf("cub->wall->height = %d\n", cub->wall->heigth);
 	printf("cu->wall->y = %d\n", cub->wall->y);
 	printf("tx->height = %d\n", tx->height); */
-	heigth = (double)cub->wall->heigth / 64;
+	heigth = (double)cub->wall->heigth / tx->height;
 /* 	printf("heigth = %f\n", heigth); */
 	tx_coord[1] = cub->wall->y++ / heigth;
 /* 	printf("tx_coord[1] = %d\n", tx_coord[1]); */
@@ -67,14 +67,14 @@ unsigned long	ft_get_pixel(t_cub *cub, mlx_texture_t *tx)
 
 void	ft_select_texture(t_cub *cub, double horiz, int y, int i)
 {
-	if (i == 0)
+	if (i == 0 && y >= 0 && y < HEIGHT)
 	{
 		if (cub->ray->angle > PI / 2 && cub->ray->angle < (3 * PI) / 2)
 			mlx_put_pixel(cub->ray->img, horiz, y, ft_get_pixel(cub, cub->tx->EA_tx));//Este
 		else
 			mlx_put_pixel(cub->ray->img, horiz, y, ft_get_pixel(cub, cub->tx->WE_tx));//Oeste
 	}
-	else
+	else if (i == 1 && y >= 0 && y < HEIGHT)
 	{
 		if (cub->ray->angle > 0 && cub->ray->angle < PI)
 			mlx_put_pixel(cub->ray->img, horiz, y, ft_get_pixel(cub, cub->tx->NO_tx));//Norte
@@ -92,14 +92,12 @@ void	ft_draw_walls(t_cub *cub, double horiz, double dist, int i)
 	int	end;
 
 	heigth = HEIGHT / dist;
-	if (heigth > HEIGHT)
-		heigth = HEIGHT;
 	cub->wall->heigth = heigth;
 	cub->wall->y = 0;
 	y = (HEIGHT / 2) - (heigth / 2);
 	end = (HEIGHT / 2) + (heigth / 2);
 	if (end >= HEIGHT)
-		end = HEIGHT - 1;
-	while (y >= 0 && y < HEIGHT && y <= end)
+		end = HEIGHT;
+	while (y <= end)
 		ft_select_texture(cub, horiz, y++, i);
 }

@@ -6,7 +6,7 @@
 /*   By: yfang <yfang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 13:20:08 by isporras          #+#    #+#             */
-/*   Updated: 2024/07/01 19:35:19 by yfang            ###   ########.fr       */
+/*   Updated: 2024/07/02 15:43:37 by yfang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,9 @@ int ft_is_wall(double x, double y, t_cub *cub)
     int next_x;
     int next_y;
 
-/*     if (x < 0)
+	if (x < 0)
         next_x = 0;
-    else if (x > ft_calc_last())
-        next_x = ft_calc_last();
-    else */
+    else
 		next_x = ft_next(x, cub->player->p_x);
 	if (y < 0)
 		next_y = 0;
