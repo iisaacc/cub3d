@@ -76,17 +76,17 @@ int	ft_load_minimap(t_cub *cub)
 	ft_set_color(cub->tx->m_walls, 0, 255, 0);
 	ft_set_color(cub->tx->m_empty, 0, 0, 0);
 	y = 0;
-	while (cub->map[y])
+	while (cub->map->map[y])
 	{
 		x = 0;
-		while (cub->map[y][x])
+		while (cub->map->map[y][x])
 		{
-			if (cub->map[y][x] == '1')
+			if (cub->map->map[y][x] == '1')
 				mlx_image_to_window(cub->mlx, cub->tx->m_walls, x * 8, y * 8);
-			else if (cub->map[y][x] == '0' || cub->map[y][x] == ' '
-					|| cub->map[y][x] == 'S'
-					|| cub->map[y][x] == 'N' || cub->map[y][x] == 'E'
-					|| cub->map[y][x] == 'W')
+			else if (cub->map->map[y][x] == '0' || cub->map->map[y][x] == ' '
+					|| cub->map->map[y][x] == 'S'
+					|| cub->map->map[y][x] == 'N' || cub->map->map[y][x] == 'E'
+					|| cub->map->map[y][x] == 'W')
 				mlx_image_to_window(cub->mlx, cub->tx->m_empty, x * 8, y * 8);
 			x++;
 		}
@@ -109,18 +109,21 @@ int	ft_load_map(t_cub *cub)
 	ft_set_color(walls, 50, 50, 50);
 	ft_set_color(empty, 255, 255, 255);
 	y = 0;
-	while (cub->map[y])
+	while (cub->map->map[y])
 	{
 		x = 0;
-		while (cub->map[y][x])
+		while (cub->map->map[y][x] && cub->player->p_y - 5 >= y && y <= cub->player->p_y + 5)
 		{
-			if (cub->map[y][x] == '1')
-				mlx_image_to_window(cub->mlx, walls, x * MAP_SIZE, y * MAP_SIZE);
-			else if (cub->map[y][x] == '0' || cub->map[y][x] == ' '
-					|| cub->map[y][x] == 'S'
-					|| cub->map[y][x] == 'N' || cub->map[y][x] == 'E'
-					|| cub->map[y][x] == 'W')
-				mlx_image_to_window(cub->mlx, empty, x * MAP_SIZE, y * MAP_SIZE);
+			if (cub->player->p_x - 5 >= x && x <= cub->player->p_x + 5 )
+			{
+				if (cub->map->map[y][x] == '1')
+					mlx_image_to_window(cub->mlx, walls, x * MAP_SIZE, y * MAP_SIZE);
+				else if (cub->map->map[y][x] == '0' || cub->map->map[y][x] == ' '
+						|| cub->map->map[y][x] == 'S'
+						|| cub->map->map[y][x] == 'N' || cub->map->map[y][x] == 'E'
+						|| cub->map->map[y][x] == 'W')
+					mlx_image_to_window(cub->mlx, empty, x * MAP_SIZE, y * MAP_SIZE);
+			}
 			x++;
 		}
 		y++;

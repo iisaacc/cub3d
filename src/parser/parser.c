@@ -41,9 +41,9 @@ void	ft_print_structure(t_cub *cub)
 	printf("Initial dx: %f\n", cub->player->p_dx);
 	printf("Initial dy: %f\n", cub->player->p_dy);
 	printf("Map:\n");
-	while (cub->map[i])
+	while (cub->map->map[i])
 	{
-		printf("%s\n", cub->map[i]);
+		printf("%s\n", cub->map->map[i]);
 		i++;
 	}
 }
@@ -54,23 +54,23 @@ int	ft_get_init_pov(t_cub *cub)
 	int	x;
 
 	y = 0;
-	while (cub->map[y])
+	while (cub->map->map[y])
 	{
 		x = 0;
-		while (cub->map[y][x])
+		while (cub->map->map[y][x])
 		{
-			if (cub->map[y][x] == 'N' || cub->map[y][x] == 'S' ||
-				cub->map[y][x] == 'E' || cub->map[y][x] == 'W')
+			if (cub->map->map[y][x] == 'N' || cub->map->map[y][x] == 'S' ||
+				cub->map->map[y][x] == 'E' || cub->map->map[y][x] == 'W')
 			{
 				cub->player->p_y = y + 0.5;//Posición inicial del jugador
 				cub->player->p_x = x + 0.5;
-				if (cub->map[y][x] == 'N')
+				if (cub->map->map[y][x] == 'N')
 					return (0);
-				else if (cub->map[y][x] == 'E')
+				else if (cub->map->map[y][x] == 'E')
 					return (1);
-				else if (cub->map[y][x] == 'S')
+				else if (cub->map->map[y][x] == 'S')
 					return (2);
-				else if (cub->map[y][x] == 'W')
+				else if (cub->map->map[y][x] == 'W')
 					return (3);
 			}
 			x++;
@@ -85,13 +85,16 @@ void	ft_init_struct(t_cub *cub)
 	cub->player = ft_calloc(1, sizeof(t_player));
 	cub->ray = ft_calloc(1, sizeof(t_ray));
 	cub->wall = ft_calloc(1, sizeof(t_wall));
+	cub->map = ft_calloc(1, sizeof(t_map));
 	cub->ray->img = NULL;
 	cub->ray->angle = 0;
 	cub->player->p_x = 0;
 	cub->player->p_y = 0;
 	cub->player->p_a = 0;
 	cub->player->initial_pov = 0;
-	cub->map = NULL;
+	cub->map->map = NULL;
+	cub->map->center[0] = 5;
+	cub->map->center[1] = 5;
 	cub->split_input = NULL;
 	cub->arrow = NULL;
 }

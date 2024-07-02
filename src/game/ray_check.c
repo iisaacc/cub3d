@@ -18,12 +18,12 @@ int	ft_on_limits(t_cub *cub, int x, int y)
 	int	j;
 
 	i = 0;
-	while (cub->map[i] && i <= y)
+	while (i <= y && cub->map->map[i])
 	{
 		if ( i == y)
 		{
 			j = 0;
-			while (cub->map[i][j] && x != j)
+			while (cub->map->map[i][j] && x != j)
 				j++;
 			if (x != j)
 				return (false);
@@ -58,8 +58,8 @@ int ft_next(double pos, double p_pos)
 
 int ft_is_wall(double x, double y, t_cub *cub)
 {
-    int next_x;
-    int next_y;
+	int next_x;
+	int next_y;
 
 	if (x < 0)
         next_x = 0;
@@ -69,9 +69,9 @@ int ft_is_wall(double x, double y, t_cub *cub)
 		next_y = 0;
 	else
 		next_y = ft_next(y, cub->player->p_y);
-	if (ft_on_limits(cub, next_x, next_y) && cub->map[next_y][next_x] != '0'
-		&& cub->map[next_y][next_x] != 'S' && cub->map[next_y][next_x] != 'N'
-		&& cub->map[next_y][next_x] != 'W' && cub->map[next_y][next_x] != 'E')
+	if (ft_on_limits(cub, next_x, next_y) && cub->map->map[next_y][next_x] != '0'
+		&& cub->map->map[next_y][next_x] != 'S' && cub->map->map[next_y][next_x] != 'N'
+		&& cub->map->map[next_y][next_x] != 'W' && cub->map->map[next_y][next_x] != 'E')
 		return (1);
 	if (!ft_on_limits(cub, next_x, next_y))
 		return (1);

@@ -115,13 +115,13 @@ void	ft_raycaster(t_cub *cub, double horiz)
 	ft_collision_y(cub, y_hit);
 	y_dist = ft_calc_dist(cub, y_hit);
 	anti_fish_eye = cos(cub->ray->angle - cub->player->p_a);
+	mlx_image_to_window(cub->mlx, cub->ray->img, 0, 0);
 	if (x_dist < y_dist)
 	{
 		cub->ray->hit[0] = x_hit[0];
 		cub->ray->hit[1] = x_hit[1];
 		ft_draw_walls(cub, horiz, x_dist * anti_fish_eye, 0);
 		draw_ray(cub, cub->ray->img, x_hit[0], x_hit[1]);
-		//ft_draw_walls(cub, x_hit[0], x_hit[1], x_dist);
 	}
 	else
 	{
@@ -129,6 +129,5 @@ void	ft_raycaster(t_cub *cub, double horiz)
 		cub->ray->hit[1] = y_hit[1];
 		ft_draw_walls(cub, horiz, y_dist * anti_fish_eye, 1);
 		draw_ray(cub, cub->ray->img, y_hit[0], y_hit[1]);
-		//ft_draw_walls(cub, y_hit[0], y_hit[1], y_dist);
 	}
 }
