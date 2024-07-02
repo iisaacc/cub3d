@@ -17,9 +17,9 @@
 #define HEIGHT			720
 #define WID				640
 #define FOV				PI / 2
-#define MOVE_SPEED		1 / 32
-#define ROTATION_SPEED	0.01
-#define LINE_LENGTH		10
+#define MOVE_SPEED		3 / 32
+#define ROTATION_SPEED	0.05
+#define LINE_LENGTH		5
 #define MAP_SIZE		32
 #define SIZE			32
 
