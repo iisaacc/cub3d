@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_raycaster.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: yfang <yfang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 14:18:50 by isporras          #+#    #+#             */
-/*   Updated: 2024/07/01 18:45:04 by isporras         ###   ########.fr       */
+/*   Updated: 2024/07/02 17:16:15 by yfang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_raycaster_loop(t_cub *cub)
 	while (horiz >= 0)
 	{
 		cub->ray->angle = ft_normalize(angle);
-		if (horiz % 20 == 0)
+		//if (horiz % 20 == 0)
 			ft_raycaster(cub, horiz);
 		angle += step;
 		horiz--;
