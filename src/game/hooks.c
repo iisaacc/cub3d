@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 12:41:20 by isporras          #+#    #+#             */
-/*   Updated: 2024/05/13 15:19:21 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/07/01 17:44:31 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_hooks(mlx_key_data_t keydata, void *param)
 	cub = (t_cub *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		mlx_close_window(cub->mlx);
-	if ((keydata.key == MLX_KEY_W || keydata.key == MLX_KEY_S )
+	if ((keydata.key == MLX_KEY_W || keydata.key == MLX_KEY_S)
 		&& (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
 		ft_move_up_down(keydata, cub);
 	if ((keydata.key == MLX_KEY_A || keydata.key == MLX_KEY_D)
@@ -28,13 +28,10 @@ void	ft_hooks(mlx_key_data_t keydata, void *param)
 	if ((keydata.key == MLX_KEY_LEFT || keydata.key == MLX_KEY_RIGHT)
 		&& (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
 		ft_turn_camera(keydata, cub);
-	draw_player_direction(cub);
+	ft_refresh_ray_img(cub);
+	ft_refresh_map_img(cub);
 	ft_raycaster_loop(cub);
-	printf("x: %d\n", cub->tx->P_img->instances->x / 32);
-	printf("y: %d\n", cub->tx->P_img->instances->y / 32);
-	printf("p_dx: %f\n", cub->player->p_dx);
-	printf("p_dy: %f\n", cub->player->p_dy);
-	printf("p_a: %f\n", cub->player->p_a);
+	ft_refresh_map(cub);
 }
 
 void	ft_close_window(void *param)

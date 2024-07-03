@@ -1,4 +1,3 @@
-
 NAME = cub3D
 INCLUDES = libft/include -I/usr/local/include #PARA UBUNTU
 SRCS_DIR = src/
@@ -25,7 +24,7 @@ MAIN = main
 MAIN_DEBUG = main
 
 SRC_FILES = parser/error parser/gnl parser/parser parser/read_split parser/checks parser/dfs parser/checks_map parser/p_textures\
-			game/game_loop game/textures game/hooks game/movements game/new_raycaster game/ray_check
+			game/game_loop game/textures game/hooks game/movements game/new_raycaster game/ray_check game/draw_walls game/ft_draw_debug
 
 OBJS_SRC = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(SRC_FILES) $(MAIN)))
 

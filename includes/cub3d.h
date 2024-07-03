@@ -13,31 +13,37 @@
 #endif
 
 #define PI				3.141592653589793238462643383
-#define WIDTH			1280 * 2
-#define HEIGHT			720 * 2
+#define WIDTH			1280
+#define HEIGHT			720
 #define WID				640
 #define FOV				PI / 2
 #define MOVE_SPEED		5 / 32
-#define ROTATION_SPEED	0.2
-#define LINE_LENGTH		5
-#define MAP_SIZE		32
+#define ROTATION_SPEED	0.05
+#define LINE_LENGTH		10
+#define MAP_SIZE		16
+#define MAP_CENTER		MAP_SIZE * 5
+#define SIZE			32
 
 
 //Guarda los datos sobre las texturas
 typedef struct s_tx
 {
-	char			*NO_pth;
+	char			*NO_pth;//Ruta a cada una de las texturas
 	char			*SO_pth;
 	char			*WE_pth;
 	char			*EA_pth;
-	uint8_t			F_rgb[3];
-	uint8_t			C_rgb[3];
+	uint8_t			F_rgb[3];//Códigos rgb del suelo
+	uint8_t			C_rgb[3];//Códigos rgb del cielo
 	mlx_texture_t	*taux;
-	mlx_image_t		*F_img;
-	mlx_image_t		*C_img;
-	mlx_image_t		*P_img;
-	mlx_image_t		*m_walls;
-	mlx_image_t		*m_empty;
+	mlx_image_t		*F_img;//Puntero mlx donde se almacena la imagen del suelo
+	mlx_image_t		*C_img;//Puntero mlx donde se almacena la imagen del cielo
+	mlx_image_t		*P_img;//Puntero mlx donde se almacena la imagen del jugador
+	mlx_texture_t	*NO_tx;//Puntero mlx donde se almacena la imagen de la textura NO
+	mlx_texture_t	*SO_tx;//Puntero mlx donde se almacena la imagen de la textura SO
+	mlx_texture_t	*WE_tx;//Puntero mlx donde se almacena la imagen de la textura WE
+	mlx_texture_t	*EA_tx;//Puntero mlx donde se almacena la imagen de la textura EA
+	mlx_image_t		*m_walls;//Almacena la imagen con la que se construye la representación de los muros del mapa
+	mlx_image_t		*m_empty;//Almacena la imagen con la que se construye la representación de los espacios vacíos del mapa
 }	t_tx;
 
 typedef struct s_player
@@ -55,20 +61,35 @@ typedef struct s_ray
 	double			angle;
 	double			x_cross[2];
 	double			y_cross[2];
+	double			hit[2];
 	mlx_image_t		*img;
 }t_ray;
+
+typedef struct s_wall
+{
+	int				heigth;
+	int				y;
+}	t_wall;
+
+typedef struct s_map
+{
+	char		**map;//guarda el mapa
+	mlx_image_t	*map_img;
+}	t_map;
 
 //Guarda los datos principales del juego
 typedef struct s_cub
 {
 	t_tx			*tx;//guarda la estructura de las texturas
 	t_ray			*ray;//guarda la info del rayo
-	char			**map;//guarda el mapa
 	char			**split_input;//guarda el input
 	mlx_t			*mlx;//guarda el puntero de mlx
 	mlx_image_t		*arrow;
 	t_player		*player;//guarda los datos del jugador
+	t_wall			*wall;
+	t_map			*map;
 }	t_cub;
+
 
 //------------------PARSER--------------------------
 int		ft_parser(char	*file, t_cub *cub);
@@ -83,7 +104,7 @@ int		ft_map_checks(char **map);
 int		ft_parser_textures(t_cub *cub);
 //--------------------GAME----------------------------
 int		ft_game_loop(t_cub *cub);
-void	ft_raycaster(t_cub *cub);
+void	ft_raycaster(t_cub *cub, double horiz);
 void	ft_raycaster_loop(t_cub *cub);
 int		ft_is_wall(double x, double y, t_cub *cub);
 double	ft_calc_dist(t_cub *cub, double *hit);
@@ -93,6 +114,11 @@ int		ft_load_textures(t_cub *cub);
 void	draw_player_direction(t_cub *cub);
 void	ft_mlx_draw_line(mlx_image_t* image, int x0, int y0, int x1, int y1, int color);
 int		ft_get_rgba(int r, int g, int b, int a);
+void	ft_draw_walls(t_cub *cub, double horiz, double dist, int i);
+int		ft_load_map(t_cub *cub);
+int		ft_refresh_map(t_cub *cub);
+void	ft_refresh_ray_img(t_cub *cub);
+void	ft_refresh_map_img(t_cub *cub);
 
 //-------------------MOVEMENTS-----------------------
 void	ft_turn_camera(mlx_key_data_t keydata, t_cub *cub);
