@@ -14,5 +14,5 @@
 
 void	ft_draw_walls(t_cub *cub, double x_collision, double y_collision, double distance)
 {
-
+hh
 }
