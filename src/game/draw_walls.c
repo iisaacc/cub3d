@@ -14,20 +14,13 @@
 
 unsigned long	ft_get_pixel_color(t_cub *cub, mlx_texture_t *tx, int tx_coord[2])
 {
-	int	r;
-	int	g;
-	int	b;
-	int	a;
 	int	p;
 
 	p = 4 * tx_coord[0] + (4 * tx_coord[1] * tx->width);
 	if (p <= tx->height * tx->width * tx->bytes_per_pixel)
 	{
-		r = tx->pixels[p];
-		g = tx->pixels[p + 1];
-		b = tx->pixels[p + 2];
-		a = tx->pixels[p + 3];
-		return (r << 24 | g << 16 | b << 8 | 0xFF);
+		return (ft_get_rgba(tx->pixels[p], tx->pixels[p + 1]
+			, tx->pixels[p + 2], 255));
 	}
 	return (ft_get_rgba(255, 0, 0, 255));
 }
@@ -44,7 +37,7 @@ unsigned long	ft_get_pixel(t_cub *cub, mlx_texture_t *tx)
 	else
 		tx_coord[0] = 0;
 
-	heigth = (double)cub->wall->heigth / 64;
+	heigth = (double)cub->wall->heigth / tx->width;
 	tx_coord[1] = cub->wall->y / heigth;
 
 	return (ft_get_pixel_color(cub, tx, tx_coord));
@@ -79,10 +72,15 @@ void	ft_draw_walls(t_cub *cub, double horiz, double dist, int i)
 	y = (HEIGHT / 2) - (heigth / 2);
 	end = (HEIGHT / 2) + (heigth / 2);
 	cub->wall->y = 0;
+	if (y < 0)
+	{
+		cub->wall->y = -y;
+		y = 0;
+	}
 	while (y <= end)
 	{
-		if (y <= 0 || y >= HEIGHT)
-			y++;
+		if (y >= HEIGHT)
+			break ;
 		else
 			ft_select_texture(cub, horiz, y++, i);
 		cub->wall->y++;
