@@ -6,7 +6,7 @@
 /*   By: yfang <yfang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 11:09:16 by isporras          #+#    #+#             */
-/*   Updated: 2024/07/03 16:48:39 by yfang            ###   ########.fr       */
+/*   Updated: 2024/07/03 16:59:14 by yfang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,13 @@
 
 unsigned long	ft_get_pixel_color(t_cub *cub, mlx_texture_t *tx, int tx_coord[2])
 {
-	int	r;
-	int	g;
-	int	b;
-	int	a;
 	int	p;
 
 	p = 4 * tx_coord[0] + (4 * tx_coord[1] * tx->width);
 	if (p <= tx->height * tx->width * tx->bytes_per_pixel)
 	{
-		r = tx->pixels[p];
-		g = tx->pixels[p + 1];
-		b = tx->pixels[p + 2];
-		a = tx->pixels[p + 3];
-		return (r << 24 | g << 16 | b << 8 | 0xFF);
+		return (ft_get_rgba(tx->pixels[p], tx->pixels[p + 1]
+			, tx->pixels[p + 2], 255));
 	}
 	return (0);
 }
