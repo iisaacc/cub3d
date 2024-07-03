@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: yfang <yfang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:08:38 by isporras          #+#    #+#             */
-/*   Updated: 2024/07/01 16:09:26 by isporras         ###   ########.fr       */
+/*   Updated: 2024/07/03 17:05:44 by yfang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,11 +101,13 @@ void	ft_put_pixel_map(t_cub *cub, int x, int y)
 			{
 				if (cub->map->map[y][x] == '1')
 					mlx_put_pixel(cub->map->map_img, px_x, px_y, ft_get_rgba(0, 0, 0, 255));
-				else if (cub->map->map[y][x] == '0' || cub->map->map[y][x] == ' '
+				else if (cub->map->map[y][x] == '0' /* || cub->map->map[y][x] == ' ' */
 						|| cub->map->map[y][x] == 'S'
 						|| cub->map->map[y][x] == 'N' || cub->map->map[y][x] == 'E'
 						|| cub->map->map[y][x] == 'W')
 					mlx_put_pixel(cub->map->map_img, px_x, px_y, ft_get_rgba(255, 255, 255, 255));
+				else
+					mlx_put_pixel(cub->map->map_img, px_x, px_y, ft_get_rgba(255, 255, 0, 255));
 			}
 			j++;
 		}
