@@ -6,7 +6,7 @@
 /*   By: yfang <yfang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 11:09:16 by isporras          #+#    #+#             */
-/*   Updated: 2024/07/03 14:49:01 by yfang            ###   ########.fr       */
+/*   Updated: 2024/07/03 16:48:39 by yfang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,15 @@ void	ft_draw_walls(t_cub *cub, double horiz, double dist, int i)
 	y = (HEIGHT / 2) - (heigth / 2);
 	end = (HEIGHT / 2) + (heigth / 2);
 	cub->wall->y = 0;
+	if (y < 0)
+	{
+		cub->wall->y = -y;
+		y = 0;
+	}
 	while (y <= end)
 	{
-		if (y < 0 || y > HEIGHT)
-			y++;
+		if (y > HEIGHT)
+			break ;
 		else
 			ft_select_texture(cub, horiz, y++, i);
 		cub->wall->y++;

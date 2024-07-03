@@ -6,7 +6,7 @@
 /*   By: yfang <yfang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 14:18:50 by isporras          #+#    #+#             */
-/*   Updated: 2024/07/02 17:30:02 by yfang            ###   ########.fr       */
+/*   Updated: 2024/07/03 16:32:57 by yfang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,9 @@ void	ft_raycaster_loop(t_cub *cub)
 {
 	double	angle;
 	int		horiz;
-	double s;
-	double dist;
+	double	s;
+	double	dist;
 
-	angle = cub->player->p_a - (FOV / 2);
 	cub->ray->angle = cub->player->p_a;
 	horiz = WIDTH;
 	s = WIDTH / 2;
