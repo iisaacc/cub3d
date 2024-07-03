@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_walls.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: yfang <yfang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 11:09:16 by isporras          #+#    #+#             */
-/*   Updated: 2024/07/01 18:42:33 by isporras         ###   ########.fr       */
+/*   Updated: 2024/07/03 16:48:39 by yfang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ unsigned long	ft_get_pixel_color(t_cub *cub, mlx_texture_t *tx, int tx_coord[2])
 		return (ft_get_rgba(tx->pixels[p], tx->pixels[p + 1]
 			, tx->pixels[p + 2], 255));
 	}
-	return (ft_get_rgba(255, 0, 0, 255));
+	return (0);
 }
 
 unsigned long	ft_get_pixel(t_cub *cub, mlx_texture_t *tx)
@@ -45,14 +45,14 @@ unsigned long	ft_get_pixel(t_cub *cub, mlx_texture_t *tx)
 
 void	ft_select_texture(t_cub *cub, double horiz, int y, int i)
 {
-	if (i == 0)
+	if (i == 0 && y >= 0 && y < HEIGHT)
 	{
 		if (cub->ray->angle > PI / 2 && cub->ray->angle < (3 * PI) / 2)
 			mlx_put_pixel(cub->ray->img, horiz, y, ft_get_pixel(cub, cub->tx->EA_tx));//Este
 		else
 			mlx_put_pixel(cub->ray->img, horiz, y, ft_get_pixel(cub, cub->tx->WE_tx));//Oeste
 	}
-	else
+	else if (i == 1 && y >= 0 && y < HEIGHT)
 	{
 		if (cub->ray->angle > 0 && cub->ray->angle < PI)
 			mlx_put_pixel(cub->ray->img, horiz, y, ft_get_pixel(cub, cub->tx->NO_tx));//Norte
@@ -77,10 +77,15 @@ void	ft_draw_walls(t_cub *cub, double horiz, double dist, int i)
 		cub->wall->y = -y;
 		y = 0;
 	}
+	if (y < 0)
+	{
+		cub->wall->y = -y;
+		y = 0;
+	}
 	while (y <= end)
 	{
-		if (y >= HEIGHT)
-			break ;
+		if (y <= 0 || y >= HEIGHT)
+			y++;
 		else
 			ft_select_texture(cub, horiz, y++, i);
 		cub->wall->y++;
