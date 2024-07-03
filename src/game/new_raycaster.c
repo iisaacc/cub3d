@@ -13,10 +13,33 @@
 
 #include "../../includes/cub3d.h"
 
-void	draw_ray(t_cub *cub, mlx_image_t *ray, double x_collision, double y_collision)
+void	ft_cut_ray_circle(double *x_end, double *y_end)
 {
-	ft_mlx_draw_line(ray, cub->player->p_x * 32, cub->player->p_y * 32, x_collision * MAP_SIZE, y_collision * MAP_SIZE, ft_get_rgba(255, 0, 0, 255));
-	mlx_image_to_window(cub->mlx, ray, 0, 0);
+	double	radius;
+	double	distance;
+	double	scale;
+
+	radius = MAP_CENTER;
+	distance = sqrt((*x_end) * (*x_end) + (*y_end) * (*y_end));
+	if (distance > radius)
+	{
+		scale = radius / distance;
+		*x_end *= scale;
+		*y_end *= scale;
+	}
+}
+
+void	draw_ray(t_cub *cub, double x_collision, double y_collision)
+{
+	double	x_end;
+	double	y_end;
+
+	x_end = (x_collision - cub->player->p_x) * MAP_SIZE;
+	y_end = (y_collision - cub->player->p_y) * MAP_SIZE;
+
+	ft_cut_ray_circle(&x_end, &y_end);
+
+	ft_mlx_draw_line(cub->map->map_img, MAP_CENTER, MAP_CENTER, x_end + MAP_CENTER, y_end + MAP_CENTER, ft_get_rgba(255, 0, 0, 255));
 }
 
 double	ft_normalize(double angle)
@@ -40,16 +63,12 @@ void	ft_raycaster_loop(t_cub *cub)
 
 	step = FOV / WIDTH;
 	angle = cub->player->p_a - (FOV / 2);
-	if (cub->ray->img)
-		mlx_delete_image(cub->mlx, cub->ray->img);
-	cub->ray->img = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
 	cub->ray->angle = cub->player->p_a;
 	horiz = WIDTH - 1;
 	while (horiz >= 0)
 	{
 		cub->ray->angle = ft_normalize(angle);
-		if (horiz % 20 == 0)
-			ft_raycaster(cub, horiz);
+		ft_raycaster(cub, horiz);
 		angle += step;
 		horiz--;
 	}
@@ -112,19 +131,16 @@ void	ft_raycaster(t_cub *cub, double horiz)
 	ft_collision_y(cub, y_hit);
 	y_dist = ft_calc_dist(cub, y_hit);
 	anti_fish_eye = cos(cub->ray->angle - cub->player->p_a);
-	mlx_image_to_window(cub->mlx, cub->ray->img, 0, 0);
 	if (x_dist < y_dist)
 	{
 		cub->ray->hit[0] = x_hit[0];
 		cub->ray->hit[1] = x_hit[1];
 		ft_draw_walls(cub, horiz, x_dist * anti_fish_eye, 0);
-		draw_ray(cub, cub->ray->img, x_hit[0], x_hit[1]);
 	}
 	else
 	{
 		cub->ray->hit[0] = y_hit[0];
 		cub->ray->hit[1] = y_hit[1];
 		ft_draw_walls(cub, horiz, y_dist * anti_fish_eye, 1);
-		draw_ray(cub, cub->ray->img, y_hit[0], y_hit[1]);
 	}
 }

@@ -54,7 +54,7 @@ int	ft_get_init_pov(t_cub *cub)
 	int	x;
 
 	y = 0;
-	while (cub->map->map[y])
+	while (cub->map->map && cub->map->map[y])
 	{
 		x = 0;
 		while (cub->map->map[y][x])
@@ -93,8 +93,6 @@ void	ft_init_struct(t_cub *cub)
 	cub->player->p_a = 0;
 	cub->player->initial_pov = 0;
 	cub->map->map = NULL;
-	cub->map->center[0] = 5;
-	cub->map->center[1] = 5;
 	cub->split_input = NULL;
 	cub->arrow = NULL;
 }

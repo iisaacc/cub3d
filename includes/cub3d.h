@@ -20,7 +20,8 @@
 #define MOVE_SPEED		1 / 32
 #define ROTATION_SPEED	0.01
 #define LINE_LENGTH		10
-#define MAP_SIZE		32
+#define MAP_SIZE		16
+#define MAP_CENTER		MAP_SIZE * 5
 #define SIZE			32
 
 
@@ -72,8 +73,8 @@ typedef struct s_wall
 
 typedef struct s_map
 {
-	int			center[2];
 	char		**map;//guarda el mapa
+	mlx_image_t	*map_img;
 }	t_map;
 
 //Guarda los datos principales del juego
@@ -114,6 +115,10 @@ void	draw_player_direction(t_cub *cub);
 void	ft_mlx_draw_line(mlx_image_t* image, int x0, int y0, int x1, int y1, int color);
 int		ft_get_rgba(int r, int g, int b, int a);
 void	ft_draw_walls(t_cub *cub, double horiz, double dist, int i);
+int		ft_load_map(t_cub *cub);
+int		ft_refresh_map(t_cub *cub);
+void	ft_refresh_ray_img(t_cub *cub);
+void	ft_refresh_map_img(t_cub *cub);
 
 //-------------------MOVEMENTS-----------------------
 void	ft_turn_camera(mlx_key_data_t keydata, t_cub *cub);
