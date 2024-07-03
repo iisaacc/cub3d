@@ -30,9 +30,3 @@ void ft_mlx_draw_line(mlx_image_t* image, int x0, int y0, int x1, int y1, int co
         }
     }
 }
-
-void	draw_player_direction(t_cub *cub)
-{
-	cub->tx->P_img->instances->x = cub->player->p_x * 32;
-	cub->tx->P_img->instances->y = cub->player->p_y * 32;
-}
