@@ -6,7 +6,7 @@
 /*   By: yfang <yfang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 14:18:50 by isporras          #+#    #+#             */
-/*   Updated: 2024/07/02 17:16:15 by yfang            ###   ########.fr       */
+/*   Updated: 2024/07/02 17:30:02 by yfang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,22 @@ double	ft_normalize(double angle)
 void	ft_raycaster_loop(t_cub *cub)
 {
 	double	angle;
-	double	step;
 	int		horiz;
+	double s;
+	double dist;
 
-	step = FOV / WIDTH;
 	angle = cub->player->p_a - (FOV / 2);
 	cub->ray->angle = cub->player->p_a;
-	horiz = WIDTH - 1;
+	horiz = WIDTH;
+	s = WIDTH / 2;
+	dist = horiz - WIDTH / 2 - 0.5;
+	angle = cub->player->p_a + asin((dist) / (sqrt(dist * dist + s * s)));
 	while (horiz >= 0)
 	{
 		cub->ray->angle = ft_normalize(angle);
 		ft_raycaster(cub, horiz);
-		angle += step;
+		dist = horiz - WIDTH / 2 - 0.5;
+		angle = cub->player->p_a - asin((dist) / (sqrt(dist * dist + s * s)));
 		horiz--;
 	}
 }
