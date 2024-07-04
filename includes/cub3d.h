@@ -3,6 +3,7 @@
 
 # include "libft/libft.h"
 # include <stdio.h>
+# include <stdlib.h>
 # include <fcntl.h>
 # include <unistd.h>
 # include "./MLX42/include/MLX42/MLX42.h"
@@ -17,12 +18,15 @@
 #define HEIGHT			720
 #define WID				640
 #define FOV				PI / 2
-#define MOVE_SPEED		5 / 32
+#define MOVE_SPEED		2 / 32
 #define ROTATION_SPEED	0.05
 #define LINE_LENGTH		10
 #define MAP_SIZE		16
 #define MAP_CENTER		MAP_SIZE * 5
 #define SIZE			32
+#define BLACK			0x000000FF
+#define WHITE			0xFFFFFFFF
+#define RED				0xFF0000FF
 
 
 //Guarda los datos sobre las texturas
@@ -34,7 +38,6 @@ typedef struct s_tx
 	char			*EA_pth;
 	uint8_t			F_rgb[3];//Códigos rgb del suelo
 	uint8_t			C_rgb[3];//Códigos rgb del cielo
-	mlx_texture_t	*taux;
 	mlx_image_t		*F_img;//Puntero mlx donde se almacena la imagen del suelo
 	mlx_image_t		*C_img;//Puntero mlx donde se almacena la imagen del cielo
 	mlx_image_t		*P_img;//Puntero mlx donde se almacena la imagen del jugador
@@ -42,8 +45,6 @@ typedef struct s_tx
 	mlx_texture_t	*SO_tx;//Puntero mlx donde se almacena la imagen de la textura SO
 	mlx_texture_t	*WE_tx;//Puntero mlx donde se almacena la imagen de la textura WE
 	mlx_texture_t	*EA_tx;//Puntero mlx donde se almacena la imagen de la textura EA
-	mlx_image_t		*m_walls;//Almacena la imagen con la que se construye la representación de los muros del mapa
-	mlx_image_t		*m_empty;//Almacena la imagen con la que se construye la representación de los espacios vacíos del mapa
 }	t_tx;
 
 typedef struct s_player
@@ -90,6 +91,19 @@ typedef struct s_cub
 	t_map			*map;
 }	t_cub;
 
+typedef struct s_line
+{
+	int		dx;
+	int		sx;
+	int		dy;
+	int		sy;
+	int		err;
+	int		e2;
+	int		x0;
+	int		y0;
+	int		color;
+}	t_line;
+
 
 //------------------PARSER--------------------------
 int		ft_parser(char	*file, t_cub *cub);
@@ -108,17 +122,22 @@ void	ft_raycaster(t_cub *cub, double horiz);
 void	ft_raycaster_loop(t_cub *cub);
 int		ft_is_wall(double x, double y, t_cub *cub);
 double	ft_calc_dist(t_cub *cub, double *hit);
+void	ft_delete(t_cub *cub);
+void	ft_init_struct(t_cub *cub);
 
 //-------------------TEXTURES-------------------------
 int		ft_load_textures(t_cub *cub);
 void	draw_player_direction(t_cub *cub);
-void	ft_mlx_draw_line(mlx_image_t* image, int x0, int y0, int x1, int y1, int color);
+void	ft_mlx_draw_line(mlx_image_t* image, int x1, int y1);
 int		ft_get_rgba(int r, int g, int b, int a);
 void	ft_draw_walls(t_cub *cub, double horiz, double dist, int i);
 int		ft_load_map(t_cub *cub);
 int		ft_refresh_map(t_cub *cub);
 void	ft_refresh_ray_img(t_cub *cub);
 void	ft_refresh_map_img(t_cub *cub);
+void	ft_set_color(mlx_image_t *img, uint8_t r, uint8_t g, uint8_t b);
+int		ft_load_player(t_cub *cub);
+void	ft_draw_player_direction(t_cub *cub);
 
 //-------------------MOVEMENTS-----------------------
 void	ft_turn_camera(mlx_key_data_t keydata, t_cub *cub);

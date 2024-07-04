@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/04 13:08:56 by isporras          #+#    #+#             */
-/*   Updated: 2024/07/04 13:08:56 by isporras         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../includes/cub3d.h"
 
 char	**ft_get_map(char **split_input)
@@ -22,7 +10,7 @@ char	**ft_get_map(char **split_input)
 	{
 		j = 0;
 		while (split_input[i][j] == ' ')
-			j++;
+				j++;
 		if (split_input[i][j] && split_input[i][j] != '\n' &&
 			ft_strncmp(&split_input[i][j], "NO ", 3) != 0 &&
 			ft_strncmp(split_input[i], "SO ", 3) != 0 &&
@@ -36,17 +24,28 @@ char	**ft_get_map(char **split_input)
 	return (ft_error_msg("No map found", NULL), NULL);
 }
 
-int	ft_switch_coord(t_cub *cub, int y, int x)
+void	ft_print_structure(t_cub *cub)
 {
-	if (cub->map->map[y][x] == 'N')
-		return (0);
-	else if (cub->map->map[y][x] == 'E')
-		return (1);
-	else if (cub->map->map[y][x] == 'S')
-		return (2);
-	else if (cub->map->map[y][x] == 'W')
-		return (3);
-	return (ft_error_msg("Invalid character in map", NULL), -1);
+	int	i;
+
+	i = 0;
+	printf("NO: %s\n", cub->tx->NO_pth);
+	printf("SO: %s\n", cub->tx->SO_pth);
+	printf("WE: %s\n", cub->tx->WE_pth);
+	printf("EA: %s\n", cub->tx->EA_pth);
+	printf("F: %d, %d, %d\n", cub->tx->F_rgb[0], cub->tx->F_rgb[1], cub->tx->F_rgb[2]);
+	printf("C: %d, %d, %d\n", cub->tx->C_rgb[0], cub->tx->C_rgb[1], cub->tx->C_rgb[2]);
+	printf("Initial point of view: %d\n", cub->player->initial_pov);
+	printf("Initial position: x: %f, y: %f\n", cub->player->p_x, cub->player->p_y);
+	printf("Initial angle: %f\n", cub->player->p_a);
+	printf("Initial dx: %f\n", cub->player->p_dx);
+	printf("Initial dy: %f\n", cub->player->p_dy);
+	printf("Map:\n");
+	while (cub->map->map[i])
+	{
+		printf("%s\n", cub->map->map[i]);
+		i++;
+	}
 }
 
 int	ft_get_init_pov(t_cub *cub)
@@ -63,15 +62,39 @@ int	ft_get_init_pov(t_cub *cub)
 			if (cub->map->map[y][x] == 'N' || cub->map->map[y][x] == 'S' ||
 				cub->map->map[y][x] == 'E' || cub->map->map[y][x] == 'W')
 			{
-				cub->player->p_y = y + 0.5;
+				cub->player->p_y = y + 0.5;//Posición inicial del jugador
 				cub->player->p_x = x + 0.5;
-				return (ft_switch_coord(cub, y, x));
+				if (cub->map->map[y][x] == 'N')
+					return (0);
+				else if (cub->map->map[y][x] == 'E')
+					return (1);
+				else if (cub->map->map[y][x] == 'S')
+					return (2);
+				else if (cub->map->map[y][x] == 'W')
+					return (3);
 			}
 			x++;
 		}
 		y++;
 	}
 	return (ft_error_msg("No initial point of view found", NULL), -1);
+}
+void	ft_init_struct(t_cub *cub)
+{
+	cub->tx = ft_calloc(1, sizeof(t_tx));
+	cub->player = ft_calloc(1, sizeof(t_player));
+	cub->ray = ft_calloc(1, sizeof(t_ray));
+	cub->wall = ft_calloc(1, sizeof(t_wall));
+	cub->map = ft_calloc(1, sizeof(t_map));
+	cub->ray->img = NULL;
+	cub->ray->angle = 0;
+	cub->player->p_x = 0;
+	cub->player->p_y = 0;
+	cub->player->p_a = 0;
+	cub->player->initial_pov = 0;
+	cub->map->map = NULL;
+	cub->split_input = NULL;
+	cub->arrow = NULL;
 }
 
 void	ft_set_player_angle(t_cub *cub)
@@ -85,6 +108,7 @@ void	ft_set_player_angle(t_cub *cub)
 	else if (cub->player->initial_pov == 3)
 		cub->player->p_a = PI;
 	cub->player->p_dx = cos(cub->player->p_a) * MOVE_SPEED;
+	
 	cub->player->p_dy = sin(cub->player->p_a) * MOVE_SPEED;
 }
 
@@ -101,5 +125,7 @@ int	ft_parser(char	*file, t_cub *cub)
 		return (ft_delete(cub), 1);
 	ft_set_player_angle(cub);
 	ft_parser_textures(cub);
+	ft_print_structure(cub);
+	//ft_conf_elements(split_input);
 	return (0);
 }

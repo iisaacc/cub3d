@@ -62,7 +62,7 @@ void	ft_draw_player_direction(t_cub *cub)
 	int endY = MAP_CENTER + (int)(sin(-cub->player->p_a) * LINE_LENGTH); // Calcula el punto final usando seno para y
 
 	// Dibuja la línea en la imagen del jugador
-	ft_mlx_draw_line(cub->map->map_img, MAP_CENTER, MAP_CENTER, endX, endY, ft_get_rgba(255, 0, 0, 255)); // 0xFFFFFF es el color blanco
+	ft_mlx_draw_line(cub->map->map_img, endX, endY);
 }
 
 int	ft_load_player(t_cub *cub)

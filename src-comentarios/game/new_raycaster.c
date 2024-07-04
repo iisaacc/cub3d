@@ -12,6 +12,22 @@
 
 #include "../../includes/cub3d.h"
 
+void	ft_cut_ray_circle(double *x_end, double *y_end)
+{
+	double	radius;
+	double	distance;
+	double	scale;
+
+	radius = MAP_CENTER;
+	distance = sqrt((*x_end) * (*x_end) + (*y_end) * (*y_end));
+	if (distance > radius)
+	{
+		scale = radius / distance;
+		*x_end *= scale;
+		*y_end *= scale;
+	}
+}
+
 double	ft_normalize(double angle)
 {
 	double	normalize;
@@ -53,12 +69,12 @@ void	ft_collision_x(t_cub *cub, double *hit_x)
 	hit_x[1] = cub->player->p_y;
 	while (!ft_is_wall(hit_x[0], hit_x[1], cub))
 	{
-		if (cub->ray->angle < PI / 2 || cub->ray->angle > (3 * PI) / 2)
+		if (cub->ray->angle < PI / 2 || cub->ray->angle > (3 * PI) / 2)//Si el jugador mira hacia la derecha comprobamos la parte entera de la casilla + 1 (Para saber cual va a ser su proximo x crossing)
 			hit_x[0] = floor(hit_x[0]) + 1;
 		else
-			hit_x[0] = ceil(hit_x[0]) - 1;
-		hit_x[1] = (cub->player->p_x - hit_x[0]) * tan(cub->ray->angle);
-		hit_x[1] += cub->player->p_y;
+			hit_x[0] = ceil(hit_x[0]) - 1;//Si el jugador mira hacia la derecha comprobamos la siguiente casilla (en caso de que tenga decimales) - 1
+		hit_x[1] = (cub->player->p_x - hit_x[0]) * tan(cub->ray->angle);//Esta fórmula nos permite obtener la y a partir del ángulo del rayo y la coordenada x donde estamos comprobando si colisiona
+		hit_x[1] += cub->player->p_y;//Le sumamos la posición en y del jugador
 		if (hit_x[0] > 1000 || hit_x[1] > 1000)
 			break ;
 	}
@@ -93,7 +109,7 @@ void	ft_collision_y(t_cub *cub, double *hit_y)
 
 void	ft_raycaster(t_cub *cub, double horiz)
 {
-	double	x_hit[2];
+	double	x_hit[2];//coordenadas [x][y]
 	double	y_hit[2];
 	double	x_dist;
 	double	y_dist;

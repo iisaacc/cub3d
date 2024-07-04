@@ -27,7 +27,6 @@ int	ft_game_loop(t_cub *cub)
 	ft_refresh_ray_img(cub);
 	ft_refresh_map_img(cub);
 	ft_raycaster_loop(cub);
-	ft_refresh_map(cub);
 	mlx_key_hook(cub->mlx, &ft_hooks, cub);
 	mlx_loop(cub->mlx);
 	ft_delete(cub);

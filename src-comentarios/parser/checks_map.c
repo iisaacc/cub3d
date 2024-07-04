@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 11:43:14 by isporras          #+#    #+#             */
-/*   Updated: 2024/07/04 12:31:17 by isporras         ###   ########.fr       */
+/*   Updated: 2024/07/04 12:29:05 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,27 +39,27 @@ int	ft_spaces_unclosed(char **map)
 	return (0);
 }
 
-int	ft_check_walls(char **map)
+int	ft_check_walls(char **split_input)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	if (ft_spaces_unclosed(map))
+	if (ft_spaces_unclosed(split_input)) //Chequea si hay espacios por dentro del mapa sin paredes que los cierren
 		return (ft_error_msg("Map has spaces without closing walls", NULL), 1);
-	while (map[i])
+	while (split_input[i])
 	{
 		j = 0;
-		while (map[i][j] && (map[i][j] == ' '))
+		while (split_input[i][j] && (split_input[i][j] == ' '))
 			j++;
-		if (map[i][j] != '1' || map[i][ft_strlen(map[i]) - 1] != '1')
+		if (split_input[i][j] != '1' || split_input[i][ft_strlen(split_input[i]) - 1] != '1')
 			return (ft_error_msg("Map is not surrounded by walls", NULL), 1);
-		if (i == 0 || i == ft_count_lines2d(map) - 1)
+		if (i == 0 || i == ft_count_lines2d(split_input) - 1)
 		{
-			while (map[i][j])
+			while (split_input[i][j])
 			{
-				if (map[i][j] != '1' && map[i][j] != ' ')
-					return (ft_error_msg("Map is not surrounded", NULL), 1);
+				if (split_input[i][j] != '1' && split_input[i][j] != ' ')
+					return (ft_error_msg("Map is not surrounded by walls", NULL), 1);
 				j++;
 			}
 		}
@@ -68,24 +68,24 @@ int	ft_check_walls(char **map)
 	return (0);
 }
 
-int	ft_strange_chars(char **map)
+int	ft_strange_chars(char **split_input)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (map[i])
+	while (split_input[i])
 	{
 		j = 0;
-		if (map[i][0] == '\0')
+		if (split_input[i][0] == '\0')
 			return (ft_error_msg("Empty line in map", NULL), 1);
-		while (map[i][j])
+		while (split_input[i][j])
 		{
-			if (map[i][j] != '0' && map[i][j] != '1'
-				&& map[i][j] != 'N' && map[i][j] != 'S'
-				&& map[i][j] != 'W' && map[i][j] != 'E'
-				&& map[i][j] != ' ')
-				return (ft_error_msg("Strange character : ", &map[i][j]), 1);
+			if (split_input[i][j] != '0' && split_input[i][j] != '1'
+				&& split_input[i][j] != 'N' && split_input[i][j] != 'S'
+				&& split_input[i][j] != 'W' && split_input[i][j] != 'E'
+				&& split_input[i][j] != ' ')
+				return (ft_error_msg("Strange character in map: ", &split_input[i][j]), 1);
 			j++;
 		}
 		i++;

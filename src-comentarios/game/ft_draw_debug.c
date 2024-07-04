@@ -12,32 +12,6 @@
 
 #include "../../includes/cub3d.h"
 
-void	ft_print_structure(t_cub *cub)
-{
-	int	i;
-
-	i = 0;
-	printf("NO: %s\n", cub->tx->NO_pth);
-	printf("SO: %s\n", cub->tx->SO_pth);
-	printf("WE: %s\n", cub->tx->WE_pth);
-	printf("EA: %s\n", cub->tx->EA_pth);
-	printf("F: %d, %d, %d\n", cub->tx->F_rgb[0],
-		cub->tx->F_rgb[1], cub->tx->F_rgb[2]);
-	printf("C: %d, %d, %d\n", cub->tx->C_rgb[0],
-		cub->tx->C_rgb[1], cub->tx->C_rgb[2]);
-	printf("Initial point of view: %d\n", cub->player->initial_pov);
-	printf("Initial pos: x: %f, y: %f\n", cub->player->p_x, cub->player->p_y);
-	printf("Initial angle: %f\n", cub->player->p_a);
-	printf("Initial dx: %f\n", cub->player->p_dx);
-	printf("Initial dy: %f\n", cub->player->p_dy);
-	printf("Map:\n");
-	while (cub->map->map[i])
-	{
-		printf("%s\n", cub->map->map[i]);
-		i++;
-	}
-}
-
 void	ft_draw_line_loop(mlx_image_t *image, int x1, int y1, t_line line)
 {
 	while (true)
@@ -79,22 +53,6 @@ void	ft_mlx_draw_line(mlx_image_t *image, int x1, int y1)
 	line.e2;
 	line.color = ft_get_rgba(255, 0, 0, 255);
 	ft_draw_line_loop(image, x1, y1, line);
-}
-
-void	ft_cut_ray_circle(double *x_end, double *y_end)
-{
-	double	radius;
-	double	distance;
-	double	scale;
-
-	radius = MAP_CENTER;
-	distance = sqrt((*x_end) * (*x_end) + (*y_end) * (*y_end));
-	if (distance > radius)
-	{
-		scale = radius / distance;
-		*x_end *= scale;
-		*y_end *= scale;
-	}
 }
 
 void	draw_ray(t_cub *cub, double x_collision, double y_collision)

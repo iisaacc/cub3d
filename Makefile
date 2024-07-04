@@ -5,8 +5,8 @@ OBJS_DIR = obj/
 LIBFT = includes/libft
 MLX42 = includes/MLX42
 LIBFLAG =
-CC = clang
-CFLAGS = -g -I
+CC = gcc
+CFLAGS = -O2 -fsanitize=leak -g -I
 MLXFLAGS = includes/MLX42/libmlx42.a -ldl -DEBUG=1 -Iinclude -lm -lglfw -L"usr/lib/x86_64-linux-gnu/"
 RM = rm -f
 AR = ar rcs
@@ -23,8 +23,9 @@ MAIN = main
 
 MAIN_DEBUG = main
 
-SRC_FILES = parser/error parser/gnl parser/parser parser/read_split parser/checks parser/dfs parser/checks_map parser/p_textures\
-			game/game_loop game/textures game/hooks game/movements game/new_raycaster game/ray_check game/draw_walls game/ft_draw_debug
+SRC_FILES = parser/error parser/gnl parser/parser parser/read_split parser/checks parser/dfs parser/checks_map parser/p_textures parser/init_struct\
+			game/game_loop game/delete game/hooks game/movements game/new_raycaster game/ray_check game/draw_walls game/ft_draw_debug\
+			textures/textures textures/tx_aux textures/tx_map
 
 OBJS_SRC = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(SRC_FILES) $(MAIN)))
 

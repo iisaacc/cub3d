@@ -1,53 +1,110 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gnl.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/04 12:35:15 by isporras          #+#    #+#             */
+/*   Updated: 2024/07/04 13:07:33 by isporras         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
-char	*ft_strjoin_gnl(char *s1, char const *s2, size_t len)
+char	*ft_free_strjoin(char *save, char *tmp)
 {
-	size_t	s1_len;
-	size_t	s2_len;
-	char	*join;
+	char	*new;
 
-	if (!s1 || !s2)
-		return (NULL);
-	s1_len = ft_strlen(s1);
-	s2_len = len;
-	join = (char *)malloc((s1_len + s2_len + 1) * sizeof(char));
-	if (!join)
-		return (NULL);
-	ft_strlcpy(join, s1, s1_len + 1);
-	ft_strlcpy((join + s1_len), s2, s2_len + 1);
-	free(s1);
-	return (join);
+	new = ft_strjoin(save, tmp);
+	return (new);
 }
-//dgfsffdsfdsd
+
+char	*the_rest(char *save)
+{
+	int		i;
+	int		n;
+	char	*new_save;
+
+	i = 0;
+	while (save[i] != '\0' && save[i] != '\n')
+		i++;
+	if (save[i] == '\0')
+	{
+		free(save);
+		return (NULL);
+	}
+	new_save = ft_calloc(sizeof(char), (ft_strlen(save) - i + 1));
+	i++;
+	n = 0;
+	while (save[i] != '\0')
+		new_save[n++] = save[i++];
+	free(save);
+	return (new_save);
+}
+
+char	*make_line_from(char *save)
+{
+	int		i;
+	char	*line;
+
+	i = 0;
+	if (save[i] == '\0')
+		return (NULL);
+	while (save[i] != '\0' && save[i] != '\n')
+		i++;
+	line = ft_calloc(sizeof(char), (i + 2));
+	i = 0;
+	while (save[i] != '\0' && save[i] != '\n')
+	{
+		line[i] = save[i];
+		i++;
+	}
+	if (save[i] == '\n')
+		line[i] = '\n';
+	return (line);
+}
+
+char	*read_until_enter(int fd, char *save)
+{
+	int		n_of_chars;
+	char	*tmp;
+
+	if (!save)
+		save = ft_calloc(1, 1);
+	tmp = ft_calloc(sizeof(char), BUFFER_SIZE + 1);
+	n_of_chars = 1;
+	while (n_of_chars > 0)
+	{
+		n_of_chars = read(fd, tmp, BUFFER_SIZE);
+		if (n_of_chars == -1)
+		{
+			free(tmp);
+			if (save)
+				free(save);
+			save = NULL;
+			return (NULL);
+		}
+		tmp[n_of_chars] = '\0';
+		save = ft_free_strjoin(save, tmp);
+		if (ft_strchr(save, '\n'))
+			break ;
+	}
+	free(tmp);
+	return (save);
+}
 
 char	*get_next_line(int fd)
 {
-	static char	buf[BUFFER_SIZE + 1];
 	char		*line;
-	char		*newline;
-	int			countread;
-	int			to_copy;
+	static char	*save;
 
-	line = ft_strdup(buf);
-	while (!(ft_strchr(line, '\n')) && (countread = read(fd, buf, BUFFER_SIZE)) > 0)
-	{
-		buf[countread] = '\0';
-		line = ft_strjoin_gnl(line, buf, countread);
-	}
-	if (ft_strlen(line) == 0)
-		return (free(line), NULL);
-
-	newline = ft_strchr(line, '\n');
-	if (newline != NULL)
-	{
-		to_copy = newline - line + 1;
-		ft_strlcpy(buf, newline + 1, BUFFER_SIZE + 1);
-	}
-	else
-	{
-		to_copy = ft_strlen(line);
-		ft_strlcpy(buf, "", BUFFER_SIZE + 1);
-	}
-	line[to_copy] = '\0';
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+		return (NULL);
+	save = read_until_enter(fd, save);
+	if (save == NULL)
+		return (NULL);
+	line = make_line_from(save);
+	save = the_rest(save);
 	return (line);
 }

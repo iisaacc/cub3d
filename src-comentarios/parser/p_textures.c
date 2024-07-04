@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   p_textures.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/04 13:08:14 by isporras          #+#    #+#             */
-/*   Updated: 2024/07/04 13:08:14 by isporras         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../includes/cub3d.h"
 
 void	ft_fill_rgb(uint8_t *rgb, char *str)
@@ -36,7 +24,6 @@ void	ft_remove_endl(char *str)
 		i++;
 	}
 }
-
 void	ft_get_textures(t_cub *cub)
 {
 	int	i;
@@ -55,7 +42,7 @@ void	ft_get_textures(t_cub *cub)
 		else if (ft_strncmp(cub->split_input[i], "F ", 2) == 0)
 			ft_fill_rgb(cub->tx->F_rgb, &cub->split_input[i][2]);
 		else if (ft_strncmp(cub->split_input[i], "C ", 2) == 0)
-			ft_fill_rgb(cub->tx->C_rgb, &cub->split_input[i][2]);
+			ft_fill_rgb(cub->tx->C_rgb, &cub->split_input[i][2]); 
 		i++;
 	}
 	ft_remove_endl(cub->tx->NO_pth);
@@ -77,6 +64,7 @@ void	ft_init_tx_struct(t_cub *cub)
 	cub->tx->C_rgb[1] = -1;
 	cub->tx->C_rgb[2] = -1;
 }
+
 
 int	ft_parser_textures(t_cub *cub)
 {
