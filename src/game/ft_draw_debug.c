@@ -96,14 +96,3 @@ void	ft_cut_ray_circle(double *x_end, double *y_end)
 		*y_end *= scale;
 	}
 }
-
-void	draw_ray(t_cub *cub, double x_collision, double y_collision)
-{
-	double	x_end;
-	double	y_end;
-
-	x_end = (x_collision - cub->player->p_x) * MAP_SIZE;
-	y_end = (y_collision - cub->player->p_y) * MAP_SIZE;
-	ft_cut_ray_circle(&x_end, &y_end);
-	ft_mlx_draw_line(cub->map->map_img, x_end + MAP_CENTER, y_end + MAP_CENTER);
-}

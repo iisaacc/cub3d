@@ -33,17 +33,6 @@ int	ft_load_floor_sky(t_cub *cub)
 	return (0);
 }
 
-int	ft_load_map(t_cub *cub)
-{
-	cub->map->map_img = mlx_new_image(cub->mlx, MAP_SIZE * 30, MAP_SIZE * 30);
-	if (!cub->map->map_img)
-		return (ft_error_msg("Error loading map texture", NULL), -1);
-	mlx_image_to_window(cub->mlx, cub->map->map_img, 0, 0);
-	if (ft_refresh_map(cub) == 1)
-		return (EXIT_FAILURE);
-	return (0);
-}
-
 int	ft_load_wall_textures(t_cub *cub)
 {
 	mlx_texture_t	*tx;
@@ -70,10 +59,6 @@ int	ft_load_wall_textures(t_cub *cub)
 int	ft_load_textures(t_cub *cub)
 {
 	if (ft_load_floor_sky(cub) == -1)
-		return (EXIT_FAILURE);
-	if (ft_load_map(cub) == -1)
-		return (EXIT_FAILURE);
-	if (ft_load_player(cub) == -1)
 		return (EXIT_FAILURE);
 	if (ft_load_wall_textures(cub) == -1)
 		return (EXIT_FAILURE);

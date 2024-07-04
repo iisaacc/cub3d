@@ -75,7 +75,6 @@ typedef struct s_wall
 typedef struct s_map
 {
 	char		**map;//guarda el mapa
-	mlx_image_t	*map_img;
 }	t_map;
 
 //Guarda los datos principales del juego
@@ -127,17 +126,10 @@ void	ft_init_struct(t_cub *cub);
 
 //-------------------TEXTURES-------------------------
 int		ft_load_textures(t_cub *cub);
-void	draw_player_direction(t_cub *cub);
-void	ft_mlx_draw_line(mlx_image_t* image, int x1, int y1);
 int		ft_get_rgba(int r, int g, int b, int a);
 void	ft_draw_walls(t_cub *cub, double horiz, double dist, int i);
-int		ft_load_map(t_cub *cub);
-int		ft_refresh_map(t_cub *cub);
 void	ft_refresh_ray_img(t_cub *cub);
-void	ft_refresh_map_img(t_cub *cub);
 void	ft_set_color(mlx_image_t *img, uint8_t r, uint8_t g, uint8_t b);
-int		ft_load_player(t_cub *cub);
-void	ft_draw_player_direction(t_cub *cub);
 
 //-------------------MOVEMENTS-----------------------
 void	ft_turn_camera(mlx_key_data_t keydata, t_cub *cub);

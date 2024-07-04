@@ -29,9 +29,7 @@ void	ft_hooks(mlx_key_data_t keydata, void *param)
 		&& (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
 		ft_turn_camera(keydata, cub);
 	ft_refresh_ray_img(cub);
-	ft_refresh_map_img(cub);
 	ft_raycaster_loop(cub);
-	ft_refresh_map(cub);
 }
 
 void	ft_close_window(void *param)

@@ -26,8 +26,6 @@ void	ft_delete_textures(t_cub *cub)
 		mlx_delete_image(cub->mlx, cub->tx->F_img);
 	if (cub->tx->C_img)
 		mlx_delete_image(cub->mlx, cub->tx->C_img);
-	if (cub->tx->P_img)
-		mlx_delete_image(cub->mlx, cub->tx->P_img);
 	if (cub->tx->NO_tx)
 		mlx_delete_texture(cub->tx->NO_tx);
 	if (cub->tx->SO_tx)
@@ -44,8 +42,6 @@ void	ft_delete(t_cub *cub)
 	ft_delete_textures(cub);
 	if (cub->ray->img)
 		mlx_delete_image(cub->mlx, cub->ray->img);
-	if (cub->map->map_img)
-		mlx_delete_image(cub->mlx, cub->map->map_img);
 	if (cub->map->map)
 		ft_free_2d(cub->split_input);
 	free(cub->player);
