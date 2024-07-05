@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tx_map.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: yfang <yfang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 11:55:46 by isporras          #+#    #+#             */
-/*   Updated: 2024/07/04 11:55:46 by isporras         ###   ########.fr       */
+/*   Updated: 2024/07/05 19:55:55 by yfang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ int	ft_load_player(t_cub *cub)
 	return (0);
 }
 
-void	ft_put_pixel_map_aux(t_cub *cub, int x, int y, int i, int j)
+void	ft_put_pixel_map_aux(t_cub *cub, int x, int y, int *k)
 {
 	double	px_x;
 	double	px_y;
 	double	radio;
 
 	radio = 5 * MAP_SIZE;
-	px_x = (x - cub->player->p_x + 5) * MAP_SIZE + j;
-	px_y = (y - cub->player->p_y + 5) * MAP_SIZE + i;
+	px_x = (x - cub->player->p_x + 5) * MAP_SIZE + k[1];
+	px_y = (y - cub->player->p_y + 5) * MAP_SIZE + k[0];
 	if (((px_x - 5 * MAP_SIZE) * (px_x - 5 * MAP_SIZE)
 			+ (px_y - 5 * MAP_SIZE)
 			* (px_y - 5 * MAP_SIZE)) <= radio * radio)
@@ -53,19 +53,18 @@ void	ft_put_pixel_map_aux(t_cub *cub, int x, int y, int i, int j)
 
 void	ft_put_pixel_map(t_cub *cub, int x, int y)
 {
-	double	i;
-	double	j;
+	int	k[2];
 
-	i = 0;
-	while (i < MAP_SIZE)
+	k[0] = 0;
+	while (k[0] < MAP_SIZE)
 	{
-		j = 0;
-		while (j < MAP_SIZE)
+		k[1] = 0;
+		while (k[1] < MAP_SIZE)
 		{
-			ft_put_pixel_map_aux(cub, x, y, i, j);
-			j++;
+			ft_put_pixel_map_aux(cub, x, y, k);
+			k[1]++;
 		}
-		i++;
+		k[0]++;
 	}
 }
 

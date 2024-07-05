@@ -10,7 +10,7 @@
 # include <math.h>
 
 #ifndef BUFFER_SIZE
-# define BUFFER_SIZE 64
+# define BUFFER_SIZE 	64
 #endif
 
 #define PI				3.141592653589793238462643383
@@ -64,7 +64,7 @@ typedef struct s_ray
 	double			y_cross[2];
 	double			hit[2];
 	mlx_image_t		*img;
-}t_ray;
+}	t_ray;
 
 typedef struct s_wall
 {
