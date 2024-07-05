@@ -8,7 +8,7 @@ OBJS_DIR = obj/
 OBJS_DIR_BONUS = obj_bonus/
 LIBFT = includes/libft
 MLX42 = includes/MLX42
-CC = gcc
+CC = clang
 CFLAGS = -O2 -fsanitize=leak -g -I
 MLXFLAGS = includes/MLX42/libmlx42.a -ldl -DEBUG=1 -Iinclude -lm -lglfw -L"usr/lib/x86_64-linux-gnu/"
 RM = rm -f
