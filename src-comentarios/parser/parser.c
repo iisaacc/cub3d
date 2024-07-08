@@ -29,12 +29,12 @@ void	ft_print_structure(t_cub *cub)
 	int	i;
 
 	i = 0;
-	printf("NO: %s\n", cub->tx->NO_pth);
-	printf("SO: %s\n", cub->tx->SO_pth);
-	printf("WE: %s\n", cub->tx->WE_pth);
-	printf("EA: %s\n", cub->tx->EA_pth);
-	printf("F: %d, %d, %d\n", cub->tx->F_rgb[0], cub->tx->F_rgb[1], cub->tx->F_rgb[2]);
-	printf("C: %d, %d, %d\n", cub->tx->C_rgb[0], cub->tx->C_rgb[1], cub->tx->C_rgb[2]);
+	printf("NO: %s\n", cub->tx->no_pth);
+	printf("SO: %s\n", cub->tx->so_pth);
+	printf("WE: %s\n", cub->tx->we_pth);
+	printf("EA: %s\n", cub->tx->ea_pth);
+	printf("F: %d, %d, %d\n", cub->tx->f_rgb[0], cub->tx->f_rgb[1], cub->tx->f_rgb[2]);
+	printf("C: %d, %d, %d\n", cub->tx->c_rgb[0], cub->tx->c_rgb[1], cub->tx->c_rgb[2]);
 	printf("Initial point of view: %d\n", cub->player->initial_pov);
 	printf("Initial position: x: %f, y: %f\n", cub->player->p_x, cub->player->p_y);
 	printf("Initial angle: %f\n", cub->player->p_a);

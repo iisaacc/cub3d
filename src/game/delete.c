@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   delete.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: yfang <yfang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 10:17:10 by isporras          #+#    #+#             */
-/*   Updated: 2024/07/04 10:17:10 by isporras         ###   ########.fr       */
+/*   Updated: 2024/07/08 12:31:19 by yfang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,26 @@
 
 void	ft_delete_textures(t_cub *cub)
 {
-	if (cub->tx->NO_pth)
-		free(cub->tx->NO_pth);
-	if (cub->tx->SO_pth)
-		free(cub->tx->SO_pth);
-	if (cub->tx->WE_pth)
-		free(cub->tx->WE_pth);
-	if (cub->tx->EA_pth)
-		free(cub->tx->EA_pth);
-	if (cub->tx->F_img)
-		mlx_delete_image(cub->mlx, cub->tx->F_img);
-	if (cub->tx->C_img)
-		mlx_delete_image(cub->mlx, cub->tx->C_img);
-	if (cub->tx->NO_tx)
-		mlx_delete_texture(cub->tx->NO_tx);
-	if (cub->tx->SO_tx)
-		mlx_delete_texture(cub->tx->SO_tx);
-	if (cub->tx->WE_tx)
-		mlx_delete_texture(cub->tx->WE_tx);
-	if (cub->tx->EA_tx)
-		mlx_delete_texture(cub->tx->EA_tx);
+	if (cub->tx->no_pth)
+		free(cub->tx->no_pth);
+	if (cub->tx->so_pth)
+		free(cub->tx->so_pth);
+	if (cub->tx->we_pth)
+		free(cub->tx->we_pth);
+	if (cub->tx->ea_pth)
+		free(cub->tx->ea_pth);
+	if (cub->tx->f_img)
+		mlx_delete_image(cub->mlx, cub->tx->f_img);
+	if (cub->tx->c_img)
+		mlx_delete_image(cub->mlx, cub->tx->c_img);
+	if (cub->tx->no_tx)
+		mlx_delete_texture(cub->tx->no_tx);
+	if (cub->tx->so_tx)
+		mlx_delete_texture(cub->tx->so_tx);
+	if (cub->tx->we_tx)
+		mlx_delete_texture(cub->tx->we_tx);
+	if (cub->tx->ea_tx)
+		mlx_delete_texture(cub->tx->ea_tx);
 	free(cub->tx);
 }
 

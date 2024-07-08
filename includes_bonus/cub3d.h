@@ -1,6 +1,8 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+/*---------------------------------   LIBS   ---------------------------------*/
+// Global
 # include "libft/libft.h"
 # include <stdio.h>
 # include <stdlib.h>
@@ -9,52 +11,52 @@
 # include "./MLX42/include/MLX42/MLX42.h"
 # include <math.h>
 
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 64
-#endif
+/*--------------------------------   MACROS   --------------------------------*/
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 	64
+# endif
 
-#define PI				3.141592653589793238462643383
-#define WIDTH			1280
-#define HEIGHT			720
-#define WID				640
-#define FOV				PI / 2
-#define MOVE_SPEED		2 / 32
-#define ROTATION_SPEED	0.05
-#define LINE_LENGTH		10
-#define MAP_SIZE		16
-#define MAP_CENTER		MAP_SIZE * 5
-#define SIZE			32
-#define BLACK			0x000000FF
-#define WHITE			0xFFFFFFFF
-#define RED				0xFF0000FF
+# define PI				3.141592653589793238462643383
+# define WIDTH			1280
+# define HEIGHT			720
+# define WID			640
+# define FOV			1.5707963267948966
+# define MOVE_SPEED		0.0625
+# define ROTATION_SPEED	0.05
+# define LINE_LENGTH	10
+# define MAP_SIZE		16
+# define MAP_CENTER		80
+# define SIZE			32
+# define BLACK			0x000000FF
+# define WHITE			0xFFFFFFFF
+# define RED			0xFF0000FF
 
 
-//Guarda los datos sobre las texturas
 typedef struct s_tx
 {
-	char			*NO_pth;//Ruta a cada una de las texturas
-	char			*SO_pth;
-	char			*WE_pth;
-	char			*EA_pth;
-	uint8_t			F_rgb[3];//Códigos rgb del suelo
-	uint8_t			C_rgb[3];//Códigos rgb del cielo
-	mlx_image_t		*F_img;//Puntero mlx donde se almacena la imagen del suelo
-	mlx_image_t		*C_img;//Puntero mlx donde se almacena la imagen del cielo
-	mlx_image_t		*P_img;//Puntero mlx donde se almacena la imagen del jugador
-	mlx_texture_t	*NO_tx;//Puntero mlx donde se almacena la imagen de la textura NO
-	mlx_texture_t	*SO_tx;//Puntero mlx donde se almacena la imagen de la textura SO
-	mlx_texture_t	*WE_tx;//Puntero mlx donde se almacena la imagen de la textura WE
-	mlx_texture_t	*EA_tx;//Puntero mlx donde se almacena la imagen de la textura EA
+	char			*no_pth;
+	char			*so_pth;
+	char			*we_pth;
+	char			*ea_pth;
+	uint8_t			f_rgb[3];
+	uint8_t			c_rgb[3];
+	mlx_image_t		*f_img;
+	mlx_image_t		*c_img;
+	mlx_image_t		*p_img;
+	mlx_texture_t	*no_tx;
+	mlx_texture_t	*so_tx;
+	mlx_texture_t	*we_tx;
+	mlx_texture_t	*ea_tx;
 }	t_tx;
 
 typedef struct s_player
 {
-	int				initial_pov;//guarda el punto de vista inicial [0-N, 1-E, 2-S, 3-W]
-	double			p_x;//guarda la posicion del jugador
+	int				initial_pov;
+	double			p_x;
 	double			p_y;
-	double			p_a;//angulo de vista
-	double			p_dx;//delta x
-	double			p_dy;//delta y
+	double			p_a;
+	double			p_dx;
+	double			p_dy;
 }	t_player;
 
 typedef struct s_ray
@@ -64,7 +66,7 @@ typedef struct s_ray
 	double			y_cross[2];
 	double			hit[2];
 	mlx_image_t		*img;
-}t_ray;
+}	t_ray;
 
 typedef struct s_wall
 {
@@ -74,19 +76,19 @@ typedef struct s_wall
 
 typedef struct s_map
 {
-	char		**map;//guarda el mapa
+	char		**map;
 	mlx_image_t	*map_img;
 }	t_map;
 
-//Guarda los datos principales del juego
+
 typedef struct s_cub
 {
-	t_tx			*tx;//guarda la estructura de las texturas
-	t_ray			*ray;//guarda la info del rayo
-	char			**split_input;//guarda el input
-	mlx_t			*mlx;//guarda el puntero de mlx
+	t_tx			*tx;
+	t_ray			*ray;
+	char			**split_input;
+	mlx_t			*mlx;
 	mlx_image_t		*arrow;
-	t_player		*player;//guarda los datos del jugador
+	t_player		*player;
 	t_wall			*wall;
 	t_map			*map;
 }	t_cub;

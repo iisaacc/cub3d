@@ -32,37 +32,37 @@ void	ft_get_textures(t_cub *cub)
 	while (cub->split_input[i])
 	{
 		if (ft_strncmp(cub->split_input[i], "NO ", 3) == 0)
-			cub->tx->NO_pth = ft_strdup(&cub->split_input[i][3]);
+			cub->tx->no_pth = ft_strdup(&cub->split_input[i][3]);
 		else if (ft_strncmp(cub->split_input[i], "SO ", 3) == 0)
-			cub->tx->SO_pth = ft_strdup(&cub->split_input[i][3]);
+			cub->tx->so_pth = ft_strdup(&cub->split_input[i][3]);
 		else if (ft_strncmp(cub->split_input[i], "WE ", 3) == 0)
-			cub->tx->WE_pth = ft_strdup(&cub->split_input[i][3]);
+			cub->tx->we_pth = ft_strdup(&cub->split_input[i][3]);
 		else if (ft_strncmp(cub->split_input[i], "EA ", 3) == 0)
-			cub->tx->EA_pth = ft_strdup(&cub->split_input[i][3]);
+			cub->tx->ea_pth = ft_strdup(&cub->split_input[i][3]);
 		else if (ft_strncmp(cub->split_input[i], "F ", 2) == 0)
-			ft_fill_rgb(cub->tx->F_rgb, &cub->split_input[i][2]);
+			ft_fill_rgb(cub->tx->f_rgb, &cub->split_input[i][2]);
 		else if (ft_strncmp(cub->split_input[i], "C ", 2) == 0)
-			ft_fill_rgb(cub->tx->C_rgb, &cub->split_input[i][2]); 
+			ft_fill_rgb(cub->tx->c_rgb, &cub->split_input[i][2]); 
 		i++;
 	}
-	ft_remove_endl(cub->tx->NO_pth);
-	ft_remove_endl(cub->tx->SO_pth);
-	ft_remove_endl(cub->tx->WE_pth);
-	ft_remove_endl(cub->tx->EA_pth);
+	ft_remove_endl(cub->tx->no_pth);
+	ft_remove_endl(cub->tx->so_pth);
+	ft_remove_endl(cub->tx->we_pth);
+	ft_remove_endl(cub->tx->ea_pth);
 }
 
 void	ft_init_tx_struct(t_cub *cub)
 {
-	cub->tx->NO_pth = NULL;
-	cub->tx->SO_pth = NULL;
-	cub->tx->WE_pth = NULL;
-	cub->tx->EA_pth = NULL;
-	cub->tx->F_rgb[0] = -1;
-	cub->tx->F_rgb[1] = -1;
-	cub->tx->F_rgb[2] = -1;
-	cub->tx->C_rgb[0] = -1;
-	cub->tx->C_rgb[1] = -1;
-	cub->tx->C_rgb[2] = -1;
+	cub->tx->no_pth = NULL;
+	cub->tx->so_pth = NULL;
+	cub->tx->we_pth = NULL;
+	cub->tx->ea_pth = NULL;
+	cub->tx->f_rgb[0] = -1;
+	cub->tx->f_rgb[1] = -1;
+	cub->tx->f_rgb[2] = -1;
+	cub->tx->c_rgb[0] = -1;
+	cub->tx->c_rgb[1] = -1;
+	cub->tx->c_rgb[2] = -1;
 }
 
 

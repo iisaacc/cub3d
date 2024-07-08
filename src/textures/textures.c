@@ -6,7 +6,7 @@
 /*   By: yfang <yfang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:08:38 by isporras          #+#    #+#             */
-/*   Updated: 2024/07/03 17:05:44 by yfang            ###   ########.fr       */
+/*   Updated: 2024/07/08 12:31:19 by yfang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@
 //Hay algo que falla al traducir el rgb a bits (preguntar en 42)
 int	ft_load_floor_sky(t_cub *cub)
 {
-	cub->tx->F_img = mlx_new_image(cub->mlx, WIDTH, HEIGHT / 2);
-	if (cub->tx->F_img == NULL)
+	cub->tx->f_img = mlx_new_image(cub->mlx, WIDTH, HEIGHT / 2);
+	if (cub->tx->f_img == NULL)
 		return (ft_error_msg("Error loading floor texture", NULL), -1);
-	ft_set_color(cub->tx->F_img, cub->tx->F_rgb[0],
-		cub->tx->F_rgb[1], cub->tx->F_rgb[2]);
-	if (mlx_image_to_window(cub->mlx, cub->tx->F_img, 0, HEIGHT / 2) < 0)
+	ft_set_color(cub->tx->f_img, cub->tx->f_rgb[0],
+		cub->tx->f_rgb[1], cub->tx->f_rgb[2]);
+	if (mlx_image_to_window(cub->mlx, cub->tx->f_img, 0, HEIGHT / 2) < 0)
 		return (ft_error_msg("Error loading floor texture", NULL), -1);
-	cub->tx->C_img = mlx_new_image(cub->mlx, WIDTH, HEIGHT / 2);
-	if (cub->tx->C_img == NULL)
+	cub->tx->c_img = mlx_new_image(cub->mlx, WIDTH, HEIGHT / 2);
+	if (cub->tx->c_img == NULL)
 		return (ft_error_msg("Error loading floor texture", NULL), -1);
-	ft_set_color(cub->tx->C_img, cub->tx->C_rgb[0],
-		cub->tx->C_rgb[1], cub->tx->C_rgb[2]);
-	if (mlx_image_to_window(cub->mlx, cub->tx->C_img, 0, 0) < 0)
+	ft_set_color(cub->tx->c_img, cub->tx->c_rgb[0],
+		cub->tx->c_rgb[1], cub->tx->c_rgb[2]);
+	if (mlx_image_to_window(cub->mlx, cub->tx->c_img, 0, 0) < 0)
 		return (ft_error_msg("Error loading floor texture", NULL), -1);
 	return (0);
 }
@@ -37,22 +37,22 @@ int	ft_load_wall_textures(t_cub *cub)
 {
 	mlx_texture_t	*tx;
 
-	tx = mlx_load_png(cub->tx->NO_pth);
+	tx = mlx_load_png(cub->tx->no_pth);
 	if (!tx)
 		return (ft_error_msg("Error loading NO texture", NULL), -1);
-	cub->tx->NO_tx = tx;
-	tx = mlx_load_png(cub->tx->SO_pth);
+	cub->tx->no_tx = tx;
+	tx = mlx_load_png(cub->tx->so_pth);
 	if (!tx)
 		return (ft_error_msg("Error loading SO texture", NULL), -1);
-	cub->tx->SO_tx = tx;
-	tx = mlx_load_png(cub->tx->WE_pth);
+	cub->tx->so_tx = tx;
+	tx = mlx_load_png(cub->tx->we_pth);
 	if (!tx)
 		return (ft_error_msg("Error loading WE texture", NULL), -1);
-	cub->tx->WE_tx = tx;
-	tx = mlx_load_png(cub->tx->EA_pth);
+	cub->tx->we_tx = tx;
+	tx = mlx_load_png(cub->tx->ea_pth);
 	if (!tx)
 		return (ft_error_msg("Error loading EA texture", NULL), -1);
-	cub->tx->EA_tx = tx;
+	cub->tx->ea_tx = tx;
 	return (0);
 }
 

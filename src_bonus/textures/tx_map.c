@@ -6,7 +6,7 @@
 /*   By: yfang <yfang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 11:55:46 by isporras          #+#    #+#             */
-/*   Updated: 2024/07/05 19:55:55 by yfang            ###   ########.fr       */
+/*   Updated: 2024/07/08 12:30:37 by yfang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int	ft_load_player(t_cub *cub)
 {
-	if (cub->tx->P_img)
-		mlx_delete_image(cub->mlx, cub->tx->P_img);
-	cub->tx->P_img = mlx_new_image(cub->mlx, 5, 5);
-	if (!cub->tx->P_img)
+	if (cub->tx->p_img)
+		mlx_delete_image(cub->mlx, cub->tx->p_img);
+	cub->tx->p_img = mlx_new_image(cub->mlx, 5, 5);
+	if (!cub->tx->p_img)
 		return (ft_error_msg("Error loading player texture", NULL), -1);
-	ft_set_color(cub->tx->P_img, 255, 0, 0);
-	if (mlx_image_to_window(cub->mlx, cub->tx->P_img,
+	ft_set_color(cub->tx->p_img, 255, 0, 0);
+	if (mlx_image_to_window(cub->mlx, cub->tx->p_img,
 			MAP_CENTER - 2, MAP_CENTER - 2) < 0)
 		return (ft_error_msg("Error loading player texture", NULL), -1);
 	ft_draw_player_direction(cub);
