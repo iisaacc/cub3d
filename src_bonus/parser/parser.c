@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 13:08:56 by isporras          #+#    #+#             */
-/*   Updated: 2024/07/04 13:08:56 by isporras         ###   ########.fr       */
+/*   Updated: 2024/07/08 13:04:07 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ int	ft_parser(char	*file, t_cub *cub)
 	if (cub->player->initial_pov == -1)
 		return (ft_delete(cub), 1);
 	ft_set_player_angle(cub);
-	ft_parser_textures(cub);
+	if (ft_parser_textures(cub) == 1)
+		return (ft_delete(cub), 1);
 	return (0);
 }

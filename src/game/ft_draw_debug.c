@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_draw_debug.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yfang <yfang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 11:23:26 by isporras          #+#    #+#             */
-/*   Updated: 2024/07/08 12:29:56 by yfang            ###   ########.fr       */
+/*   Updated: 2024/07/08 12:48:49 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void	ft_mlx_draw_line(mlx_image_t *image, int x1, int y1)
 	else
 		line.sy = -1;
 	line.err = line.dx + line.dy;
-	line.e2;
 	line.color = ft_get_rgba(255, 0, 0, 255);
 	ft_draw_line_loop(image, x1, y1, line);
 }

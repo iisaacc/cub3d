@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/08 12:46:31 by isporras          #+#    #+#             */
+/*   Updated: 2024/07/08 13:16:39 by isporras         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -30,7 +42,6 @@
 # define BLACK			0x000000FF
 # define WHITE			0xFFFFFFFF
 # define RED			0xFF0000FF
-
 
 typedef struct s_tx
 {
@@ -80,7 +91,6 @@ typedef struct s_map
 	mlx_image_t	*map_img;
 }	t_map;
 
-
 typedef struct s_cub
 {
 	t_tx			*tx;
@@ -106,7 +116,7 @@ typedef struct s_line
 	int		color;
 }	t_line;
 
-
+/*-------------------------------   FUNCTIONS   ------------------------------*/
 //------------------PARSER--------------------------
 int		ft_parser(char	*file, t_cub *cub);
 char	*get_next_line(int fd);
@@ -130,7 +140,7 @@ void	ft_init_struct(t_cub *cub);
 //-------------------TEXTURES-------------------------
 int		ft_load_textures(t_cub *cub);
 void	draw_player_direction(t_cub *cub);
-void	ft_mlx_draw_line(mlx_image_t* image, int x1, int y1);
+void	ft_mlx_draw_line(mlx_image_t *image, int x1, int y1);
 int		ft_get_rgba(int r, int g, int b, int a);
 void	ft_draw_walls(t_cub *cub, double horiz, double dist, int i);
 int		ft_load_map(t_cub *cub);

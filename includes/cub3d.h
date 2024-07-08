@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/08 12:45:48 by isporras          #+#    #+#             */
+/*   Updated: 2024/07/08 13:21:04 by isporras         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -30,7 +42,6 @@
 # define BLACK			0x000000FF
 # define WHITE			0xFFFFFFFF
 # define RED			0xFF0000FF
-
 
 /*--------------------------------   STRUCTS   -------------------------------*/
 typedef struct s_tx
@@ -79,7 +90,6 @@ typedef struct s_map
 {
 	char		**map;
 }	t_map;
-
 
 typedef struct s_cub
 {

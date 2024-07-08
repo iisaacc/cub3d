@@ -3,27 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   p_textures.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yfang <yfang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 13:08:14 by isporras          #+#    #+#             */
-/*   Updated: 2024/07/08 12:29:56 by yfang            ###   ########.fr       */
+/*   Updated: 2024/07/08 13:29:22 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	ft_fill_rgb(uint8_t *rgb, char *str)
+int	ft_fill_rgb(uint8_t *rgb, char *str)
 {
 	char	**split_num;
+	int		i;
 
 	split_num = ft_split(str, ',');
-	rgb[0] = (uint8_t)ft_atoi(split_num[0]);
-	rgb[1] = (uint8_t)ft_atoi(split_num[1]);
-	rgb[2] = (uint8_t)ft_atoi(split_num[2]);
+	if (!split_num)
+		return (ft_error_msg("No rgb code", NULL), 1);
+	i = 0;
+	while (split_num[i])
+	{
+		rgb[i] = (uint8_t)ft_atoi(split_num[i]);
+		i++;
+	}
 	ft_free_2d(split_num);
+	if (i != 3)
+		return (ft_error_msg("No rgb code", NULL), 1);
+	return (0);
 }
 
-//Elimina los saltos de línea de las rutas de las texturas
 void	ft_remove_endl(char *str)
 {
 	int	i;
@@ -37,11 +45,13 @@ void	ft_remove_endl(char *str)
 	}
 }
 
-void	ft_get_textures(t_cub *cub)
+int	ft_get_textures(t_cub *cub)
 {
 	int	i;
+	int	h;
 
 	i = 0;
+	h = 0;
 	while (cub->split_input[i])
 	{
 		if (ft_strncmp(cub->split_input[i], "NO ", 3) == 0)
@@ -53,15 +63,14 @@ void	ft_get_textures(t_cub *cub)
 		else if (ft_strncmp(cub->split_input[i], "EA ", 3) == 0)
 			cub->tx->ea_pth = ft_strdup(&cub->split_input[i][3]);
 		else if (ft_strncmp(cub->split_input[i], "F ", 2) == 0)
-			ft_fill_rgb(cub->tx->f_rgb, &cub->split_input[i][2]);
+			h += ft_fill_rgb(cub->tx->f_rgb, &cub->split_input[i][2]);
 		else if (ft_strncmp(cub->split_input[i], "C ", 2) == 0)
-			ft_fill_rgb(cub->tx->c_rgb, &cub->split_input[i][2]);
+			h += ft_fill_rgb(cub->tx->c_rgb, &cub->split_input[i][2]);
 		i++;
 	}
-	ft_remove_endl(cub->tx->no_pth);
-	ft_remove_endl(cub->tx->so_pth);
-	ft_remove_endl(cub->tx->we_pth);
-	ft_remove_endl(cub->tx->ea_pth);
+	if (h != 0)
+		return (1);
+	return (0);
 }
 
 void	ft_init_tx_struct(t_cub *cub)
@@ -81,6 +90,11 @@ void	ft_init_tx_struct(t_cub *cub)
 int	ft_parser_textures(t_cub *cub)
 {
 	ft_init_tx_struct(cub);
-	ft_get_textures(cub);
+	if (ft_get_textures(cub) == 1)
+		return (1);
+	ft_remove_endl(cub->tx->no_pth);
+	ft_remove_endl(cub->tx->so_pth);
+	ft_remove_endl(cub->tx->we_pth);
+	ft_remove_endl(cub->tx->ea_pth);
 	return (0);
 }

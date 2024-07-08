@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   delete.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yfang <yfang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 10:17:10 by isporras          #+#    #+#             */
-/*   Updated: 2024/07/08 12:31:19 by yfang            ###   ########.fr       */
+/*   Updated: 2024/07/08 13:27:07 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ void	ft_delete(t_cub *cub)
 	if (cub->map->map_img)
 		mlx_delete_image(cub->mlx, cub->map->map_img);
 	if (cub->map->map)
+	{
+		ft_free_2d(cub->split_input);
+		cub->split_input = NULL;
+	}
+	if (cub->split_input)
 		ft_free_2d(cub->split_input);
 	free(cub->player);
 	free(cub->map);
