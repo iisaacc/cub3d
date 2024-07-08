@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_walls.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yfang <yfang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 11:09:16 by isporras          #+#    #+#             */
-/*   Updated: 2024/07/05 18:38:04 by yfang            ###   ########.fr       */
+/*   Updated: 2024/07/08 12:20:45 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ unsigned long	ft_get_pixel_color(t_cub *cub, mlx_texture_t *tx, int tx_co[2])
 	int	p;
 
 	p = 4 * tx_co[0] + (4 * tx_co[1] * tx->width);
-	if (p <= tx->height * tx->width * tx->bytes_per_pixel)
+	if (p + 2 <= tx->height * tx->width * tx->bytes_per_pixel)
 	{
 		return (ft_get_rgba(tx->pixels[p], tx->pixels[p + 1],
 				tx->pixels[p + 2], 255));
