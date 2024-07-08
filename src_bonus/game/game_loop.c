@@ -20,10 +20,10 @@ int	ft_game_loop(t_cub *cub)
 	if (!cub->mlx)
 	{
 		ft_putstr_fd((char *)mlx_strerror(mlx_errno), 2);
-		return (EXIT_FAILURE);
+		return (ft_delete(cub), EXIT_FAILURE);
 	}
 	if (ft_load_textures(cub) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
+		return (ft_delete(cub), EXIT_FAILURE);
 	ft_refresh_ray_img(cub);
 	ft_refresh_map_img(cub);
 	ft_raycaster_loop(cub);

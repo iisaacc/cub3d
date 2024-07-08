@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_raycaster.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yfang <yfang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 14:18:50 by isporras          #+#    #+#             */
-/*   Updated: 2024/07/03 16:32:57 by yfang            ###   ########.fr       */
+/*   Updated: 2024/07/08 12:23:00 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_raycaster_loop(t_cub *cub)
 	double	dist;
 
 	cub->ray->angle = cub->player->p_a;
-	horiz = WIDTH;
+	horiz = WIDTH - 1;
 	s = WIDTH / 2;
 	dist = horiz - WIDTH / 2 - 0.5;
 	angle = cub->player->p_a + asin((dist) / (sqrt(dist * dist + s * s)));

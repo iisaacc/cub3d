@@ -16,7 +16,7 @@ int	main(int argc, char **argv)
 {
 	t_cub	cub;
 
-	if (argc != 2)
+	if (argc != 2 || ft_strncmp(&argv[1][ft_strlen(argv[1]) - 4], ".cub", 4) != 0)
 		ft_error_msg("Single argument specifying a .cub file", NULL);
 	else
 	{
