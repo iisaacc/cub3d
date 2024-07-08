@@ -6,7 +6,7 @@
 /*   By: yfang <yfang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 11:09:16 by isporras          #+#    #+#             */
-/*   Updated: 2024/07/03 16:59:14 by yfang            ###   ########.fr       */
+/*   Updated: 2024/07/08 12:31:19 by yfang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,16 @@ void	ft_select_texture(t_cub *cub, double horiz, int y, int i)
 	if (i == 0 && y >= 0 && y < HEIGHT)
 	{
 		if (cub->ray->angle > PI / 2 && cub->ray->angle < (3 * PI) / 2)
-			mlx_put_pixel(cub->ray->img, horiz, y, ft_get_pixel(cub, cub->tx->EA_tx));//Este
+			mlx_put_pixel(cub->ray->img, horiz, y, ft_get_pixel(cub, cub->tx->ea_tx));//Este
 		else
-			mlx_put_pixel(cub->ray->img, horiz, y, ft_get_pixel(cub, cub->tx->WE_tx));//Oeste
+			mlx_put_pixel(cub->ray->img, horiz, y, ft_get_pixel(cub, cub->tx->we_tx));//Oeste
 	}
 	else if (i == 1 && y >= 0 && y < HEIGHT)
 	{
 		if (cub->ray->angle > 0 && cub->ray->angle < PI)
-			mlx_put_pixel(cub->ray->img, horiz, y, ft_get_pixel(cub, cub->tx->NO_tx));//Norte
+			mlx_put_pixel(cub->ray->img, horiz, y, ft_get_pixel(cub, cub->tx->no_tx));//Norte
 		else
-			mlx_put_pixel(cub->ray->img, horiz, y, ft_get_pixel(cub, cub->tx->SO_tx));//Sur
+			mlx_put_pixel(cub->ray->img, horiz, y, ft_get_pixel(cub, cub->tx->so_tx));//Sur
 	}
 }
 

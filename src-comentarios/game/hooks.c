@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: yfang <yfang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 12:41:20 by isporras          #+#    #+#             */
-/*   Updated: 2024/07/01 17:44:31 by isporras         ###   ########.fr       */
+/*   Updated: 2024/07/08 12:30:37 by yfang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,17 @@ void	ft_close_window(void *param)
 
 	cub = (t_cub *)param;
 	mlx_close_window(cub->mlx);
-	mlx_delete_image(cub->mlx, cub->tx->F_img);
-	mlx_delete_image(cub->mlx, cub->tx->C_img);
-	mlx_delete_image(cub->mlx, cub->tx->P_img);
-	if (cub->tx->NO_pth)
-		free(cub->tx->NO_pth);
-	if (cub->tx->SO_pth)
-		free(cub->tx->SO_pth);
-	if (cub->tx->WE_pth)
-		free(cub->tx->WE_pth);
-	if (cub->tx->EA_pth)
-		free(cub->tx->EA_pth);
+	mlx_delete_image(cub->mlx, cub->tx->f_img);
+	mlx_delete_image(cub->mlx, cub->tx->c_img);
+	mlx_delete_image(cub->mlx, cub->tx->p_img);
+	if (cub->tx->no_pth)
+		free(cub->tx->no_pth);
+	if (cub->tx->so_pth)
+		free(cub->tx->so_pth);
+	if (cub->tx->we_pth)
+		free(cub->tx->we_pth);
+	if (cub->tx->ea_pth)
+		free(cub->tx->ea_pth);
 	free(cub->tx);
 	free(cub->player);
 	mlx_terminate(cub->mlx);
