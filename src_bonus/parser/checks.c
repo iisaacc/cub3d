@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 12:31:30 by isporras          #+#    #+#             */
-/*   Updated: 2024/07/04 12:31:30 by isporras         ###   ########.fr       */
+/*   Updated: 2024/07/08 13:37:59 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ int	ft_checks(t_cub *cub)
 	if (ft_valid_rgb(cub->split_input) == 1)
 		return (1);
 	cub->map->map = ft_get_map(cub->split_input);
+	if (!cub->map->map)
+		return (1);
 	if (ft_map_checks(cub->map->map) == 1)
 		return (1);
 	return (0);
