@@ -22,10 +22,18 @@ The goal was to implement a simple 3D rendering engine using **raycasting**, pro
 - **Development OS**: Linux / macOS  
 
 ---
+## Screenshots
+
+<img width="1275" height="717" alt="image" src="https://github.com/user-attachments/assets/95507123-87d5-406f-aaa3-f284db3b3161" />
+<img width="1280" height="718" alt="image" src="https://github.com/user-attachments/assets/4d642258-37f2-4814-b025-dc1bd99eae3b" />
+
 
 ## 🚀 Build & Run
 
 Clone the repository and compile the project with `make`:
+
+
+
 
 ```bash
 git clone https://github.com/iisaacc/cub3d/
